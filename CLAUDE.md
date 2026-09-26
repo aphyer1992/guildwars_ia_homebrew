@@ -134,8 +134,8 @@ balance tooling.
 
   Both keep their IA rules.
 - Enemies: shared stats at the top level; anything that differs between regular and
-  elite (cost, reinforce, health, surges, name, variant-specific abilities) goes in
-  `variants.regular` / `variants.elite`. Parenthesised values in the original docs
+  elite (cost, reinforce, health, surges, name, attack `dice`, variant-specific
+  abilities) goes in `variants.regular` / `variants.elite`. Parenthesised values in the original docs
   meant the elite value.
 - `surges` is a list; each string is one surge ability (costs 1 surge unless stated).
 - Unfinished content: `status: stub`, a missing `text`/`dice`, or a `# TODO` comment.

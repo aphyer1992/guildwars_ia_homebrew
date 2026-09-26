@@ -1,24 +1,25 @@
 name: Charr Blade Storm
 affiliation: adversary
-group_size: 3
+group_size: 2
 traits: []
 speed: 4
 defense: [black]
 attack:
   type: melee
-  dice: [red, green]
+  dice: [red, green]  # elite adds a yellow die (see variants.elite.dice)
 
 variants:
   regular:
     cost: 6
-    reinforce: 2
-    health: 4
-    surges: ["Cleave 1"]
-  elite:
-    cost: 9
     reinforce: 3
     health: 6
-    surges: ["Cleave 2"]
+    surges: ["Cleave 1", "+1 damage"]
+  elite:
+    cost: 10
+    reinforce: 5
+    health: 8
+    dice: [red, green, yellow]
+    surges: ["Cleave 2", "+1 damage"]
 
 abilities:
   - name: Riposte

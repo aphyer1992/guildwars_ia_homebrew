@@ -124,7 +124,8 @@ def enemy_attacks(file_stem, variant=None):
         if variant and vname != variant:
             continue
         out.append(Attack.from_strings(
-            f"{v.get('name', e['name'])} [{vname}]", e["attack"]["dice"], v.get("surges") or [],
+            f"{v.get('name', e['name'])} [{vname}]", v.get("dice") or e["attack"]["dice"],
+            v.get("surges") or [],
             bonus=e["attack"].get("bonus"), type=e["attack"].get("type"),
             stats={"cost": v.get("cost"), "reinforce": v.get("reinforce"),
                    "health": v.get("health"), "speed": e.get("speed"),

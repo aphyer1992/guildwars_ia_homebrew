@@ -117,6 +117,7 @@ def check_enemy(where, e):
                 err(f"{where} [{vname}]", f"missing {field}")
         if None in (v.get("surges") or []):
             stub(where, f"{vname}: blank surge")
+        check_dice(f"{where} [{vname}]", v.get("dice"), ATTACK_DICE)  # optional per-variant pool
 
 
 def check_card_list(where, cards, required="text"):

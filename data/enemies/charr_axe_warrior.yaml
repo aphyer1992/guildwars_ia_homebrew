@@ -1,24 +1,25 @@
 name: Charr Axe Warrior
 affiliation: adversary
-group_size: 3
+group_size: 2
 traits: []
 speed: 4
 defense: [black]
 attack:
   type: melee
-  dice: [red, yellow]
+  dice: [red, yellow]  # elite adds a yellow die (see variants.elite.dice)
 
 variants:
   regular:
     cost: 6
-    reinforce: 2
-    health: 4
-    surges: ["Bleed"]
-  elite:
-    name: Charr Axe Fiend  # original: "Charr Axe Warrior (Fiend)"
-    cost: 9
     reinforce: 3
     health: 6
+    surges: ["Bleed", "+1 damage"]
+  elite:
+    name: Charr Axe Fiend  # original: "Charr Axe Warrior (Fiend)"
+    cost: 10
+    reinforce: 5
+    health: 8
+    dice: [red, yellow, yellow]
     surges: ["+1 damage, Bleed"]
 
 abilities:
