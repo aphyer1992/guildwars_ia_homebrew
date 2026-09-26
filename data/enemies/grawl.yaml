@@ -1,0 +1,25 @@
+name: Grawl
+affiliation: adversary
+group_size: 3
+traits: []
+speed: 4
+defense: [black]
+attack:
+  type: melee  # hammers
+  dice: [green, green]
+
+variants:
+  regular:
+    cost: 6
+    reinforce: 2
+    health: 3
+    # 2-surge Stun is deliberately unreliable (~4-8% per attack; it needs 2 net surges
+    # and >= 1 damage). Pierce 1 = hammers crushing armour; it rates about the same as
+    # +1 damage (tools/attack.py benchmarks, 2026-09-26).
+    surges: ["2 surges: Stun", "Pierce 1"]
+
+abilities:
+  - name: Pack Tactics  # placeholder name; modelled on IA's Squad Training
+    text: >-
+      While attacking, if you are adjacent to another friendly Grawl, you may
+      reroll 1 attack die.
