@@ -5,3 +5,5 @@ __pycache__/
 ~$*
 # generated output (card PDFs, renders)
 output/
+# official IA rulebooks (FFG copyright)
+reference/

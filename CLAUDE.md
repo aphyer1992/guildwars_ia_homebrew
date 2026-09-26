@@ -13,9 +13,13 @@ balance tooling.
   - `adversary/class_decks.yaml`, `adversary/agendas.yaml` — Adversary (Imperial player) cards.
   - `items/weapons.yaml`, `items/attachments.yaml`, `items/accessories.yaml`.
   - `shrines.yaml` — the "ashes of the spirits" shrine items (IA crates equivalent).
+  - `dice.yaml` — the six faces of each IA die (standard IA dice, unchanged). Use this
+    for any damage/probability maths rather than recalling faces from memory.
 - `tools/check_data.py` — validates all data and lists unfinished entries/TODOs.
   Run it after any data edit: `python tools/check_data.py`.
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
+- `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.
+- `reference/` — official IA rulebook PDFs (FFG's copyrighted material; not our content).
 - `archive/original-docx/` — the Word docs the data was transcribed from (2026-09-26).
   Historical only; do not edit or treat as current.
 
@@ -39,7 +43,53 @@ balance tooling.
 - Rules text is the designer's wording. Don't silently reword, "fix" or rebalance it;
   propose changes and flag ambiguities in `docs/open-questions.md` instead.
 
-## Game rules primer
+## Game rules
 
-TODO: summary of Imperial Assault core rules (dice faces, surges, accuracy, conditions,
-strain, exhaust vs deplete, threat, influence, card sizes) and GW → IA mapping notes.
+The base rules are standard Imperial Assault campaign mode. **Read
+`docs/rules-primer.md` before commenting on rules or balance.** It condenses the rules,
+has the dice statistics, and marks which details are unverified. For exact rulings, the
+source PDFs are in `reference/`: the Rules Reference Guide (authoritative) and Learn to
+Play. The IA text in those files can be extracted with `pdftotext`.
+
+Key facts that are easy to get wrong:
+- Heroes may attack twice per activation. Non-hero figures may attack only once.
+- Each surge ability can be triggered only once per attack.
+- Evade cancels surges. Dodge (white die) is an automatic miss.
+- Blast and Cleave damage ignores blocks, and Blast hits friendly figures too.
+- An attribute test passes on 1 or more surges. Only heroes roll; elite figures get 1
+  automatic success and regular figures automatically fail.
+- Heroes are wounded, then withdraw. They never die, and they heal fully between
+  missions.
+
+GW terminology: Rebels/heroes = heroes, Imperial player = **Adversary**, crates =
+**shrines** (ashes of the spirits).
+
+## Design intent
+
+- The IA mechanics are theme-agnostic. IA itself grew out of the fantasy game Descent.
+  The goal is for the game to **feel like Guild Wars**.
+- Enemies, skills and items should be Guild Wars ones, and each should *feel like* its GW
+  version, even though real-time numbers don't translate (a 91-damage Fireball makes no
+  sense when 15 Health is a lot). For example, *Inferno* belongs on a fire Elementalist
+  and damages adjacent figures.
+- Faithful-but-risky designs are deliberate. Norgu is a Mesmer, which in GW means
+  interrupts and denying abilities. That's hard to do well on a board, and he may end up
+  too strong or too weak, but it's being attempted anyway. When commenting on designs
+  like this, help make them work. Don't steer them back to safe IA patterns.
+- **IA cards are a starting point for balance, not a gold standard.** Many are badly
+  balanced, especially early ones. The designer's assessment:
+  - Heroes:
+    - Gideon is hugely overpowered.
+    - Shyla, Fenn, and Diala (when built as support) are very overpowered.
+    - Saska is too weak to function.
+    - Biv and Davith are very weak.
+  - Deployment cards: almost all core-set uniques (Darth Vader, IG-88, Han Solo, etc.)
+    are badly overcosted for what they do.
+
+  So benchmark against IA content that is mid-strength, not against outliers.
+- **Some IA mechanics are repurposed for GW flavour:**
+  - The Weaken condition mostly stands in for GW **Poison**.
+  - Pierce 3, which IA mostly put on lightsabers, now goes on **Mesmers**, whose attacks
+    ignore armor.
+
+TODO (designer): player count and difficulty targets, and any house rules.

@@ -1,0 +1,50 @@
+# Imperial Assault die faces (standard IA dice, unchanged in this conversion).
+# Each die has exactly six faces, listed in no particular order.
+# Attack faces: damage, surge, accuracy. Defense faces: block, evade, dodge.
+# Omitted fields are 0 (or false for dodge). An empty mapping {} is a blank face.
+
+attack:
+  red:
+    - {damage: 1}
+    - {damage: 2}
+    - {damage: 2}
+    - {damage: 2, surge: 1}
+    - {damage: 3}
+    - {damage: 3}
+  yellow:
+    - {surge: 1}
+    - {damage: 1, surge: 2}
+    - {accuracy: 1, damage: 2}
+    - {accuracy: 1, damage: 1, surge: 1}
+    - {accuracy: 2, damage: 1}
+    - {accuracy: 2, surge: 1}
+  blue:
+    - {accuracy: 2, surge: 1}
+    - {accuracy: 2, damage: 2}
+    - {accuracy: 3, damage: 1, surge: 1}
+    - {accuracy: 3, damage: 2}
+    - {accuracy: 4, damage: 1}
+    - {accuracy: 5, damage: 1}
+  green:
+    - {accuracy: 1, surge: 1}
+    - {accuracy: 1, damage: 2}
+    - {accuracy: 1, damage: 1, surge: 1}
+    - {accuracy: 2, damage: 2}
+    - {accuracy: 2, damage: 1, surge: 1}
+    - {accuracy: 3, damage: 2}
+
+defense:
+  black:
+    - {evade: 1}
+    - {block: 1}
+    - {block: 1}
+    - {block: 2}
+    - {block: 2}
+    - {block: 3}
+  white:
+    - {}
+    - {evade: 1}
+    - {block: 1}
+    - {block: 1, evade: 1}
+    - {block: 1, evade: 1}
+    - {dodge: true}

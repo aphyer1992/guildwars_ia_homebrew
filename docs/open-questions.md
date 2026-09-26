@@ -11,6 +11,10 @@ editing the data and deleting the item here.
    `intellect` for now. Pick one; it will be printed on cards.
 2. **Attribute dice letters**: in `Strength BG`, is `B` blue or black? Kept as raw
    letters until decided.
+   *Suggestion (Claude):* almost certainly blue. Attribute tests pass on surges, and
+   defense dice have no surge faces, so a black die could never contribute. Every hero
+   also follows the same B → BG → BGY ladder, which fits blue/green/yellow. Pass rates:
+   B 33%, BG 67%, BGY 89% (see `docs/rules-primer.md`).
 3. **Move vs Speed**: Zenmai's sheet says *Speed 5*; the others say *Move*. The data uses
    `speed`.
 4. **Penetrating Attack** (Jin, 3XP) says "martial weapon". The item categories are

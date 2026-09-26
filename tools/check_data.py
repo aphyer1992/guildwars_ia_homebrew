@@ -87,6 +87,21 @@ def check_card_list(where, cards, required="text"):
             stub(where, c.get("name"))
 
 
+def check_dice_faces(where, doc):
+    kinds = {"attack": (ATTACK_DICE, {"damage", "surge", "accuracy"}),
+             "defense": (DEFENSE_DICE, {"block", "evade", "dodge"})}
+    for kind, (colours, fields) in kinds.items():
+        dice = doc.get(kind) or {}
+        if set(dice) != colours:
+            err(where, f"{kind} dice should be {sorted(colours)}, got {sorted(dice)}")
+        for colour, faces in dice.items():
+            if len(faces) != 6:
+                err(f"{where} / {colour}", f"expected 6 faces, got {len(faces)}")
+            for face in faces:
+                if not set(face) <= fields:
+                    err(f"{where} / {colour}", f"bad face {face!r} (fields: {sorted(fields)})")
+
+
 def main():
     for path in sorted(DATA.rglob("*.yaml")):
         rel = path.relative_to(ROOT).as_posix()
@@ -108,6 +123,8 @@ def main():
         elif rel.startswith("data/adversary/"):
             for deck in doc:
                 check_card_list(f"{rel} / {deck['name']}", deck["cards"])
+        elif rel == "data/dice.yaml":
+            check_dice_faces(rel, doc)
         elif rel == "data/shrines.yaml":
             check_card_list(rel, doc["cards"])
         elif rel == "data/items/accessories.yaml":
