@@ -45,6 +45,12 @@ balance tooling.
       damage" for heroes). Re-run it after any tuning.
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
 - `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.
+- `docs/setting.md` — Guild Wars setting primer: Ascalon and the Searing, factions,
+  allies, and where each hero comes from in the MMO.
+- `docs/campaign-research.md` — the first campaign (Prophecies, pre-Searing through The
+  Frost Gate): each mission, its enemies, and IA mission and enemy ideas.
+- `docs/skills-translation.md` — mapping GW mechanics to IA: conditions, energy,
+  elements, monks, area damage over time.
 - `reference/` — official IA material (FFG's copyrighted content). Gitignored, so it's
   local only.
   - The Rules Reference Guide and Learn to Play PDFs.
@@ -157,6 +163,22 @@ Key facts that are easy to get wrong:
 
 GW terminology: Rebels/heroes = heroes, Imperial player = **Adversary**, crates =
 **shrines** (ashes of the spirits).
+
+## Setting
+
+- **The first campaign** covers Guild Wars: Prophecies from pre-Searing Ascalon to *The
+  Frost Gate*, in two acts:
+  - **Act I, Ascalon:** against the Charr, ending with the villain Bonfaaz Burntfur at
+    Nolani Academy.
+  - **Act II, Shiverpeaks:** against the Stone Summit dwarves, ending with Dagnar
+    Stonepate at the Frost Gate, where Prince Rurik dies.
+- **Prince Rurik** is the recurring ally.
+- **The heroes are NPCs from across the MMO,** some anachronistic. Old Mac and Cynn are
+  native to this campaign.
+- Read `docs/setting.md` before writing flavour or new enemies, and
+  `docs/campaign-research.md` for the MMO's units and their skills.
+- **Mapping GW mechanics to IA:** energy → strain; knockdown → Stun; Bleeding/Burning →
+  Bleed; Poison → Weaken. The rest is in `docs/skills-translation.md`.
 
 ## Design intent
 
