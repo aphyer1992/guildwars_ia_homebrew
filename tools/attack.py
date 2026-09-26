@@ -135,11 +135,15 @@ def enemy_attacks(file_stem, variant=None):
 
 
 def ia_attacks(name=None):
-    """Official Imperial/Mercenary deployment cards (campaign-legal, no upgrades)."""
+    """Official deployment cards (campaign-legal, no skirmish upgrades).
+
+    Includes Rebel ally cards (Rebellion) as benchmarks: they are peers of Adversary
+    figures in cost and stats, even though the heroes control them in IA.
+    """
     cards = json.loads(IA_CARDS.read_text(encoding="utf-8"))["DeploymentCards"]
     out = []
     for c in cards:
-        if (c["Affiliation"] not in ("Empire", "Mercenaries") or c["Restriction"] == "SkirmishOnly"
+        if (c["Affiliation"] not in ("Empire", "Mercenaries", "Rebellion") or c["Restriction"] == "SkirmishOnly"
                 or "Skirmish Upgrade" in c["Traits"] or not c["Attack"]):
             continue
         if name and c["Name"].lower() != name.lower():
@@ -170,7 +174,7 @@ def ia_attacks(name=None):
             stats={"cost": c["PointsCost"], "reinforce": c["ReinforcementCost"] or None,
                    "health": c["Health"], "speed": c["Speed"], "group": c["GroupSize"],
                    "defense": [d.lower() for d in c["Defense"]], "source": "IA",
-                   "unique": c["IsUnique"]},
+                   "unique": c["IsUnique"], "rebel": c["Affiliation"] == "Rebellion"},
             reroll=reroll, notes=notes))
     return out
 
@@ -520,7 +524,8 @@ def compare(costs, sort_by):
             continue
         vb, vw = (expected(resolve(a, [d])[0]) for d in ("black", "white"))
         s = a.stats
-        rows.append({"name": a.name, "src": s["source"], "unique": s.get("unique"), "cost": s["cost"],
+        rows.append({"name": a.name, "src": s["source"], "unique": s.get("unique"),
+                     "rebel": s.get("rebel"), "cost": s["cost"],
                      "reinf": s["reinforce"] or "-", "grp": s["group"] or "?",
                      "hp": s["health"], "spd": s["speed"] or "?",
                      "def": "+".join(s["defense"] or []) or "?",
@@ -533,12 +538,13 @@ def compare(costs, sort_by):
     print(head)
     print("-" * len(head))
     for r in rows:
-        mark = "*" if r["src"] == "ours" else "u" if r["unique"] else " "
+        mark = "*" if r["src"] == "ours" else "u" if r["unique"] else "r" if r["rebel"] else " "
         rr = (str(r["rr"]) if r["rr"] else "") + ("~" if r["notes"] else "") or "-"
         print(f"{mark} {r['name'][:38]:38} {r['cost']:>4} {r['reinf']:>3} {r['grp']:>3} {r['hp']:>3} "
               f"{r['spd']:>3} {r['def'][:11]:11} {r['type']:6} {r['dice'][:22]:22} {rr:>2} "
               f"{r['black']:5.2f} {r['white']:5.2f}  {fmt_ranges(r['vals'])}")
-    print("\n* = this project's enemies; u = official unique figure (often overcosted).")
+    print("\n* = this project's enemies; u = official unique figure (often overcosted);"
+          " r = official Rebel ally card (a benchmark peer).")
     print("dmgB/dmgW = expected damage per figure per attack vs black/white, accuracy ignored.")
     print(RANGE_NOTE + " Enemies use the vs_heroes perspective.")
     print("rr = attack dice rerolled (optimally); ~ = has reroll text that isn't modelled"
@@ -660,7 +666,7 @@ def main():
     elif a.ia:
         attacks = ia_attacks(a.ia)
         if not attacks:
-            raise SystemExit(f"no official Imperial/Mercenary deployment card named {a.ia!r}")
+            raise SystemExit(f"no official deployment card named {a.ia!r}")
     elif a.weapon:
         w, cat = find_weapon(a.weapon)
         attacks = [Attack.from_strings(w["name"], w["dice"], w.get("surges") or [],
