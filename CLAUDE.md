@@ -33,6 +33,9 @@ balance tooling.
     - It's not quite complete: 7 of the 21 hero class decks are missing cards (for
       example, Biv and Shyla have only 6). Treat an odd-looking gap as missing data, not
       as the real design.
+  - Fallback source: the IA wiki (for example,
+    https://imperial-assault.fandom.com/wiki/Shyla_Varad_(Hero)). WebFetch gets HTTP 402
+    from it, so read it with the in-app browser instead.
 - `archive/original-docx/` — the Word docs the data was transcribed from (2026-09-26).
   Historical only; do not edit or treat as current.
 
