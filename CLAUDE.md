@@ -29,8 +29,17 @@ balance tooling.
   - `--reroll N` and `--defense-reroll N`: both sides reroll optimally (exact, not a
     heuristic). The attacker decides first, then the defender. The choice uses the same
     objective as surge spending, so it will follow the value model too.
-  - Planned next step: score an attack by situational *value* instead of raw
-  damage.
+  - `--value` scores an attack by situational *value* in damage-equivalents, using
+    `tools/value_model.yaml`. The model counts overkill, kill or wound bonuses,
+    Cleave/Blast targets, Recover when hurt, a hero's surge-for-strain, and condition
+    values.
+    - Surges and rerolls are re-optimised for each listed situation, then averaged.
+    - Weapons use the `vs_enemies` perspective; enemies use `vs_heroes`.
+    - `--compare` shows the result as its VALUE column.
+    - The model's numbers are the designer's to tune.
+    - `--calibrate` shows the value each single surge adds in each perspective. It
+      also checks the designer's `targets` in the YAML (for example "Cleave 2 > +2
+      damage" for heroes). Re-run it after any tuning.
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
 - `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.
 - `reference/` — official IA material (FFG's copyrighted content). Gitignored, so it's

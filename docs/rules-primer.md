@@ -285,5 +285,24 @@ These are general IA knowledge, not rules text.
 - Surge abilities are the main tuning dial. Common prices, each for 1 surge **[typical
   values]**: +1 damage, +1 or +2 accuracy, Pierce 1–2, a condition, Recover 1–2. A surge
   that adds 2 damage or Blast usually needs a strong die.
+- **Action economy is the common currency.** A hero's Rest action recovers Endurance
+  (about 4) in strain or damage. So one hero action is worth roughly 4
+  damage-equivalents, and an effect that costs a hero an action is worth up to that
+  much.
+  - **Stun** costs a hero an action to clear, so it's worth up to ~4 by that measure.
+    Some heroes clear conditions more efficiently (for example Acolyte Jin's *Mending
+    Touch* and Olias).
+  - **The Adversary usually plays to wound, though.** A stunned hero at 8 damage isn't
+    wounded; a hero at 12 damage is. When the plan is to spike one hero down before
+    they can recover, Stun is worth about 0.
+  - The designer's average is **Stun ≈ 2–2.5**.
+  - **Bleed** is strong early in a mission, when the hero must clear it or bleed all
+    game. Late on it's weak, because the hero can simply ignore it. It's worth
+    **≈ 1.5**.
+  - **Focus** adds a green die to the next attack: +1.33 damage and +0.5 surges, so
+    ≈ 2 if the figure survives to use it. Fragile figures (for example the 3-Health
+    Imperial Officer) are often defeated first, so the value model scales it by
+    Health.
+  - These values live in `tools/value_model.yaml`.
 - Missions are races against the round limit, so movement and actions are worth a lot.
   Extra actions, "move X" and free attacks are among the strongest effects in the game.

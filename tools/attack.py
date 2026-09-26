@@ -46,6 +46,7 @@ IA_CARDS = ROOT / "reference" / "ia_cards.json"
 CONDITIONS = {"bleed", "stun", "weaken", "focus", "hidden"}
 NUMERIC = {"damage", "pierce", "accuracy", "blast", "cleave", "recover", "surge"}
 NOT_EXTRAS = {"damage", "pierce", "accuracy", "surge"}
+ATTACK_DICE_NAMES = {"red", "blue", "green", "yellow"}
 
 
 # ---------------------------------------------------------------- parsing
@@ -97,6 +98,12 @@ class Attack:
     stats: dict = field(default_factory=dict)    # cost, health etc. for comparisons
     reroll: int = 0                              # attack dice it may reroll per attack
     notes: list = field(default_factory=list)    # card text we don't model
+    hero: bool = False                           # heroes may surge to recover strain
+
+    @property
+    def perspective(self):
+        """Default value-model perspective: heroes attack enemies, enemies attack heroes."""
+        return "vs_enemies" if self.hero else "vs_heroes"
 
     @classmethod
     def from_strings(cls, name, dice, surges, bonus=None, **kw):
@@ -136,6 +143,8 @@ def ia_attacks(name=None):
             continue
         if name and c["Name"].lower() != name.lower():
             continue
+        if any(d.lower() not in ATTACK_DICE_NAMES for d in c["Attack"]):
+            continue  # variable attacks (General Weiss, IG-88) are listed as 'Unknown'
         surges, bonus = [], Counter()
         for s in c["SimpleAbilities"]:
             cost = s.count("<surge>:") and s.split(":")[0].count("<surge>")
@@ -144,7 +153,7 @@ def ia_attacks(name=None):
             if cost:
                 surges.append((cost, eff))
             else:  # always-on modifier; ignore keywords like Mobile/Reach and defense bonuses
-                bonus.update({k: v for k, v in eff.items() if k in NUMERIC})
+                bonus.update({k: v for k, v in eff.items() if k in NUMERIC or k in CONDITIONS})
         reroll, notes = 0, []
         for ability in c["ComplexAbilities"]:
             plain = re.sub(r"<[^>]+>", "", ability).strip()
@@ -193,8 +202,13 @@ def pool_distribution(dice, kind):
 
 # ---------------------------------------------------------------- resolution
 
-def best_surge_spend(surges, available, base, block, rng):
-    """Choose which surge abilities to use. Returns (target damage, effect used)."""
+def damage_score(eff, dmg):
+    """Default objective: most damage; ties go to more extras."""
+    return (dmg, sum(v for k, v in eff.items() if k not in NOT_EXTRAS and v > 0))
+
+
+def best_surge_spend(surges, available, base, block, rng, score=damage_score):
+    """Choose which surge abilities to use. Returns (target damage, effect used, score)."""
     best = None
     for n in range(len(surges) + 1):
         for combo in itertools.combinations(surges, n):
@@ -207,11 +221,57 @@ def best_surge_spend(surges, available, base, block, rng):
                 dmg = 0  # miss
             else:
                 dmg = max(0, eff["damage"] - max(0, block - eff["pierce"]))
-            extras = sum(v for k, v in eff.items() if k not in NOT_EXTRAS and v > 0)
-            key = (dmg, extras)
+            key = (score(eff, dmg), dmg)
             if best is None or key > best[0]:
                 best = (key, dmg, eff)
-    return best[1], best[2]
+    return best[1], best[2], best[0][0]
+
+
+# ---------------------------------------------------------------- value model
+
+VALUE_MODEL = Path(__file__).resolve().parent / "value_model.yaml"
+HERO_STRAIN_SURGE = (1, Counter({"strain": 1}))  # IA: a hero may spend 1 surge to recover 1 strain
+
+
+def load_perspectives():
+    return load_yaml(VALUE_MODEL)["perspectives"]
+
+
+HERO_HEALTH = 12  # assumed attacker health for hero attacks (Focus scaling)
+
+
+def value_scorer(model, situation, attacker_hp=None):
+    """Score an attack result in damage-equivalents for one situation (see value_model.yaml)."""
+    kill = model["kill_bonus"]
+    worth = dict(model["conditions"])
+    # Focus is only worth its full value if the attacker survives to use it.
+    worth["focus"] = worth.get("focus", 0) * min(1, ((attacker_hp or HERO_HEALTH) + 2) / 10)
+    hp = situation.get("target_hp", 99)
+    cleave_hp = situation.get("cleave_hp")
+    blast_hps = situation.get("blast") or []
+    friendly = situation.get("blast_friendly", 0)
+    missing_hp = situation.get("attacker_missing_hp", 0)
+    missing_strain = situation.get("attacker_missing_strain", 0)
+    cleave_w = model.get("cleave_weight", 1.0)  # worth of a point of cleave damage vs main-target damage
+    blast_w = model.get("blast_weight", 1.0)
+
+    def score(eff, dmg):
+        v = min(dmg, hp) + (kill if dmg >= hp else 0)
+        if dmg:
+            if eff["cleave"] and cleave_hp:
+                v += (min(eff["cleave"], cleave_hp) * cleave_w
+                      + (kill if eff["cleave"] >= cleave_hp else 0))
+            if eff["blast"]:
+                v += sum(min(eff["blast"], b) * blast_w + (kill if eff["blast"] >= b else 0)
+                         for b in blast_hps)
+                v -= eff["blast"] * friendly
+            for cond, w in worth.items():
+                if eff[cond] and (cond in ("focus", "hidden") or dmg < hp):
+                    v += w  # every condition keyword needs >= 1 damage on the target
+        v += min(eff["recover"], missing_hp) * model["recover_weight"]
+        v += min(eff["strain"], missing_strain) * model["strain_value"]
+        return v
+    return score
 
 
 ATK_FIELDS = ("damage", "surge", "accuracy")
@@ -236,32 +296,36 @@ def mix(weighted):
     return out
 
 
-def resolve(attack, defense_dice, rng=None, defense_reroll=0):
-    """Return (damage distribution, trigger rates of extra effects).
+def resolve(attack, defense_dice, rng=None, defense_reroll=0, score=None):
+    """Return (damage distribution, trigger rates of extra effects, expected score).
 
-    With rerolls, both players reroll optimally for expected damage: the attacker
-    first (seeing both pools), then the defender (seeing the attacker's new result).
+    `score(eff, dmg)` is the objective surges and rerolls are chosen for (default:
+    damage). With rerolls, both players reroll optimally for the expected score: the
+    attacker first (seeing both pools), then the defender (seeing the new result).
     """
     if attack.type == "melee":
         rng = None
+    value_mode = score is not None
+    score = score or damage_score
+    surges = attack.surges + ([HERO_STRAIN_SURGE] if attack.hero else [])
 
     @lru_cache(maxsize=None)
     def final(at, dt):
-        """Outcome of fully-rolled pools: (target damage, tuple of triggered extras)."""
+        """Outcome of fully-rolled pools: (score, target damage, triggered extras)."""
         (dmg, surge, acc), (block, evade, dodge) = at, dt
-        if dodge:
-            return (0, ())
         base = Counter(attack.bonus)
         base["damage"] += dmg
         base["accuracy"] += acc
         available = max(0, surge + base.pop("surge", 0) - evade)
-        done, eff = best_surge_spend(attack.surges, available, base, block, rng)
+        # A dodge is a miss (infinite accuracy needed), but surges can still recover.
+        done, eff, s = best_surge_spend(surges, available, base, block,
+                                        float("inf") if dodge else rng, score)
         if done:  # blast/cleave/conditions need the target to suffer damage
             trig = tuple(sorted(f"{k} {v}" if k in NUMERIC else k
                                 for k, v in eff.items() if k not in NOT_EXTRAS and v > 0))
         else:  # recover works even on a miss
             trig = (f"recover {eff['recover']}",) if eff["recover"] else ()
-        return (done, trig)
+        return (s if value_mode else done, done, trig)
 
     if not attack.reroll and not defense_reroll:
         dist = Counter()
@@ -271,12 +335,25 @@ def resolve(attack, defense_dice, rng=None, defense_reroll=0):
     else:
         dist = _resolve_with_rerolls(attack, defense_dice, defense_reroll, final)
 
-    damage, triggers = Counter(), Counter()
-    for (done, trig), p in dist.items():
+    damage, triggers, total = Counter(), Counter(), 0.0
+    for (s, done, trig), p in dist.items():
         damage[done] += p
+        total += s * p
         for t in trig:
             triggers[t] += p
-    return damage, triggers
+    return damage, triggers, total
+
+
+def value(attack, defense_dice, perspective, rng=None, defense_reroll=0):
+    """Weighted value across a perspective's situations, plus the per-situation values."""
+    model = load_perspectives()[perspective]
+    per = []
+    for sit in model["situations"]:
+        scorer = value_scorer(model, sit, None if attack.hero else attack.stats.get("health"))
+        v = resolve(attack, defense_dice, rng, defense_reroll, scorer)[2]
+        per.append((sit["name"], sit["weight"], v))
+    total_w = sum(w for _, w, _ in per)
+    return sum(w * v for _, w, v in per) / total_w, per
 
 
 def _reroll_choices(n, k):
@@ -369,7 +446,7 @@ def describe_surges(attack):
     return "; ".join(one(c, e) for c, e in attack.surges) or "none"
 
 
-def report(attack, rng, defenses, defense_reroll=0):
+def report(attack, rng, defenses, defense_reroll=0, perspective=None):
     print(f"\n{attack.name}")
     bonus = ", ".join(f"{k} {v:+}" for k, v in attack.bonus.items() if v)
     print(f"  dice: {' '.join(attack.dice)}   surges: {describe_surges(attack)}"
@@ -378,12 +455,16 @@ def report(attack, rng, defenses, defense_reroll=0):
           + (f"   defender reroll: {defense_reroll}" if defense_reroll else "")
           + (f"   range: {rng}" if rng is not None and attack.type != "melee" else "   (accuracy ignored)"))
     for d in defenses:
-        dist, trig = resolve(attack, d, rng, defense_reroll)
+        dist, trig, _ = resolve(attack, d, rng, defense_reroll)
         at_least = "  ".join(f">={k}:{sum(p for j, p in dist.items() if j >= k):4.0%}"
                              for k in range(1, max(dist) + 1))
         print(f"  vs {'+'.join(d) or 'none':6} expected {expected(dist):4.2f}   {at_least}")
         if trig:
             print(" " * 13 + "triggers: " + ", ".join(f"{k} {p:.0%}" for k, p in sorted(trig.items())))
+        if perspective:
+            v, per = value(attack, d, perspective, rng, defense_reroll)
+            print(" " * 13 + f"VALUE {v:4.2f} ({perspective}): "
+                  + ", ".join(f"{name} {x:.2f}" for name, _, x in per))
     for note in attack.notes:
         print(f"  not modelled: {note}")
 
@@ -396,31 +477,70 @@ def compare(costs, rng, sort_by):
         if a.stats.get("cost") not in costs:
             continue
         vb, vw = (expected(resolve(a, [d], rng)[0]) for d in ("black", "white"))
+        valb, valw = (value(a, [d], a.perspective, rng)[0] for d in ("black", "white"))
         s = a.stats
         rows.append({"name": a.name, "src": s["source"], "unique": s.get("unique"), "cost": s["cost"],
                      "reinf": s["reinforce"] or "-", "grp": s["group"] or "?",
                      "hp": s["health"], "spd": s["speed"] or "?",
                      "def": "+".join(s["defense"] or []) or "?",
                      "type": (a.type or "?")[:6], "dice": " ".join(a.dice),
-                     "black": vb, "white": vw, "rr": a.reroll, "notes": bool(a.notes)})
-    key = {"cost": lambda r: (r["cost"], -r["black"]), "black": lambda r: -r["black"],
-           "white": lambda r: -r["white"], "hp": lambda r: -(r["hp"] or 0)}[sort_by]
+                     "black": vb, "white": vw, "value": (valb + valw) / 2,
+                     "rr": a.reroll, "notes": bool(a.notes)})
+    key = {"cost": lambda r: (r["cost"], -r["value"]), "black": lambda r: -r["black"],
+           "white": lambda r: -r["white"], "hp": lambda r: -(r["hp"] or 0),
+           "value": lambda r: -r["value"]}[sort_by]
     rows.sort(key=key)
-    head = f"{'':1} {'name':40} {'cost':>4} {'rnf':>3} {'grp':>3} {'hp':>3} {'spd':>3} {'def':12} {'type':6} {'dice':24} {'rr':>2} {'vsBlk':>5} {'vsWht':>5}"
+    head = (f"{'':1} {'name':38} {'cost':>4} {'rnf':>3} {'grp':>3} {'hp':>3} {'spd':>3} {'def':11} "
+            f"{'type':6} {'dice':22} {'rr':>2} {'dmgB':>5} {'dmgW':>5} {'VALUE':>6}")
     print(head)
     print("-" * len(head))
     for r in rows:
         mark = "*" if r["src"] == "ours" else "u" if r["unique"] else " "
         rr = (str(r["rr"]) if r["rr"] else "") + ("~" if r["notes"] else "") or "-"
-        print(f"{mark} {r['name'][:40]:40} {r['cost']:>4} {r['reinf']:>3} {r['grp']:>3} {r['hp']:>3} "
-              f"{r['spd']:>3} {r['def'][:12]:12} {r['type']:6} {r['dice'][:24]:24} {rr:>2} {r['black']:5.2f} {r['white']:5.2f}")
+        print(f"{mark} {r['name'][:38]:38} {r['cost']:>4} {r['reinf']:>3} {r['grp']:>3} {r['hp']:>3} "
+              f"{r['spd']:>3} {r['def'][:11]:11} {r['type']:6} {r['dice'][:22]:22} {rr:>2} "
+              f"{r['black']:5.2f} {r['white']:5.2f} {r['value']:6.2f}")
     print("\n* = this project's enemies; u = official unique figure (often overcosted).")
-    print("Expected damage is per figure, per attack"
+    print("dmgB/dmgW = expected damage per figure per attack vs black/white"
           + (f", at range {rng}." if rng is not None else ", accuracy ignored."))
+    print("VALUE = value-model score (tools/value_model.yaml, vs_heroes), averaged over black"
+          " and white. It counts overkill, kills, Cleave, Blast, Recover and conditions.")
     print("rr = attack dice rerolled (optimally); ~ = has reroll text that isn't modelled"
           " (conditional or costed; see --ia NAME).")
     print("Official cards: surges, always-on modifiers and unconditional attack rerolls only;"
           " other card text isn't modelled.")
+
+
+CALIBRATION_SURGES = ["+1 damage", "+2 damage", "Cleave 1", "Cleave 2", "Blast 1", "Blast 2",
+                      "Pierce 1", "Pierce 2", "Recover 1", "Recover 2",
+                      "Stun", "Bleed", "Weaken", "Focus"]
+CALIBRATION_POOLS = [["red", "green"], ["blue", "green"], ["green", "yellow"]]
+
+
+def calibrate(perspectives):
+    """Marginal value of each single surge ability added to typical attacks."""
+    for persp in perspectives:
+        hero = persp == "vs_enemies"
+        print(f"\n{persp}: value added by one surge ability "
+              f"(avg over pools {', '.join('+'.join(p) for p in CALIBRATION_POOLS)}; black & white)")
+
+        def avg_value(surges):
+            vals = [value(Attack.from_strings("cal", pool, surges, hero=hero,
+                                              stats={"health": 6}), [d], persp)[0]
+                    for pool in CALIBRATION_POOLS for d in ("black", "white")]
+            return sum(vals) / len(vals)
+
+        base = avg_value([])
+        print(f"  (base value, no surge abilities: {base:.2f})")
+        targets = load_perspectives()[persp].get("targets") or []
+        needed = set(CALIBRATION_SURGES) | {s for t in targets for s in re.split(r" [<>] ", t)}
+        rows = {s: avg_value([s]) - base for s in needed}
+        for s in sorted(CALIBRATION_SURGES, key=lambda s: -rows[s]):
+            print(f"  {s:12} {rows[s]:+5.2f}  {'#' * round(rows[s] * 20)}")
+        for t in targets:
+            left, op, right = re.fullmatch(r"(.+) ([<>]) (.+)", t).groups()
+            ok = rows[left] < rows[right] if op == "<" else rows[left] > rows[right]
+            print(f"  target {'PASS' if ok else 'FAIL'}: {t}  ({rows[left]:+.2f} vs {rows[right]:+.2f})")
 
 
 def find_weapon(name):
@@ -450,11 +570,21 @@ def main():
     ap.add_argument("--defense-reroll", type=int, default=0, help="defense dice the defender may reroll")
     ap.add_argument("--compare", nargs="+", type=int, metavar="COST",
                     help="table of every figure (ours and official) at these costs")
-    ap.add_argument("--sort", choices=["cost", "black", "white", "hp"], default="cost")
+    ap.add_argument("--sort", choices=["cost", "black", "white", "hp", "value"], default="cost")
+    ap.add_argument("--value", action="store_true",
+                    help="also score by the value model (tools/value_model.yaml)")
+    ap.add_argument("--perspective", choices=["vs_heroes", "vs_enemies"],
+                    help="value-model perspective (default: vs_enemies for weapons and --hero, else vs_heroes)")
+    ap.add_argument("--calibrate", action="store_true",
+                    help="show the value each single surge ability adds, per perspective")
+    ap.add_argument("--hero", action="store_true",
+                    help="treat a --dice attack as a hero's (may surge to recover strain)")
     a = ap.parse_args()
     defenses = a.defense or [["black"], ["white"]]
     extra = parse_effect(a.bonus) if a.bonus else Counter()
 
+    if a.calibrate:
+        return calibrate([a.perspective] if a.perspective else ["vs_heroes", "vs_enemies"])
     if a.compare:
         return compare(set(a.compare), a.range, a.sort)
     if a.enemy:
@@ -468,15 +598,16 @@ def main():
     elif a.weapon:
         w, cat = find_weapon(a.weapon)
         attacks = [Attack.from_strings(w["name"], w["dice"], w.get("surges") or [],
-                                       type="melee" if cat == "melee" else "ranged")]
+                                       type="melee" if cat == "melee" else "ranged", hero=True)]
     elif a.dice:
-        attacks = [Attack.from_strings("custom attack", a.dice, a.surge)]
+        attacks = [Attack.from_strings("custom attack", a.dice, a.surge, hero=a.hero)]
     else:
         ap.error("give an enemy, --ia, --weapon, --dice or --compare")
     for atk in attacks:
         atk.bonus.update(extra)
         atk.reroll += a.reroll
-        report(atk, a.range, defenses, a.defense_reroll)
+        persp = (a.perspective or atk.perspective) if (a.value or a.perspective) else None
+        report(atk, a.range, defenses, a.defense_reroll, persp)
 
 
 if __name__ == "__main__":
