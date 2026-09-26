@@ -3,7 +3,10 @@ health: 13
 endurance: 4
 speed: 4
 defense: [black]
-attributes: null  # TODO: not specified
+attributes:  # Paragon/Ranger spear-thrower: good strength, okay agility, bad arcana
+  strength: [blue, green, yellow]
+  agility: [blue, green]
+  arcana: [blue]
 
 abilities:
   - name: Command

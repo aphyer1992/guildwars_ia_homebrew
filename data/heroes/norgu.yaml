@@ -1,10 +1,13 @@
 name: Norgu
-# TODO: no stats given yet
+# TODO: health, endurance and defense not given yet
 health: null
 endurance: null
-speed: null
+speed: 4  # default: designer says assume 4
 defense: null
-attributes: null
+attributes:  # Mesmer: good arcana, mediocre agility, bad strength
+  strength: [blue]
+  agility: [blue, green]
+  arcana: [blue, green, yellow]
 
 abilities:
   - name: Power Block

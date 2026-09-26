@@ -29,14 +29,3 @@ class_cards:
     xp: null  # TODO: no XP cost given
     text: >-
       When you spend a +1 armor token, also apply +1 evade.
-  - name: Shockwave
-    xp: null  # TODO: no XP cost given
-    text: >-
-      Deplete this card when you trigger Crystal Wave. All enemy figures in LoS
-      suffer the damage, but that damage is reduced by 1 for every additional
-      square distance between you and them.
-  - name: Sliver Armor  # TODO: duplicate of the ability above; unfinished
-    xp: null
-    status: stub
-    text: >-
-      Exhaust this card when an

@@ -72,6 +72,11 @@ balance tooling.
   in attack pools and black in defense pools.)
 - Hero `attributes` are keyed `strength`, `agility` and `arcana`. Tech doesn't fit the GW
   theme. Values are attack-dice lists; the original docs' `B` meant blue here.
+  - The designer's scale: **Bad = blue** (33% pass), **Okay = blue green** (67%),
+    **Good = blue green yellow** (89%).
+  - In-between pools like blue blue green (78%) and blue green green (83%) sit between
+    Okay and Good.
+  - Official heroes usually have one Good, one Okay and one Bad attribute.
 - **Wounded side is derived, not stored**. `tools/heroes.py:wounded_stats` works it out
   from the default rule:
   - Speed and endurance each drop by 1.
