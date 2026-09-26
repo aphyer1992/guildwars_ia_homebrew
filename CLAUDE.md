@@ -80,9 +80,11 @@ balance tooling.
   - **Compare pools by surge faces, not dice**, since tests pass on surges. Blue has 2
     surge faces, green 3, yellow 5 and red 1. So Bad = 2, Okay = 5, Good = 10, blue
     blue green = 7, blue green green = 8.
-  - **Standard hero total: 17** (Good + Okay + Bad). Old Mac's blue green green / blue
-    blue green / blue is also 17: more dice, but weaker ones. `check_data.py` flags
-    any other total.
+  - **Typical hero total: 17** (Good + Okay + Bad). Old Mac's blue green green / blue
+    blue green / blue is also 17: more dice, but weaker ones.
+  - 17 isn't a rule. Official heroes range from 14 to 23: Onar Koma 23, Jarrod 21,
+    Gideon/Mak/Shyla 20, Loku 14. `check_data.py` lists other totals under "Balance
+    flags" as a reminder to confirm they're deliberate, not as errors.
 - **Hero defaults:** Health 12, Endurance 4.
   - Endurance 5 is a very big edge in IA (Gideon, Diala and others). Every hero here has
     4 unless there's strong reason otherwise.

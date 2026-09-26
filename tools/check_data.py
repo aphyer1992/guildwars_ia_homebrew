@@ -21,7 +21,7 @@ COMPLETE_DECK_XP = [1, 1, 2, 2, 3, 3, 4, 4]
 AFFILIATIONS = {"adversary", "beast"}  # like IA's Imperial vs Mercenary
 # Attribute tests pass on surges: surge faces per die (see data/dice.yaml).
 SURGE_FACES = {"red": 1, "blue": 2, "green": 3, "yellow": 5}
-STANDARD_ATTRIBUTE_SURGES = 17  # Good (BGY) 10 + Okay (BG) 5 + Bad (B) 2
+TYPICAL_ATTRIBUTE_SURGES = 17  # Good (BGY) 10 + Okay (BG) 5 + Bad (B) 2; official heroes range 14-23
 
 errors: list[str] = []
 stubs: dict[str, list[str]] = {}  # group -> names
@@ -35,7 +35,7 @@ def stub(group, name="(whole entry)"):
     stubs.setdefault(group, []).append(str(name))
 
 
-flags: list[str] = []  # balance departures from project standards (not errors)
+flags: list[str] = []  # departures from typical values, to confirm are deliberate (not errors)
 
 
 def flag(where, msg):
@@ -68,8 +68,9 @@ def check_hero(where, h):
         for name, pool in attrs.items():
             check_dice(f"{where} [{name}]", pool, ATTACK_DICE)
         total = sum(SURGE_FACES.get(d, 0) for pool in attrs.values() for d in pool or [])
-        if total != STANDARD_ATTRIBUTE_SURGES:
-            flag(where, f"attribute surge faces total {total}, standard is {STANDARD_ATTRIBUTE_SURGES}")
+        if total != TYPICAL_ATTRIBUTE_SURGES:
+            flag(where, f"attribute surge faces total {total} (typical {TYPICAL_ATTRIBUTE_SURGES};"
+                        " fine if deliberate, official heroes range 14-23)")
     if h.get("endurance") not in (None, 4):
         flag(where, f"endurance {h['endurance']} (default 4; 5 is a very big edge)")
     extra = set(h.get("wounded") or {}) - WOUNDED_OVERRIDES
