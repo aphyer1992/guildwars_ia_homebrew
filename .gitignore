@@ -7,3 +7,6 @@ __pycache__/
 output/
 # official IA rulebooks (FFG copyright)
 reference/
+
+# artwork: Guild Wars references and generated art (ArenaNet IP; home use only)
+art/

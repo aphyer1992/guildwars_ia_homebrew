@@ -1,0 +1,9 @@
+# Physical sizes for tools/render_print.py (designer's measurements, 2026-09-26).
+page: {width_in: 8.5, height_in: 11}          # US Letter
+card: {width_in: 2.25, height_in: 3.5}        # IA cards, sleeved
+token:
+  diameter_in: 1.0                            # IA cardboard tokens; grid squares are 1 in
+  rim_mm: 2                                   # coloured edge
+  gap_in: 0.12                                # spacing between tokens on the sheet
+rims: {regular: "#ffffff", elite: "#c0282d", hero: "#2d5fb3"}
+card_borders: {regular: "#8a8a8a", elite: "#b3262a"}

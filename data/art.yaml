@@ -1,0 +1,166 @@
+# Art manifest: one entry per figure, keyed by its data file name
+# (data/enemies/<key>.yaml or data/heroes/<key>.yaml).
+#
+#   reference   wiki.guildwars.com file names, fetched by tools/fetch_art.py into
+#               art/reference/<key>/. The wiki shows unarmed models, so weapons
+#               come from the prompt, not the reference.
+#   badge       game-icons.net icon (author/name, CC BY 3.0) shown on the token so
+#               lookalike groups can be told apart. The rim colour is reserved:
+#               white = regular, red = elite, blue = hero.
+#   accent      group colour, used behind the badge and on the card.
+#   icon_crop   where to centre the token crop: x and y as fractions of the art's
+#               width and height, and zoom (art width / token width).
+#   prompt      draft image-generation prompt. Weapon, pose and palette are chosen
+#               to keep lookalike groups distinct (for example the two Charr
+#               warrior groups).
+#
+# Final art goes in art/final/<key>.png, with an optional art/final/<key>-icon.png
+# override for the token. Until then, the first reference image is a placeholder.
+# art/ is gitignored: Guild Wars art is ArenaNet's, for home use only.
+
+style: >-
+  Painterly dark-fantasy card illustration in the style of Guild Wars concept art,
+  dramatic rim lighting, muted ash-and-ember palette, single figure, plain dark
+  background, no text
+
+figures:
+  # ---------------------------------------------------------------- Charr
+  charr_axe_warrior:
+    reference: [Charr_warrior.jpg]
+    badge: lorc/battle-axe
+    accent: "#b5452b"
+    icon_crop: {x: 0.5, y: 0.38, zoom: 2.6}
+    prompt: >-
+      Charr axe warrior, huge horned feline beast-man in heavy spiked iron plate,
+      a notched battle-axe in each fist, FACING THE VIEWER head-on, mouth open
+      with fangs bared in a roar, rust-red warpaint and tattered red banners on
+      the armour, embers in the air
+  charr_blade_storm:
+    reference: [Charr_warrior.jpg]
+    badge: lorc/crossed-swords
+    accent: "#4a6fa5"
+    icon_crop: {x: 0.5, y: 0.38, zoom: 2.6}
+    prompt: >-
+      Charr blade warrior, horned feline beast-man in lighter iron armour with
+      steel-grey and cold-blue cloth, twin long curved swords, head IN PROFILE
+      looking sideways, poised mid-lunge, sleek and fast rather than bulky
+  charr_stalker:
+    reference: [Charr_ranger.jpg]
+    badge: delapouite/bow-arrow
+    accent: "#4f7a3a"
+    icon_crop: {x: 0.5, y: 0.3, zoom: 3.0}
+    prompt: >-
+      Charr archer on a rocky ledge above the viewer, horned feline beast-man in
+      leather and fur, drawing a longbow with a burning arrow (Ignite Arrows),
+      three-quarter view, eyes narrowed, fire glow lighting the face
+  charr_ash_walker:
+    reference: [Charr_necromancer.jpg]
+    badge: lorc/skull-crossed-bones
+    accent: "#6b5b7b"
+    icon_crop: {x: 0.47, y: 0.3, zoom: 2.6}
+    prompt: >-
+      Charr necromancer of the Ash Legion, gaunt horned feline beast-man in ragged
+      grey robes and bone fetishes, one clawed hand draining a red stream of life
+      from an unseen foe, ash swirling, pale glowing eyes
+  charr_mind_spark:
+    reference: [Charr_mesmer.jpg]
+    badge: lorc/brain
+    accent: "#a03c8c"
+    icon_crop: {x: 0.5, y: 0.14, zoom: 3.0}
+    prompt: >-
+      Charr mesmer, horned feline beast-man in dark robes with violet trim,
+      crackling magenta arcane energy between its claws, eyes glowing violet,
+      unsettling hypnotic stare
+  charr_flamecaller:
+    reference: [Charr_shaman.jpg]
+    badge: lorc/fire-ray
+    accent: "#e07b1f"
+    icon_crop: {x: 0.47, y: 0.16, zoom: 2.6}
+    prompt: >-
+      Charr fire caller, horned feline beast-man in scorched shaman robes and
+      bronze ornaments, a ring of flame erupting around its feet (Inferno), one
+      hand raised calling fire, face lit orange from below
+  # ---------------------------------------------------------------- Beasts
+  carrion_devourer:
+    reference: [Red_devourer.jpg]
+    badge: lorc/scorpion-tail
+    accent: "#9c3b2f"
+    icon_crop: {x: 0.55, y: 0.62, zoom: 2.2}
+    prompt: >-
+      Carrion devourer, massive red-shelled scorpion-like beast with two tails,
+      bursting out of cracked ash-grey earth, mandibles spread, heavy armoured
+      carapace
+  plague_devourer:
+    reference: [Ridged_devourer.jpg]
+    badge: lorc/poison-bottle
+    accent: "#7fae3a"
+    icon_crop: {x: 0.5, y: 0.62, zoom: 2.2}
+    prompt: >-
+      Plague devourer, ridged pale-green scorpion-like beast with two tails
+      dripping sickly green venom, poisonous mist around it
+  whiptail_devourer:
+    reference: [Yellow_devourer.jpg]
+    badge: lorc/spiked-tail
+    accent: "#d8b830"
+    icon_crop: {x: 0.55, y: 0.7, zoom: 2.2}
+    prompt: >-
+      Whiptail devourer, yellow-shelled scorpion-like beast half-buried in sand,
+      two long tails raised and flicking barbed spines forward
+  # ---------------------------------------------------------------- Grawl
+  grawl:
+    reference: [Grawl_martial.jpg]
+    badge: lorc/hammer-drop
+    accent: "#7a5a3a"
+    icon_crop: {x: 0.55, y: 0.29, zoom: 2.8}
+    prompt: >-
+      Grawl warrior, hulking ape-like tribal brute with shaggy grey fur, bone
+      necklace, swinging a crude stone-headed war hammer overhead, snarling
+  # ---------------------------------------------------------------- Heroes
+  acolyte_jin:
+    reference: [Acolyte_Jin_Zaishen_armor.jpg]
+    icon_crop: {x: 0.525, y: 0.07, zoom: 3.2}
+    prompt: >-
+      Acolyte Jin, young stern Canthan woman archer in Zaishen armour, drawing a
+      recurve bow, focused grim expression
+  argo:
+    reference: [Argo.jpg]
+    icon_crop: {x: 0.51, y: 0.075, zoom: 3.2}
+    prompt: >-
+      Argo, Luxon champion elementalist, broad honourable warrior-mage wreathed in
+      floating shards of obsidian and stone armour (earth magic)
+  cynn:
+    reference: [Prophecies_Box_Art_Cynn.jpg]
+    icon_crop: {x: 0.5, y: 0.25, zoom: 1.8}
+    prompt: >-
+      Cynn, young sardonic Ascalonian fire elementalist, hurling a fireball, a
+      dark smirk, burning ruins of Surmia behind her
+  general_morgahn:
+    reference: [General_Morgahn_Kournan_armor.jpg]
+    icon_crop: {x: 0.5, y: 0.075, zoom: 3.2}
+    prompt: >-
+      General Morgahn, weathered veteran Kournan spear-general, Paragon with
+      spear and shield, grave and dignified, desert armour
+  norgu:
+    reference: [Norgu_Thespian_armor.jpg]
+    icon_crop: {x: 0.477, y: 0.075, zoom: 3.2}
+    prompt: >-
+      Norgu, large flamboyant Vabbian actor and mesmer, theatrical pose with
+      illusory masks and violet mirror-images swirling around him, beaming
+  old_mac:
+    reference: [Joe.jpg]  # no image of Old Mac himself on the wiki
+    icon_crop: {x: 0.5, y: 0.45, zoom: 2.0}
+    prompt: >-
+      Old Mac, grizzled old Ascalonian farmer-turned-warrior in patched armour,
+      stubborn grin, with Joe, his devourer raised from an egg, at his side
+  olias:
+    reference: [Olias_Krytan_armor.jpg]
+    icon_crop: {x: 0.54, y: 0.085, zoom: 3.2}
+    prompt: >-
+      Olias, gaunt morbid necromancer devoted to Grenth, bone minions rising
+      around him, cold unsettling smile
+  zenmai:
+    reference: [Zenmai_Am_Fah_armor.jpg]
+    icon_crop: {x: 0.474, y: 0.085, zoom: 3.2}
+    prompt: >-
+      Zenmai, stoic Canthan assassin woman with twin daggers, shadow-stepping
+      out of darkness, calm penitent expression

@@ -142,6 +142,25 @@ def check_dice_faces(where, doc):
                     err(f"{where} / {colour}", f"bad face {face!r} (fields: {sorted(fields)})")
 
 
+def check_art(where, doc):
+    figures = {p.stem for sub in ("enemies", "heroes") for p in (DATA / sub).glob("*.yaml")}
+    for key, fig in (doc.get("figures") or {}).items():
+        fw = f"{where} / {key}"
+        if key not in figures:
+            err(fw, "no matching file in data/enemies or data/heroes")
+        if not fig.get("reference"):
+            stub(where, f"{key}: no reference image")
+        crop = fig.get("icon_crop") or {}
+        if set(crop) - {"x", "y", "zoom"} or not all(isinstance(v, (int, float)) for v in crop.values()):
+            err(fw, f"bad icon_crop {crop!r}")
+        if fig.get("badge") and not re.fullmatch(r"[a-z0-9-]+/[a-z0-9-]+", fig["badge"]):
+            err(fw, f"badge should be 'author/icon-name', got {fig['badge']!r}")
+    for key in sorted(figures - set(doc.get("figures") or {})):
+        if not (DATA / "enemies" / f"{key}.yaml").exists() or \
+                (load(DATA / "enemies" / f"{key}.yaml") or {}).get("status") != "stub":
+            stub(where, f"{key}: no art entry")
+
+
 def main():
     for path in sorted(DATA.rglob("*.yaml")):
         rel = path.relative_to(ROOT).as_posix()
@@ -165,6 +184,8 @@ def main():
                 check_card_list(f"{rel} / {deck['name']}", deck["cards"])
         elif rel == "data/dice.yaml":
             check_dice_faces(rel, doc)
+        elif rel == "data/art.yaml":
+            check_art(rel, doc)
         elif rel == "data/shrines.yaml":
             check_card_list(rel, doc["cards"])
         elif rel == "data/items/accessories.yaml":

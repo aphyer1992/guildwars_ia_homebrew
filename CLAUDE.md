@@ -43,6 +43,20 @@ balance tooling.
     - `--calibrate` shows the value each single surge adds in each perspective. It
       also checks the designer's `targets` in the YAML (for example "Cleave 2 > +2
       damage" for heroes). Re-run it after any tuning.
+- **Print pipeline** (cards on 2.25 × 3.5 in sleeved cardstock; 1 in tokens with a
+  2 mm rim: white = regular, red = elite, blue = hero):
+  - `data/art.yaml` — per figure: wiki reference images, token badge (game-icons.net),
+    accent colour, token crop and a draft art prompt. Lookalike groups are separated
+    by pose, palette and badge.
+  - `tools/fetch_art.py` — downloads references and badges into `art/` (gitignored:
+    ArenaNet art, home use only).
+  - `tools/render_print.py` — builds `output/cards.pdf` and `output/tokens.pdf` through
+    headless Chrome. `--png` writes previews; `--prompts` writes
+    `output/art-prompts.md`.
+    - Final art goes in `art/final/<key>.png`, with an optional `<key>-icon.png` token
+      override. Until then, reference images are used and marked PLACEHOLDER ART.
+    - Sizes are in `tools/print_config.yaml`. The same art serves regular and elite.
+  - `docs/credits.md` — attribution (game-icons.net requires CC BY credit).
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
 - `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.
 - `docs/setting.md` — Guild Wars setting primer: Ascalon and the Searing, factions,
