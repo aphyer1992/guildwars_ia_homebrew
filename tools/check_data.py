@@ -19,6 +19,9 @@ DEFENSE_DICE = {"black", "white"}
 ATTRIBUTES = {"strength", "agility", "arcana"}
 COMPLETE_DECK_XP = [1, 1, 2, 2, 3, 3, 4, 4]
 AFFILIATIONS = {"adversary", "beast"}  # like IA's Imperial vs Mercenary
+# Attribute tests pass on surges: surge faces per die (see data/dice.yaml).
+SURGE_FACES = {"red": 1, "blue": 2, "green": 3, "yellow": 5}
+STANDARD_ATTRIBUTE_SURGES = 17  # Good (BGY) 10 + Okay (BG) 5 + Bad (B) 2
 
 errors: list[str] = []
 stubs: dict[str, list[str]] = {}  # group -> names
@@ -30,6 +33,13 @@ def err(where, msg):
 
 def stub(group, name="(whole entry)"):
     stubs.setdefault(group, []).append(str(name))
+
+
+flags: list[str] = []  # balance departures from project standards (not errors)
+
+
+def flag(where, msg):
+    flags.append(f"{where}: {msg}")
 
 
 def load(path):
@@ -57,6 +67,11 @@ def check_hero(where, h):
             err(where, f"attributes should be {sorted(ATTRIBUTES)}, got {sorted(attrs)}")
         for name, pool in attrs.items():
             check_dice(f"{where} [{name}]", pool, ATTACK_DICE)
+        total = sum(SURGE_FACES.get(d, 0) for pool in attrs.values() for d in pool or [])
+        if total != STANDARD_ATTRIBUTE_SURGES:
+            flag(where, f"attribute surge faces total {total}, standard is {STANDARD_ATTRIBUTE_SURGES}")
+    if h.get("endurance") not in (None, 4):
+        flag(where, f"endurance {h['endurance']} (default 4; 5 is a very big edge)")
     extra = set(h.get("wounded") or {}) - WOUNDED_OVERRIDES
     if extra:
         err(where, f"wounded can only override {sorted(WOUNDED_OVERRIDES)}, got {sorted(extra)}")
@@ -167,6 +182,9 @@ def main():
     print(f"\nTODO comments ({len(todos)}):")
     for t in todos:
         print("  ", t)
+    print(f"\nBalance flags ({len(flags)}):")
+    for f in flags:
+        print("  ", f)
     if errors:
         print(f"\nERRORS ({len(errors)}):")
         for e in errors:

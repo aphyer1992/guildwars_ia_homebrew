@@ -14,8 +14,8 @@ editing the data and deleting the item here.
 
 ## Missing stats
 
-3. **Norgu's stats**: health, endurance and defense are still blank. Attributes and speed
-   (default 4) are set.
+3. **Norgu's defense die** is still blank (black or white?). Health 12 and endurance 4
+   are set as defaults; health may drop to 10-11 later.
 4. **XP costs** are missing on several class cards: Zenmai *Mo Zing*; Old Mac *I Will
    Avenge You!*, *Heal as One*; all of Argo's and Cynn's class cards; the Adversary class
    cards.

@@ -77,6 +77,15 @@ balance tooling.
   - In-between pools like blue blue green (78%) and blue green green (83%) sit between
     Okay and Good.
   - Official heroes usually have one Good, one Okay and one Bad attribute.
+  - **Compare pools by surge faces, not dice**, since tests pass on surges. Blue has 2
+    surge faces, green 3, yellow 5 and red 1. So Bad = 2, Okay = 5, Good = 10, blue
+    blue green = 7, blue green green = 8.
+  - **Standard hero total: 17** (Good + Okay + Bad). Old Mac's blue green green / blue
+    blue green / blue is also 17: more dice, but weaker ones. `check_data.py` flags
+    any other total.
+- **Hero defaults:** Health 12, Endurance 4.
+  - Endurance 5 is a very big edge in IA (Gideon, Diala and others). Every hero here has
+    4 unless there's strong reason otherwise.
 - **Wounded side is derived, not stored**. `tools/heroes.py:wounded_stats` works it out
   from the default rule:
   - Speed and endurance each drop by 1.
