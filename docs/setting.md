@@ -82,7 +82,8 @@ opening of **Guild Wars: Prophecies**, from pre-Searing Ascalon through the miss
   - They man **ballistae and catapults**; Engineers crew the siege weapons.
 - **In the story:** they blockade the passes the refugees need. At the Frost Gate,
   Dagnar (riding an **Ice Drake**) kills Prince Rurik while Rurik covers the refugees'
-  escape.
+  escape. **In this campaign, that only happens if the heroes lose the finale** (see
+  `docs/campaign-research.md`).
 - **Level gap:** they're tougher than the Charr (roughly levels 9–13 against 5–8). They
   fit a higher threat level in the campaign's second act.
 
@@ -103,10 +104,12 @@ opening of **Guild Wars: Prophecies**, from pre-Searing Ascalon through the miss
 - **Grawl:** primitive ape-like tribes with a religious hierarchy.
   - They gather at shrines to Tyria's gods.
   - Post-Searing, they're split between rival sects: Petitioners and Heretics.
-  - They could reasonably be **Beast or Adversary**. They're organised and have
-    shamans, but they aren't a real military threat. That's the designer's call.
+  - **Adversary** in this project (designer, 2026-09-26): they're organised and have
+    shamans. How to include them without a third basic melee unit is still open; see
+    `docs/campaign-research.md`.
 - **Elementals:** **Boulder Elementals** are rock brutes, hard to cut but vulnerable to
-  hammers. **Ice Golems** are Stone Summit constructs.
+  hammers. **Ice Golems** are Stone Summit constructs, so they count as **Adversary**,
+  not Beast (designer, 2026-09-26).
 - **Shiverpeak creatures:**
   - **Centaurs:** Shiverpeak warriors, longbows and protector-monks, resistant to cold.
   - **Snow Ettins:** ogre hammer-warriors.

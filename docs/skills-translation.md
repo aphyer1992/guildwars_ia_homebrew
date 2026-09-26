@@ -31,21 +31,15 @@ a once-per-mission limit, and **rounds** as the only clock.
 | Healing | Recover | See the Monk section: the action economy is the whole problem |
 | Resurrection | Nothing equivalent: IA heroes are wounded, then withdraw, and never die | A "return a withdrawn hero" effect would be huge; handle with care |
 
-### Friendly fire
+### Friendly fire (decided: keep it)
 
 IA's Blast damages **every** adjacent figure, friend or foe. GW area spells hit only
-foes (apart from rare exceptions such as *Heal Area*, which also heals foes). Cynn's
-*Liquid Flame* already works around this by letting her exempt spaces. The options are:
-
-- **Keep IA's rule:** positioning matters and fire is dangerous. That suits the Charr
-  shooting into melee scrums, and the value model already penalises Blast next to
-  friendly figures.
-- **Add a keyword, such as "Blast X (foes)":** it only hits hostile figures. It's
-  cleaner for hero spellcasters, but noticeably stronger, since the only limit on
-  firing into a melee disappears.
-
-Suggestion: keep IA's rule by default, and use exemption effects like *Liquid Flame* as
-the upgrade path. That makes Elementalist class cards about controlling their fire.
+foes, but only because an MMO can't have friendly fire; a board game can. **Decided
+(2026-09-26): friendly fire is a feature.**
+- Positioning matters. Enemy groups clumping up (for example around a healer) risk
+  Blast.
+- Exemption effects like Cynn's *Liquid Flame* are the Elementalist's upgrade path:
+  "control your fire".
 
 ## Elementalists
 
@@ -155,6 +149,8 @@ Three ways to translate it:
   - **Against Adversary groups** at a deployment point, or anything holding a point,
     it's strong.
   - Hero Elementalists therefore get more out of it than enemy casters do.
+- **Timing and tracking:** see the two subsections below. They're the designer's main
+  concerns.
 
 **B. Condition rider: recommended for "burning" spells.**
 - *Immolate*, *Incendiary Bonds*, *Searing Flames*: normal attacks or effects that apply
@@ -163,6 +159,45 @@ Three ways to translate it:
   target clears it with an action. That fits Bleed's IA value (about 1.5).
 - *Searing Flames*' GW twist (extra damage to targets already Burning) becomes "+2
   damage if the target is Bleeding" in IA.
+
+#### Timing and turn order (designer's point)
+
+When a zone triggers decides who can escape it, because IA alternates activations and
+a figure that has already activated this round can't move:
+
+| Trigger | Who can escape | Effect |
+|---|---|---|
+| **End of round** | Only figures that haven't activated yet | Rewards **acting late**: a zone dropped on figures that have already activated is guaranteed damage |
+| End of each affected figure's activation | Every figure, once | Turn-order neutral; only punishes figures that can't or won't move |
+| Start of the caster's next activation | Roughly everyone | Roughly neutral, but awkward to track |
+
+The designer's inclination is to **embrace the turn-order effect** and make it a
+profession identity:
+- **Mesmers want to act before their targets.** They "interrupt" them. Norgu's *Power
+  Block* and the Mind Spark's *Power Drain* already reward targeting figures that
+  haven't activated yet.
+- **Elementalists want to act after their targets,** so the storm lands on figures that
+  can no longer move.
+
+**Balance note:** an end-of-round zone dropped on figures that have already activated
+is **unblockable, guaranteed area damage**, like a Blast that can't miss. Cost it that
+way: exhaust plus strain, and a low X. Activation order also becomes a real decision
+for the heroes: hold the Elementalist back to activate last? That costs flexibility
+elsewhere in the round.
+
+#### Tracking (designer's concern)
+
+Several Elementalists could mean several kinds of token. Suggestions to keep it
+manageable:
+- **One generic zone token type.** The card that placed it defines the effect.
+- **Link the token to its card with IA's existing ID tokens:** the numbered, coloured
+  markers IA already uses to tell apart two groups of the same figure. Put a matching
+  ID token on the card.
+- **One zone per caster.** Placing a new zone removes that caster's old one.
+- **Zones last one round at most.** Nothing to remember next round.
+
+With those rules, the most a table ever tracks is one token per spellcaster, each
+cleared every round.
 
 **C. Delayed Blast: for Meteor Shower and Eruption.**
 - "Place a token. At the start of your next activation, perform Blast 2 centered on it

@@ -171,7 +171,15 @@ GW terminology: Rebels/heroes = heroes, Imperial player = **Adversary**, crates 
   - **Act I, Ascalon:** against the Charr, ending with the villain Bonfaaz Burntfur at
     Nolani Academy.
   - **Act II, Shiverpeaks:** against the Stone Summit dwarves, ending with Dagnar
-    Stonepate at the Frost Gate, where Prince Rurik dies.
+    Stonepate at the Frost Gate.
+- **The ending branches, as in IA's core campaign.** The second-last mission picks which
+  finale is played, and each finale has a win and a loss ending.
+  - Prince Rurik dies (as he does in the MMO) only if the heroes lose the finale.
+  - Lady Althea can be rescued through the side mission *Althea's Ashes*.
+- **Siege weapons, levers and beacons are campaign mission rules,** not general rules.
+  The IA Campaign Guide exists only as the designer's physical copy.
+- **Friendly fire on Blast is a feature,** not something to work around.
+- **Grawl and Ice Golems are Adversary.**
 - **Prince Rurik** is the recurring ally.
 - **The heroes are NPCs from across the MMO,** some anachronistic. Old Mac and Cynn are
   native to this campaign.

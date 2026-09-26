@@ -24,9 +24,22 @@ mini-campaign or a short full campaign. It breaks naturally into two acts:
 
 - **Rurik** is a recurring ally in almost every mission. He's a natural IA ally card,
   and often the protect or escort target.
-- **The finale is a tragedy:** Rurik dies at the Frost Gate as the refugees escape. One
-  IA option is a finale where the heroes win by getting the refugees through, and
-  Rurik's survival changes the ending text.
+- **The ending branches on mission results (designer's plan, 2026-09-26).** It works
+  like the IA core campaign: the second-last mission decides which finale is played,
+  and each finale has a win and a loss ending.
+  - In the MMO, Rurik dies at the Frost Gate. Here, **Rurik only dies if the heroes lose
+    the finale**: he sacrifices himself drawing the Stone Summit away so the refugees
+    escape. If the heroes win, he survives.
+  - **Lady Althea**, sacrificed to the Titans by the Charr in the MMO, can be
+    **rescued** if the heroes play and win the side mission *Althea's Ashes* (agenda set
+    *Rites of Fire* in `data/adversary/agendas.yaml`).
+  - Because Borlis Pass is the second-last mission, its result could choose between two
+    Frost Gate finales. For example: win, and the heroes reach the gate ahead of the
+    Summit, facing a Dagnar-led last stand; lose, and the refugees are already under
+    attack and the heroes must break through to them.
+- **Siege weapons, trebuchets, levers and beacons are campaign mission rules,** as in
+  IA's Campaign Guide. That document isn't available digitally yet; the designer owns
+  a physical copy.
 - **Side-mission sources:**
   - Pre-Searing quests (*A Mesmer's Burden*, the start of Old Mac's story).
   - *Defend the Wall*.
@@ -172,8 +185,10 @@ mini-campaign or a short full campaign. It breaks naturally into two acts:
   - Rurik holds a chokepoint as an ally who takes damage from mission rules.
   - Dagnar on the Ice Drake as an unkillable finale threat, or a very tough villain. He
     arrives in the final rounds.
-  - Heroes win when the refugees escape, and their performance decides whether Rurik
-    survives.
+  - **Branching (designer's plan):** if the heroes win, Rurik survives. If they lose,
+    Rurik sacrifices himself drawing the Stone Summit away and the refugees still
+    escape. Borlis Pass's result could select between two versions of this finale (see
+    "Campaign shape").
 
 ## Enemy roster and IA translations
 
@@ -221,8 +236,18 @@ The existing designs are faithful to the MMO:
 | **Flash Gargoyle** | Elementalist | Lightning Orb, Lightning Strike | Fragile ranged: blue dice, Pierce (lightning ignores armour) |
 | Resurrect Gargoyle | Monk | heals | minor healer |
 | **Boulder Elemental** | Warrior | Crude Swing; resists slashing and piercing, weak to blunt | Slow and tough, black defense; perhaps "−1 damage from Blade/Axe weapons" if weapon traits exist |
-| **Grawl** (fighter, longspear, shaman, ulodyte) | Warrior / Ranger / Monk | primitive tribal | Intro and low-threat fodder; Beast or Adversary is the designer's call |
+| **Grawl** (fighter, longspear, shaman, ulodyte) | Warrior / Ranger / Monk | primitive tribal | **Adversary** (designer, 2026-09-26). The **Ulodyte's Heal Area** fits well: it heals adjacent figures, which encourages the Adversary to clump up (risking Blast) and the heroes to press in. **Open:** a regular Grawl melee group would make three basic Adversary melee units alongside the two Charr ones. See the options below the table |
 | Spirit of the Fallen | Warrior (ghost) | graveyard guardians | Mission-specific figures for the Nolani bonus |
+
+**Options for the Grawl melee overlap** (suggestions):
+1. **Ulodyte only.** Grawl appear as a single support deployment (the Ulodyte, with Heal
+   Area), escorted by Charr melee in act I. There's no regular Grawl melee card.
+2. **A distinct role for Grawl melee:** a cheap, fragile swarm (group of 3–4, 2–3
+   Health, cheap reinforcement). The Charr stay the "real infantry": Axe = Cleave,
+   Blade = Pierce/Bleed. Grawl then play like IA's cheap chaff rather than a third
+   version of the same unit.
+3. **Scope them to the intro and pre-Searing side missions,** where there are no Charr
+   groups to compete with. Only the Ulodyte stays in the act I open-group pool.
 
 ### Stone Summit (Adversary) — act II
 
@@ -243,7 +268,7 @@ The existing designs are faithful to the MMO:
 
 | MMO unit | Profession | Notable skills / behaviour | IA suggestion |
 |---|---|---|---|
-| **Ice Golem** | Elementalist | Frozen Burst, Ice Spikes (slow and cold AoE); a Stone Summit construct | Slow ranged caster: "target and adjacent figures get −1 Speed / lose movement points" (GW's Cripple as a movement penalty); arguably Adversary, since the Summit build them |
+| **Ice Golem** | Elementalist | Frozen Burst, Ice Spikes (slow and cold AoE); a Stone Summit construct | Slow ranged caster: "target and adjacent figures get −1 Speed / lose movement points" (GW's Cripple as a movement penalty); **Adversary** (designer, 2026-09-26): Stone Summit constructs |
 | **Frostfire Dryder** | Necromancer | Suffering (damage-over-time hex), Defile Flesh, Faintheartedness, Shadow Strike | Bleed or Weaken hexer |
 | **Snow Ettin** | Warrior (hammer ogre) | Power Attack, Staggering Blow (knockdown), Balanced Stance, Stun Immunity | Big melee brute: Stun surge, immune to Stun |
 | **Minotaur** | Warrior | stubborn charger | Charging melee: "gain movement points, then attack" |
@@ -256,8 +281,9 @@ The existing designs are faithful to the MMO:
   Drake. All are large figures, and the MMO gives them **Stun Immunity**. That's a
   natural shared keyword: "Mounted: large figure, cannot be Stunned."
 - **Siege weapons:** Fort Ranik's trebuchets, and the ballistae at Borlis Pass and the
-  Frost Gate. A reusable siege-object rule would serve three missions: an object with
-  Health that fires a Blast attack each round while crewed.
+  Frost Gate. The designer expects these to be **campaign mission rules** (as in IA's
+  Campaign Guide), not general game rules. A shared template would still help: an
+  object with Health that fires a Blast attack each round while crewed.
 - **Enchantment and hex removal:** the Sage, Howler, Chaot, Shaman and Dolyak Rider all
   do it. In IA terms, these are "discard a beneficial condition from a hostile figure"
   and "discard a harmful condition from a friendly figure". The MMO's enchantments

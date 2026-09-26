@@ -221,6 +221,13 @@ are from the core game; Weaken and Hidden are from expansions.
 
 ## Campaign economy
 
+- **Branching finales** (designer's description of the core campaign):
+  - The second-last mission (foiling General Weiss) decides which finale is played.
+  - **Heroes lose it:** they must escape the disaster. Losing again means capture and
+    the Rebellion's collapse. Winning means escape with a diminished Rebellion.
+  - **Heroes win it:** Vader arrives. Losing means the heroes die, but having dealt the
+    Empire a grievous blow. Winning means they escape as victorious heroes.
+  - This project's campaign uses the same shape.
 - **Campaign structure:**
   - An introductory mission.
   - Alternating story and side missions, following the campaign log.
