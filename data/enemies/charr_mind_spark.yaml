@@ -1,16 +1,18 @@
 name: Charr Mind Spark
+affiliation: adversary
+group_size: 1
 traits: []
-speed: null  # TODO: not specified
+speed: 4  # default: designer says assume 4
 defense: [white]
 attack:
-  type: ranged  # inferred from Accuracy
+  type: ranged
   dice: [red, yellow]
   bonus: "+4 Accuracy"
 
 variants:
   regular:
     cost: 5
-    reinforce: null  # TODO: not specified (single figure?)
+    reinforce: null  # single figure: deploys alone, can't be reinforced
     health: 8
     surges: ["Pierce 3", "+1 Damage, +2 Accuracy"]
 

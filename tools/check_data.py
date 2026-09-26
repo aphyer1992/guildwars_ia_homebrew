@@ -18,6 +18,7 @@ ATTACK_DICE = {"red", "blue", "green", "yellow"}
 DEFENSE_DICE = {"black", "white"}
 ATTRIBUTES = {"strength", "agility", "arcana"}
 COMPLETE_DECK_XP = [1, 1, 2, 2, 3, 3, 4, 4]
+AFFILIATIONS = {"adversary", "beast"}  # like IA's Imperial vs Mercenary
 
 errors: list[str] = []
 stubs: dict[str, list[str]] = {}  # group -> names
@@ -77,6 +78,8 @@ def check_hero(where, h):
 
 
 def check_enemy(where, e):
+    if e.get("affiliation") not in AFFILIATIONS:
+        err(where, f"affiliation should be one of {sorted(AFFILIATIONS)}, got {e.get('affiliation')!r}")
     if e.get("status") == "stub":
         stub(where)
         return
@@ -85,6 +88,10 @@ def check_enemy(where, e):
     check_dice(where, attack.get("dice"), ATTACK_DICE)
     if attack.get("type") not in ("melee", "ranged", None):
         err(where, f"bad attack type {attack.get('type')!r}")
+    if e.get("group_size") is None:
+        stub(where, "group size")
+    elif not isinstance(e["group_size"], int) or e["group_size"] < 1:
+        err(where, f"bad group_size {e['group_size']!r}")
     variants = e.get("variants") or {}
     if not variants:
         err(where, "no variants")

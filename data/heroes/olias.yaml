@@ -1,7 +1,7 @@
 name: Olias
 health: 12
 endurance: 4
-speed: null  # TODO: not specified
+speed: 4  # default: designer says assume 4
 defense: [white]
 attributes:
   strength: [blue, green]

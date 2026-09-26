@@ -1,9 +1,11 @@
 name: Charr Stalker
+affiliation: adversary
+group_size: 3
 traits: []
 speed: 4
 defense: [black]
 attack:
-  type: ranged  # inferred from Blast/Accuracy surges
+  type: ranged
   dice: [blue, yellow]
 
 variants:

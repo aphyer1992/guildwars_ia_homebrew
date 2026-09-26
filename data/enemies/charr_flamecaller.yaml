@@ -1,17 +1,19 @@
 name: Charr Flamecaller
+affiliation: adversary
+group_size: 1
 traits: []
 speed: 4
 defense: [white]
 attack:
-  type: ranged  # inferred
+  type: ranged
   dice: [blue, yellow, yellow]
 
 variants:
   regular:
     cost: 5
-    reinforce: null  # TODO: not specified (single figure?)
+    reinforce: null  # single figure: deploys alone, can't be reinforced
     health: 8
-    surges: [null]  # TODO: surge left blank in original
+    surges: ["Bleed"]  # Bleed also represents GW Burning
 
 abilities:
   - name: Inferno

@@ -1,6 +1,8 @@
 name: Charr Ash Walker
+affiliation: adversary
+group_size: 1
 traits: []
-speed: null  # TODO: not specified
+speed: 4  # default: designer says assume 4
 defense: [white]
 attack:
   type: ranged  # necromancer: hybrid spellcaster
@@ -9,7 +11,7 @@ attack:
 variants:
   regular:
     cost: 5
-    reinforce: null  # TODO: not specified (single figure?)
+    reinforce: null  # single figure: deploys alone, can't be reinforced
     health: 8
     surges: ["+1 damage, Recover 1", "+1 damage, Recover 1"]
 

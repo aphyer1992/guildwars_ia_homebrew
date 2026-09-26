@@ -1,9 +1,11 @@
 name: Charr Axe Warrior
+affiliation: adversary
+group_size: 3
 traits: []
 speed: 4
 defense: [black]
 attack:
-  type: melee  # inferred
+  type: melee
   dice: [red, yellow]
 
 variants:

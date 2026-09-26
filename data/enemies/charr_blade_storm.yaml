@@ -1,9 +1,11 @@
 name: Charr Blade Storm
+affiliation: adversary
+group_size: 3
 traits: []
 speed: 4
 defense: [black]
 attack:
-  type: melee  # inferred from Cleave
+  type: melee
   dice: [red, green]
 
 variants:

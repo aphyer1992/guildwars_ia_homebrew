@@ -90,6 +90,23 @@ balance tooling.
 
   `check_data.py` lists heroes that don't meet this as unfinished. Most heroes are still
   in progress, so expect them there.
+- Enemy `affiliation` is `adversary` or `beast`, like IA's Imperial vs Mercenary.
+  - Adversary: the organised opposition, such as Charr, Stone Summit and White Mantle.
+  - Beast: the creatures of Tyria, such as devourers, angry trees and spiders.
+  - Cards that refer to a "Beast" figure mean the beast affiliation.
+- Enemy `group_size`: a cost like 6/2 means a deployment cost of 6 and a reinforcement
+  cost of 2. Usually that's a group of 3.
+  - The deployment cost needn't divide evenly: the Carrion Devourer's 5/2 is a group of
+    2, like IA's Riot Troopers (5/2) and Trandoshan Hunters (7/3).
+  - A single cost (for example 5) with no reinforcement means a figure that deploys
+    alone (group of 1).
+  - Always record `group_size` explicitly.
+- **Speed defaults to 4** when nothing is specified (designer's rule).
+- **Repurposed IA conditions:**
+  - Weaken mostly represents GW **Poison**.
+  - Bleed represents both GW **Bleeding** and **Burning**.
+
+  Both keep their IA rules.
 - Enemies: shared stats at the top level; anything that differs between regular and
   elite (cost, reinforce, health, surges, name, variant-specific abilities) goes in
   `variants.regular` / `variants.elite`. Parenthesised values in the original docs
@@ -146,6 +163,10 @@ GW terminology: Rebels/heroes = heroes, Imperial player = **Adversary**, crates 
   So benchmark against IA content that is mid-strength, not against outliers.
 - **Some IA mechanics are repurposed for GW flavour:**
   - The Weaken condition mostly stands in for GW **Poison**.
+  - Bleed covers both GW **Bleeding** and **Burning**, which are both damage over time.
+    Fire casters like the Charr Flamecaller use it.
+  - Blast means "it explodes", whether it's a Fireball or a Charr Stalker's Ignite
+    Arrows. It isn't reserved for Elementalists.
   - Pierce 3, which IA mostly put on lightsabers, now goes on **Mesmers**, whose attacks
     ignore armor.
 

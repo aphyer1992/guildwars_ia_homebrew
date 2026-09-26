@@ -1,4 +1,6 @@
 name: Carrion Devourer
+affiliation: beast
+group_size: 2
 traits: []
 speed: 4
 defense: [black]

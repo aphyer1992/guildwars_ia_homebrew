@@ -125,7 +125,7 @@ def enemy_attacks(file_stem, variant=None):
             continue
         out.append(Attack.from_strings(
             f"{v.get('name', e['name'])} [{vname}]", e["attack"]["dice"], v.get("surges") or [],
-            type=e["attack"].get("type"),
+            bonus=e["attack"].get("bonus"), type=e["attack"].get("type"),
             stats={"cost": v.get("cost"), "reinforce": v.get("reinforce"),
                    "health": v.get("health"), "speed": e.get("speed"),
                    "group": v.get("group_size", e.get("group_size")),

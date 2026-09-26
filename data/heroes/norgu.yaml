@@ -28,7 +28,7 @@ class_cards:
   - name: Phantom Pain
     xp: 1
     text: >-
-      Exhaust this card during your activation to roll an Arcane check. For
+      Exhaust this card during your activation to roll an Arcana check. For
       each success, you may move 1 damage token from one enemy figure within 3
       spaces to another enemy figure within 3 spaces.
   - name: Cry of Frustration
@@ -45,7 +45,7 @@ class_cards:
     xp: 3
     text: >-
       Exhaust this card when an enemy within 3 spaces declares a move action to
-      roll an Arcane check. For each success, that enemy gains 1 less move
+      roll an Arcana check. For each success, that enemy gains 1 less move
       point and you gain 1 move point.
   - name: Arcane Thievery
     xp: 3
