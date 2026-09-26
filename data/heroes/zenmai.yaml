@@ -4,9 +4,9 @@ endurance: 4
 speed: 5
 defense: [white]
 attributes:
-  strength: BG
-  agility: BGY
-  intellect: B
+  strength: [blue, green]
+  agility: [blue, green, yellow]
+  arcana: [blue]
 
 abilities:
   - name: Shadow Step

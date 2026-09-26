@@ -4,9 +4,9 @@ endurance: 4
 speed: null  # TODO: not specified
 defense: [white]
 attributes:
-  strength: BG
-  agility: B
-  intellect: BGY
+  strength: [blue, green]
+  agility: [blue]
+  arcana: [blue, green, yellow]
 
 abilities:
   - name: Animate Bone Horror

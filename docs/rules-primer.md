@@ -134,9 +134,12 @@ are from the core game; Weaken and Hidden are from expansions.
 - **Focus** (beneficial, IA core): add a green die to your next attack or attribute
   test, then discard it. It can't be saved for later.
 - **Weaken** (harmful, IA expansion): −1 evade on your defense results and −1 surge on your attack
-  results. It's discarded after you attack.
-  - There's no action to remove it. It lasts until your next attack, or indefinitely if
-    you never attack.
+  results. There's no action to remove it.
+  - **Discard timing is disputed.** The designer's text says it's discarded after you
+    attack. The Kensei card data (`reference/ia_cards.json`) says "Discard this
+    condition at the end of your activation."
+    - Under the Kensei wording, Weaken always lasts until the end of the target's next
+      activation, whether or not it attacks.
   - Acolyte Jin's *Toxicity* adds −1 block while an ally attacks a Weakened enemy.
 - **Hidden** (beneficial, IA expansion): ranged attacks against you get −2 accuracy, and your attacks
   get +1 surge. It's discarded after you attack.
@@ -149,6 +152,15 @@ are from the core game; Weaken and Hidden are from expansions.
 - **Wounded:** at 0 Health a healthy hero flips to wounded. All damage is cleared,
   abilities are reduced, and stats are usually lower. A wounded hero who is defeated
   **withdraws** for the rest of the mission but still gets rewards.
+  - All 21 official heroes follow the same wounded pattern: **same Health, −1 Endurance,
+    −1 Speed**, and in each attribute pool one die is downgraded to red (usually the
+    best one: BGY→BRG, BG→BR, B→R). Most wounded sides (17 of 21) also lose one hero
+    ability, usually the second one listed. This project uses the same pattern as its
+    default wounded rule (see `tools/heroes.py`), and `healthy_only` marks the ability
+    that is lost.
+  - Official hero baselines: Health 10–14 (Onar Koma 20), Endurance 4–5, Speed 4–5, and
+    1 defense die. Each hero has one 3-die attribute, one 2-die attribute and one 1-die
+    attribute, or something close.
   - Heroes don't die. The Imperial side usually wins missions by wounding every hero or
     by running out the clock.
 - **Strain:**
@@ -254,9 +266,22 @@ These are general IA knowledge, not rules text.
 - Heroes act far more than any single enemy figure. They can attack twice per activation
   (and get 2 activations each in a 2-hero game), and they spend strain to go further. The
   Imperial side makes up for this with numbers and reinforcement.
-- Compare a deployment group's cost to its **threat** value. As an example, a regular
-  Stormtrooper group (3 figures) costs 6 threat and reinforces for 2. An elite group
-  costs 9 and reinforces for 3. **[unverified exact values]**
+- Compare a deployment group's cost to its **threat** value. Core-set reference points,
+  from `reference/ia_cards.json`:
+
+  | Group | Figures | Cost / reinforce | Health | Speed | Defense | Attack |
+  |---|---|---|---|---|---|---|
+  | Stormtrooper | 3 | 6 / 2 | 3 | 4 | black | blue green (ranged) |
+  | Stormtrooper (elite) | 3 | 9 / 3 | 5 | 4 | black | blue green (ranged) |
+  | Imperial Officer | 1 | 2 / – | 3 | 4 | white | blue yellow (ranged) |
+  | Probe Droid | 1 | 3 / – | 5 | 3 | black | blue yellow yellow (ranged) |
+  | Nexu | 1 | 4 / – | 6 | 6 | white | red green (melee) |
+  | Trandoshan Hunter | 2 | 7 / 3 | 6 | 4 | black | blue green (ranged) |
+  | Royal Guard | 2 | 8 / 4 | 8 | 5 | black | red yellow (melee) |
+  | E-Web Engineer | 1 | 6 / – | 5 | 2 | black | blue red yellow (ranged) |
+
+  Costs are Kensei's current values. They may include FFG skirmish errata, which the
+  campaign shares.
 - Surge abilities are the main tuning dial. Common prices, each for 1 surge **[typical
   values]**: +1 damage, +1 or +2 accuracy, Pierce 1–2, a condition, Recover 1–2. A surge
   that adds 2 damage or Blast usually needs a strong die.

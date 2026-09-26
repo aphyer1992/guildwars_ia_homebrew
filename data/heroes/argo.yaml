@@ -4,9 +4,9 @@ endurance: 4
 speed: 4
 defense: [black]
 attributes:
-  strength: BBG
-  agility: B
-  intellect: BGG  # written as "Spellcraft" in the original doc
+  strength: [blue, blue, green]
+  agility: [blue]
+  arcana: [blue, green, green]  # written as "Spellcraft" in the original doc
 
 abilities:
   - name: Kinetic Armor

@@ -4,9 +4,9 @@ endurance: 4
 speed: null  # TODO: not specified
 defense: [black]
 attributes:
-  strength: B
-  agility: BGY
-  intellect: BG
+  strength: [blue]
+  agility: [blue, green, yellow]
+  arcana: [blue, green]
 
 abilities:
   - name: Apply Poison

@@ -4,9 +4,9 @@ endurance: 4
 speed: 4
 defense: [white]
 attributes:
-  strength: B
-  agility: BG
-  intellect: BGY  # written as "Arcana" in the original doc
+  strength: [blue]
+  agility: [blue, green]
+  arcana: [blue, green, yellow]  # written as "Arcana" in the original doc
 
 abilities:
   - name: Fireball

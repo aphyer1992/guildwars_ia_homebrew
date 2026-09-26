@@ -19,7 +19,20 @@ balance tooling.
   Run it after any data edit: `python tools/check_data.py`.
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
 - `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.
-- `reference/` — official IA rulebook PDFs (FFG's copyrighted material; not our content).
+- `reference/` — official IA material (FFG's copyrighted content). Gitignored, so it's
+  local only.
+  - The Rules Reference Guide and Learn to Play PDFs.
+  - `ia_cards.json` — every official IA card as JSON: `DeploymentCards`, `HeroSheets`
+    (healthy and wounded stats), `RewardCards` (hero and Imperial class cards; see
+    `ClassName` and `CostAmount` XP), `ItemCards` (by `Tier`), `AgendaCards`,
+    `ConditionCards`, and more.
+    - Extracted from the Kensei Imperial Assault Tools Suite
+      (`C:\Program Files\Kensei\...\ImpAss.Common.dll`, embedded JSON).
+    - Card text uses tags like `<surge>`, `<damage>`, `<strain>`, `<action>`.
+    - Use it to look up real benchmark stats instead of recalling them.
+    - It's not quite complete: 7 of the 21 hero class decks are missing cards (for
+      example, Biv and Shyla have only 6). Treat an odd-looking gap as missing data, not
+      as the real design.
 - `archive/original-docx/` — the Word docs the data was transcribed from (2026-09-26).
   Historical only; do not edit or treat as current.
 
@@ -28,11 +41,26 @@ balance tooling.
 - Dice are full lowercase colour names. Attack: `red blue green yellow`.
   Defense: `black white`. (The original docs used letters, where `B` meant blue
   in attack pools and black in defense pools.)
-- Hero `attributes` keys: `strength`, `agility`, `intellect`. Values are kept as the
-  original letter strings (e.g. `BGY`) until the attribute-dice question in
-  `docs/open-questions.md` is settled.
+- Hero `attributes` are keyed `strength`, `agility` and `arcana`. Tech doesn't fit the GW
+  theme. Values are attack-dice lists; the original docs' `B` meant blue here.
+- **Wounded side is derived, not stored**. `tools/heroes.py:wounded_stats` works it out
+  from the default rule:
+  - Speed and endurance each drop by 1.
+  - In each attribute pool, the most-surgy die (yellow, else green, else blue) becomes
+    red.
+  - `healthy_only` abilities are lost.
+
+  A hero that breaks the rule gets a `wounded:` block overriding `speed`, `endurance`
+  and/or `attributes`.
 - `healthy_only: true` marks a hero ability that only works while Healthy (not Wounded).
 - Class card `xp`: `1`–`4`, `mission` (mission reward), or `null` (not yet decided).
+- **A complete hero** has:
+  - At least one `healthy_only` ability.
+  - 8 XP-costed class cards, two each at 1, 2, 3 and 4 XP (20 XP total), which is the
+    official IA standard.
+
+  `check_data.py` lists heroes that don't meet this as unfinished. Most heroes are still
+  in progress, so expect them there.
 - Enemies: shared stats at the top level; anything that differs between regular and
   elite (cost, reinforce, health, surges, name, variant-specific abilities) goes in
   `variants.regular` / `variants.elite`. Parenthesised values in the original docs

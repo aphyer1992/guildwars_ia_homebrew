@@ -9,12 +9,15 @@ from pathlib import Path
 
 import yaml
 
+from heroes import WOUNDED_OVERRIDES, wounded_stats
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
 ATTACK_DICE = {"red", "blue", "green", "yellow"}
 DEFENSE_DICE = {"black", "white"}
-ATTRIBUTES = {"strength", "agility", "intellect"}
+ATTRIBUTES = {"strength", "agility", "arcana"}
+COMPLETE_DECK_XP = [1, 1, 2, 2, 3, 3, 4, 4]
 
 errors: list[str] = []
 stubs: dict[str, list[str]] = {}  # group -> names
@@ -51,6 +54,19 @@ def check_hero(where, h):
     if attrs is not None:
         if set(attrs) != ATTRIBUTES:
             err(where, f"attributes should be {sorted(ATTRIBUTES)}, got {sorted(attrs)}")
+        for name, pool in attrs.items():
+            check_dice(f"{where} [{name}]", pool, ATTACK_DICE)
+    extra = set(h.get("wounded") or {}) - WOUNDED_OVERRIDES
+    if extra:
+        err(where, f"wounded can only override {sorted(WOUNDED_OVERRIDES)}, got {sorted(extra)}")
+    wounded_stats(h)
+    # A complete hero: a Healthy-only ability, and class cards costing 1,1,2,2,3,3,4,4 XP
+    # (20 XP total; mission-reward cards don't count).
+    if not any(a.get("healthy_only") for a in h.get("abilities") or []):
+        stub(where, "no healthy_only ability")
+    xp = sorted(c.get("xp") for c in h.get("class_cards") or [] if isinstance(c.get("xp"), int))
+    if xp != COMPLETE_DECK_XP:
+        stub(where, f"class card XP {xp}, want {COMPLETE_DECK_XP}")
     for key in ("abilities", "class_cards"):
         for card in h.get(key) or []:
             cw = f"{where} / {card.get('name')}"
