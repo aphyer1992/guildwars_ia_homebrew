@@ -65,6 +65,11 @@ balance tooling.
   Frost Gate): each mission, its enemies, and IA mission and enemy ideas.
 - `docs/skills-translation.md` — mapping GW mechanics to IA: conditions, energy,
   elements, monks, area damage over time.
+- `docs/campaign-design-patterns.md` — how IA's well-regarded *Jabba's Realm* campaign
+  structures missions (branching, events, objectives, hazards, consolation rewards),
+  with GW mappings. Read it before designing missions. The source scan is
+  `reference/Jabbas_realm.pdf`; its text can't be extracted, so render pages as images
+  with PyMuPDF.
 - `reference/` — official IA material (FFG's copyrighted content). Gitignored, so it's
   local only.
   - The Rules Reference Guide and Learn to Play PDFs.
