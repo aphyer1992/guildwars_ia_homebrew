@@ -32,7 +32,7 @@ mini-campaign or a short full campaign. It breaks naturally into two acts:
     escape. If the heroes win, he survives.
   - **Lady Althea**, sacrificed to the Titans by the Charr in the MMO, can be
     **rescued** if the heroes play and win the side mission *Althea's Ashes* (agenda set
-    *Rites of Fire* in `data/adversary/agendas.yaml`).
+    *Rites of Flame* in `data/adversary/agendas.yaml`).
   - Because Borlis Pass is the second-last mission, its result could choose between two
     Frost Gate finales. For example: win, and the heroes reach the gate ahead of the
     Summit, facing a Dagnar-led last stand; lose, and the refugees are already under

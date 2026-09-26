@@ -14,13 +14,13 @@
         Deplete when a Beast group triggers to let every figure in that group
         move 3 spaces.
 
-- name: Rites of Fire
+- name: Rites of Flame
   cards:
     - name: Althea's Ashes
       influence: 3
       kind: mission
       reward:
-        name: Rites of Fire
+        name: Rites of Flame
         text: >-
           Exhaust this card when one of your figures attacks to replace one die
           in the attack pool with a yellow die.
