@@ -1,0 +1,25 @@
+# Adversary class decks (the Imperial player's XP decks in Imperial Assault).
+- name: Mysterious Affliction
+  cards:
+    - name: Afflicted Soul Explosion
+      xp: null  # TODO
+      text: >-
+        Exhaust this card when one of your figures is defeated. Roll a red die
+        and deal that much damage to each other figure (friend or foe) within 2
+        spaces of it.
+
+- name: Sinister Machinations
+  cards:
+    - name: Well-Laid Schemes
+      xp: null  # TODO
+      text: >-
+        At the beginning of the mission, place three red tokens. No token can
+        be within 3 spaces of another token, or in a space the heroes cannot
+        reach.
+
+        A hero who enters the space containing a token reveals and discards it.
+
+        If the heroes would win the mission, you may discard any number of red
+        tokens. For each discarded token, choose a hero, roll a red die, and
+        deal them that amount of damage. If this damage causes you to meet a
+        victory condition, you win the mission instead.

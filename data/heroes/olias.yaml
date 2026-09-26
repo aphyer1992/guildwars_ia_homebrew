@@ -1,0 +1,73 @@
+name: Olias
+health: 12
+endurance: 4
+speed: null  # TODO: not specified
+defense: [white]
+attributes:
+  strength: BG
+  agility: B
+  intellect: BGY
+
+abilities:
+  - name: Animate Bone Horror
+    text: >-
+      When an enemy is defeated during your activation, you may pay 2 Strain to
+      place a Bone Horror in their square. A Bone Horror has 4HP, Move 3,
+      Attack R, Defense -. It activates at the start or end of your activation
+      (including the one it is created in).
+  - name: Blood is Power
+    healthy_only: true
+    text: >-
+      Once per activation, when you or another hero within 3 spaces would spend
+      Strain, you may instead pay 1 Health (from Olias) in place of 1 of that
+      Strain (from whoever would have spent it).
+
+class_cards:
+  - name: Tainted Flesh
+    xp: 1
+    text: >-
+      You may choose to roll a Black instead of a White defense die. After an
+      attack against you is resolved, apply Weaken to the attacker.
+  - name: Contagion
+    xp: 1
+    text: >-
+      Exhaust this card during your activation. Choose a figure within LoS. All
+      conditions (positive and negative) on that figure are copied onto all
+      figures adjacent to it.
+  - name: Foul Feast
+    xp: 2
+    text: >-
+      1 Strain: Exhaust this card during your activation. Remove all conditions
+      (positive and negative) from all figures within 3 spaces. You gain every
+      condition thus removed. Then, restore 2 Health for each negative
+      condition you have.
+  - name: Death Nova
+    xp: 2
+    text: >-
+      Exhaust this card when a friendly figure in LoS is defeated. All enemies
+      within 2 spaces of that figure take 2 damage and are Stunned.
+  - name: Soul Reaping
+    xp: 3
+    text: >-
+      Whenever a figure within 3 spaces is defeated, recover 1 Strain.
+  - name: Jagged Bones
+    xp: 3
+    text: >-
+      Your Bone Horrors' attacks gain Pierce 1 and Bleed. 1 Strain: Exhaust
+      this card when a Bone Horror is defeated to place another Bone Horror in
+      its square. Then place 3 damage on that Bone Horror.
+  - name: Necrotic Traversal
+    xp: 4
+    text: >-
+      Exhaust this card when a figure in LoS is defeated to place your figure
+      in a space it occupied.
+  - name: Life Siphon
+    xp: 4
+    text: >-
+      1 Strain, Action: perform an attack with a Magical weapon. If this attack
+      deals damage, restore an equal amount of Health to yourself.
+  - name: Taste of Death
+    xp: mission
+    text: >-
+      Exhaust during your activation to remove a Bone Horror and recover Health
+      equal to its remaining Health.

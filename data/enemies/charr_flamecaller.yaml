@@ -1,0 +1,19 @@
+name: Charr Flamecaller
+traits: []
+speed: 4
+defense: [white]
+attack:
+  type: ranged  # inferred
+  dice: [blue, yellow, yellow]
+
+variants:
+  regular:
+    cost: 5
+    reinforce: null  # TODO: not specified (single figure?)
+    health: 8
+    surges: [null]  # TODO: surge left blank in original
+
+abilities:
+  - name: Inferno
+    text: >-
+      Action: roll one red die. All adjacent figures suffer that much damage.

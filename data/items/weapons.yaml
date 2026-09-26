@@ -1,0 +1,124 @@
+# Weapons by category. An entry with no `dice` is a placeholder (stub).
+# restrictions: no_prefix / no_rune = cannot take that attachment type.
+
+melee:
+  # Swords
+  - name: Dragon Sword
+    dice: [red, green, blue]
+    surges: ["+2 damage", "Pierce 2", "Cleave 2"]
+  - name: Butterfly Sword
+    dice: [blue, green]
+    surges: ["+2 damage", "Cleave 2"]
+  - name: Gladius
+    dice: [green, yellow]
+    surges: ["Pierce 2", "+1 damage"]
+  - name: Fellblade
+    dice: [red, red]
+    surges: ["Cleave 2"]
+  - name: Ascalon Razor
+  - name: Spatha
+    dice: [green, green]
+    surges: ["+1 damage", "Cleave 1", "Pierce 1, Bleed"]
+  # Axes
+  - name: Totem Axe
+  - name: The Bonehewer
+    restrictions: [no_rune]
+  - name: Deldrimor Axe
+  - name: Battlepick
+    dice: [red, green]
+    surges: ["Pierce 2"]
+  - name: Sephis Axe
+    dice: [red, blue]
+    surges: ["Cleave 1, Weaken"]
+    text: Applies conditions to Cleave targets.
+  # Hammers
+  - name: Ball Hammer
+  - name: Foehammer
+  - name: Righteous Maul
+  - name: Runic Hammer
+  - name: Bonecrusher
+  - name: Shining Maul
+  - name: Dwarven Hammer
+  - name: Destroyer Maul
+  - name: Spiked Club
+  - name: Bronze Crusher
+  # Daggers
+  - name: Ceremonial Daggers
+  - name: Jade Daggers
+  - name: Sai
+  # Scythes
+  - name: Elegant Scythe
+  - name: Hooked Scythe
+  - name: Grim Scythe
+  - name: Nightmare Scythe
+
+ranged:
+  # Spears
+  - name: Banded Spear
+  - name: Broadhead Spear
+  - name: Pronged Spear
+  - name: Solemn Spear
+  - name: Spiraling Spear
+  - name: Sunburst Spear
+  - name: Tribal Spear
+  - name: Forked Spear
+  # Bows
+  - name: Longbow
+    dice: [blue, blue]
+    surges: ["+1 damage", "Pierce 1"]
+  - name: Shortbow
+  - name: Flatbow
+  - name: Hornbow
+  - name: Recurve Bow
+  - name: Composite Bow
+  - name: Half Moon
+  - name: Dead Bow
+  - name: Scorpion Bow
+  - name: Bladed Recurve Bow
+  - name: Ironwing Flatbow
+
+magical:
+  - name: Holy Branch
+  - name: Divine Staff
+  - name: Smiting Staff
+  - name: Blood Staff
+  - name: Crescent Staff
+  - name: Bone Staff
+  - name: Soul Spire
+  - name: Evil Eye Staff
+  - name: Aureate Staff
+  - name: Dragon Spire Staff
+  - name: Illusory Staff
+  - name: Inscribed Staff
+  - name: Tempest Staff
+  - name: Tidal Staff
+  - name: Pyrewood Staff
+  - name: Ether Staff
+  - name: Eerie Staff
+  - name: Holy Rod
+  - name: Smiting Rod
+  - name: Baneful Scepter
+  - name: Deadly Cesta
+  - name: Wailing Wand
+  - name: Accursed Rod
+  - name: Bone Spiral Rod
+  - name: Luminescent Scepter
+  - name: Cane
+  - name: Voltaic Wand
+  - name: Guardian Branch
+  - name: Golden Pillar
+  - name: Whalekin Wand
+  - name: Shamanic Wand
+  - name: Brimstone Wand
+    dice: [blue, blue, yellow]
+    surges: ["Pierce 1", "+1 damage"]
+    restrictions: [no_prefix]
+
+# Weapon families noted in the original doc without details:
+#   melee:   "Tormented [things]"
+#   ranged:  Ascalon -, Bramble -, Jade -, Skull -, Spiked -, Feathered - (bows)
+#   magical: Destroyer -, Tormented -, Celestial -
+families:
+  melee: [Tormented]
+  ranged: [Ascalon, Bramble, Jade, Skull, Spiked, Feathered]
+  magical: [Destroyer, Tormented, Celestial]

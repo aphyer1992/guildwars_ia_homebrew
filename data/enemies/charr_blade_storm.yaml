@@ -1,0 +1,24 @@
+name: Charr Blade Storm
+traits: []
+speed: 4
+defense: [black]
+attack:
+  type: melee  # inferred from Cleave
+  dice: [red, green]
+
+variants:
+  regular:
+    cost: 6
+    reinforce: 2
+    health: 4
+    surges: ["Cleave 1"]
+  elite:
+    cost: 9
+    reinforce: 3
+    health: 6
+    surges: ["Cleave 2"]
+
+abilities:
+  - name: Riposte
+    text: >-
+      When attacked by a melee figure, deal 1 damage to the attacker.

@@ -1,0 +1,26 @@
+name: Charr Axe Warrior
+traits: []
+speed: 4
+defense: [black]
+attack:
+  type: melee  # inferred
+  dice: [red, yellow]
+
+variants:
+  regular:
+    cost: 6
+    reinforce: 2
+    health: 4
+    surges: ["Bleed"]
+  elite:
+    name: Charr Axe Fiend  # original: "Charr Axe Warrior (Fiend)"
+    cost: 9
+    reinforce: 3
+    health: 6
+    surges: ["+1 damage, Bleed"]
+
+abilities:
+  - name: Executioner's Strike
+    text: >-
+      When you declare an attack, if the target is suffering from Bleed, the
+      attack gains surge: +2 damage.

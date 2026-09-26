@@ -1,0 +1,35 @@
+name: General Morgahn
+health: 13
+endurance: 4
+speed: 4
+defense: [black]
+attributes: null  # TODO: not specified
+
+abilities:
+  - name: Command
+    text: >-
+      2 Strain - a friendly figure within 3 spaces may interrupt to perform a
+      move or attack. If the figure is an ally with figure cost <= the threat
+      level, this ability costs 1 less Strain.
+  - name: Leadership
+    healthy_only: true
+    text: >-
+      Allies attacking while Commanded may use your surges.
+
+class_cards:
+  - name: Mending Refrain
+    xp: 2
+    text: >-
+      When you Command, you and the Commanded ally each restore 1HP.
+  - name: Swiftfoot Refrain
+    xp: 2
+    text: >-
+      When you Command, you and the Commanded ally each gain 1 Movement Point.
+  - name: Focused Anger
+    xp: 4
+    text: >-
+      While attacking with a Melee or Ranged weapon, you gain surge: Focus.
+  - name: Hammer and Anvil
+    xp: 4
+    status: stub
+    text: null

@@ -1,0 +1,45 @@
+name: Cynn
+health: 10
+endurance: 4
+speed: 4
+defense: [white]
+attributes:
+  strength: B
+  agility: BG
+  intellect: BGY  # written as "Arcana" in the original doc
+
+abilities:
+  - name: Fireball
+    text: >-
+      When you declare an attack with a Magical weapon, you may pay 2 Strain.
+      If you do, add a yellow die to the attack pool, and the attack gains
+      surge: Blast 1.
+
+class_cards:
+  - name: Lava Font
+    xp: null  # TODO: no XP cost given
+    text: >-
+      At the start of your activation, exhaust this card to perform Blast 1
+      centered on you.
+  - name: Burning Speed
+    xp: null
+    text: >-
+      Exhaust during your activation. Roll an Arcana check. For every success,
+      you may move 1 space. Then take damage equal to the number of spaces
+      moved.
+  - name: Liquid Flame
+    xp: null
+    text: >-
+      Exhaust when resolving a Blast. Roll an Arcana check. For each success,
+      you may either exempt one square 1 away from the center from the Blast
+      or include one square 2 away in it.
+  - name: Meteor
+    xp: null
+    text: >-
+      Exhaust when resolving a Blast. All figures damaged by the Blast become
+      Stunned.
+  - name: Master of Magic
+    xp: null
+    text: >-
+      Whenever you perform an attack or an Arcana check, apply +1 surge to the
+      results for each die that shows one surge and no damage.

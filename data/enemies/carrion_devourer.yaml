@@ -1,0 +1,29 @@
+name: Carrion Devourer
+traits: []
+speed: 4
+defense: [black]
+attack:
+  type: melee
+  dice: [red, blue]
+
+variants:
+  regular:
+    cost: 5
+    reinforce: 2
+    health: 5
+    surges: ["Weaken"]
+  elite:
+    cost: 7
+    reinforce: 3
+    health: 7
+    surges: ["+1 damage, Weaken"]
+
+abilities:
+  - name: Frenzy
+    text: >-
+      You can declare multiple melee attacks per activation. You cannot
+      voluntarily exit a square adjacent to an enemy.
+  - name: Devourer Shell
+    text: >-
+      At the end of your activation, if you have no armor tokens, gain 1 armor
+      token.

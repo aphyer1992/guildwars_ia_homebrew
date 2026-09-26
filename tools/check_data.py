@@ -1,0 +1,139 @@
+"""Load every data file, check basic structure, and report what's unfinished.
+
+Usage:  python tools/check_data.py
+Exits non-zero if any file fails to parse or has a structural error.
+"""
+import re
+import sys
+from pathlib import Path
+
+import yaml
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data"
+
+ATTACK_DICE = {"red", "blue", "green", "yellow"}
+DEFENSE_DICE = {"black", "white"}
+ATTRIBUTES = {"strength", "agility", "intellect"}
+
+errors: list[str] = []
+stubs: dict[str, list[str]] = {}  # group -> names
+
+
+def err(where, msg):
+    errors.append(f"{where}: {msg}")
+
+
+def stub(group, name="(whole entry)"):
+    stubs.setdefault(group, []).append(str(name))
+
+
+def load(path):
+    try:
+        return yaml.safe_load(path.read_text(encoding="utf-8"))
+    except yaml.YAMLError as e:
+        err(path.relative_to(ROOT), f"YAML parse error: {e}")
+        return None
+
+
+def check_dice(where, dice, allowed):
+    if dice is None:
+        return
+    if not isinstance(dice, list) or not all(d in allowed for d in dice):
+        err(where, f"bad dice {dice!r} (allowed: {sorted(allowed)})")
+
+
+def check_hero(where, h):
+    if h.get("status") == "stub":
+        stub(where)
+    check_dice(where, h.get("defense"), DEFENSE_DICE)
+    attrs = h.get("attributes")
+    if attrs is not None:
+        if set(attrs) != ATTRIBUTES:
+            err(where, f"attributes should be {sorted(ATTRIBUTES)}, got {sorted(attrs)}")
+    for key in ("abilities", "class_cards"):
+        for card in h.get(key) or []:
+            cw = f"{where} / {card.get('name')}"
+            if card.get("status") == "stub" or not card.get("text"):
+                stub(where, card.get("name"))
+            if key == "class_cards" and card.get("xp") not in (1, 2, 3, 4, "mission", None):
+                err(cw, f"bad xp {card.get('xp')!r}")
+
+
+def check_enemy(where, e):
+    if e.get("status") == "stub":
+        stub(where)
+        return
+    check_dice(where, e.get("defense"), DEFENSE_DICE)
+    attack = e.get("attack") or {}
+    check_dice(where, attack.get("dice"), ATTACK_DICE)
+    if attack.get("type") not in ("melee", "ranged", None):
+        err(where, f"bad attack type {attack.get('type')!r}")
+    variants = e.get("variants") or {}
+    if not variants:
+        err(where, "no variants")
+    for vname, v in variants.items():
+        for field in ("cost", "health"):
+            if field not in v:
+                err(f"{where} [{vname}]", f"missing {field}")
+        if None in (v.get("surges") or []):
+            stub(where, f"{vname}: blank surge")
+
+
+def check_card_list(where, cards, required="text"):
+    for c in cards or []:
+        done = c.get(required) or (c.get("reward") or {}).get(required)
+        if c.get("status") == "stub" or not done:
+            stub(where, c.get("name"))
+
+
+def main():
+    for path in sorted(DATA.rglob("*.yaml")):
+        rel = path.relative_to(ROOT).as_posix()
+        doc = load(path)
+        if doc is None:
+            continue
+        if rel.startswith("data/heroes/"):
+            check_hero(rel, doc)
+        elif rel.startswith("data/enemies/"):
+            check_enemy(rel, doc)
+        elif rel == "data/items/weapons.yaml":
+            for cat in ("melee", "ranged", "magical"):
+                for w in doc.get(cat, []):
+                    check_dice(f"{rel} / {w['name']}", w.get("dice"), ATTACK_DICE)
+                check_card_list(f"{rel} [{cat}]", doc.get(cat), required="dice")
+        elif rel == "data/items/attachments.yaml":
+            for kind in ("prefixes", "suffixes"):
+                check_card_list(f"{rel} [{kind}]", doc.get(kind))
+        elif rel.startswith("data/adversary/"):
+            for deck in doc:
+                check_card_list(f"{rel} / {deck['name']}", deck["cards"])
+        elif rel == "data/shrines.yaml":
+            check_card_list(rel, doc["cards"])
+        elif rel == "data/items/accessories.yaml":
+            check_card_list(rel, doc)
+        else:
+            err(rel, "unrecognised data file (add a check for it)")
+
+    todos = []
+    for path in sorted(DATA.rglob("*.yaml")):
+        for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if re.search(r"#\s*TODO", line):
+                todos.append(f"{path.relative_to(ROOT).as_posix()}:{n}: {line.split('#', 1)[1].strip()}")
+
+    print(f"Unfinished entries ({sum(map(len, stubs.values()))}):")
+    for group, names in stubs.items():
+        print(f"   {group}: {', '.join(names)}")
+    print(f"\nTODO comments ({len(todos)}):")
+    for t in todos:
+        print("  ", t)
+    if errors:
+        print(f"\nERRORS ({len(errors)}):")
+        for e in errors:
+            print("  ", e)
+        sys.exit(1)
+    print("\nNo structural errors.")
+
+
+if __name__ == "__main__":
+    main()

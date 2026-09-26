@@ -1,0 +1,42 @@
+name: Argo
+health: 12
+endurance: 4
+speed: 4
+defense: [black]
+attributes:
+  strength: BBG
+  agility: B
+  intellect: BGG  # written as "Spellcraft" in the original doc
+
+abilities:
+  - name: Kinetic Armor
+    text: >-
+      Whenever you damage your target with an attack with a magical weapon,
+      gain a +1 armor token. You may hold up to two additional +1 armor tokens.
+  - name: Sliver Armor
+    text: >-
+      Once per round, when you take no damage from an enemy's attack, you may
+      pay 2 Strain. If you do, interrupt to perform an attack against that
+      enemy.
+  - name: Magnetic Aura
+    healthy_only: true
+    text: >-
+      When an ally within 3 spaces is attacked, you may spend +1 armor tokens
+      as if you were being attacked.
+
+class_cards:
+  - name: Obsidian Flesh
+    xp: null  # TODO: no XP cost given
+    text: >-
+      When you spend a +1 armor token, also apply +1 evade.
+  - name: Shockwave
+    xp: null  # TODO: no XP cost given
+    text: >-
+      Deplete this card when you trigger Crystal Wave. All enemy figures in LoS
+      suffer the damage, but that damage is reduced by 1 for every additional
+      square distance between you and them.
+  - name: Sliver Armor  # TODO: duplicate of the ability above; unfinished
+    xp: null
+    status: stub
+    text: >-
+      Exhaust this card when an

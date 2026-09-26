@@ -1,0 +1,21 @@
+name: Charr Mind Spark
+traits: []
+speed: null  # TODO: not specified
+defense: [white]
+attack:
+  type: ranged  # inferred from Accuracy
+  dice: [red, yellow]
+  bonus: "+4 Accuracy"
+
+variants:
+  regular:
+    cost: 5
+    reinforce: null  # TODO: not specified (single figure?)
+    health: 8
+    surges: ["Pierce 3", "+1 Damage, +2 Accuracy"]
+
+abilities:
+  - name: Power Drain
+    text: >-
+      After you damage a target with an attack, if it has not activated yet
+      this round, it takes 1 Strain.

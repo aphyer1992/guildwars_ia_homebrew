@@ -1,0 +1,36 @@
+name: Charr Stalker
+traits: []
+speed: 4
+defense: [black]
+attack:
+  type: ranged  # inferred from Blast/Accuracy surges
+  dice: [blue, yellow]
+
+variants:
+  regular:
+    cost: 6
+    reinforce: 2
+    health: 3
+    surges: ["Blast 1", "+1 Accuracy"]
+    abilities:
+      # Original: "Move (Rampage) as One" - parentheses read as the elite version.
+      - name: Move as One
+        text: >-
+          Action: a Beast ally within 3 spaces may interrupt to perform a move.
+          Limit once per group per activation.
+  elite:
+    cost: 9
+    reinforce: 3
+    health: 5
+    surges: ["Blast 2", "+2 Accuracy"]
+    abilities:
+      - name: Rampage as One
+        text: >-
+          Action: a Beast ally within 3 spaces may interrupt to perform an
+          attack. Limit once per group per activation.
+
+abilities:
+  - name: Aim
+    text: >-
+      If you have not exited your space this activation, apply +1 damage and +2
+      accuracy to your attacks.

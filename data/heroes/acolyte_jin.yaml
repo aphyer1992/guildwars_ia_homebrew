@@ -1,0 +1,59 @@
+name: Acolyte Jin
+health: 12
+endurance: 4
+speed: null  # TODO: not specified
+defense: [black]
+attributes:
+  strength: B
+  agility: BGY
+  intellect: BG
+
+abilities:
+  - name: Apply Poison
+    text: >-
+      2 Strain: for the rest of the activation, your attacks with Ranged
+      weapons gain Pierce 1 and Weaken.
+  - name: Deadly Focus
+    healthy_only: true
+    text: >-
+      At the end of your activation, if you used both actions on the same
+      thing (e.g. two attacks, or two rests), you become Focused.
+
+class_cards:
+  - name: Focused Shot
+    xp: 1
+    text: >-
+      When you declare an attack with a Ranged weapon while Focused, you may
+      exhaust this card to regain 1 Strain, and you may choose to add any color
+      of die instead of just a green one.
+  - name: Mending Touch
+    xp: 1
+    text: >-
+      Pay 1 Strain and exhaust this card during your turn. You or an adjacent
+      ally may either heal 2 Health or discard a negative condition.
+  - name: Read the Wind
+    xp: 2
+    text: >-
+      When you or an ally within 3 spaces declares a ranged attack, apply +1
+      Accuracy to the attack results. When an enemy declares a ranged attack
+      against you or an ally within 3 spaces is defending, apply -1 Accuracy to
+      the attack results.
+  - name: Zojin's Haste
+    xp: 3
+    text: >-
+      After an attack is resolved by you or against you, you may move 1 space.
+  - name: Penetrating Attack
+    xp: 3
+    text: >-
+      While attacking with a martial weapon, apply Pierce 1 to the results for
+      every die showing 3 or more range.
+  - name: Toxicity
+    xp: 4
+    text: >-
+      While an ally is attacking an enemy with Weaken, apply -1 armor to the
+      defense results.
+  - name: Barrage
+    xp: 4
+    text: >-
+      Action, Action: perform three attacks with a Ranged weapon. Each attack
+      must target a different enemy.

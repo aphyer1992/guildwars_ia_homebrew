@@ -1,0 +1,50 @@
+# Shrine items ("crates"): the ashes of the Factions spirits.
+rules:
+  - You cannot hold more than one of these items at a time.
+  - >-
+    While you are adjacent to another hero during one or the other of your
+    activations, you can pass these back and forth for free.
+
+cards:
+  - name: Destructive was Glaive
+    text: >-
+      Hold the ashes of Glaive. Discard this card during your turn to drop the
+      ashes. When you do, roll 1 red die and do that much damage to all other
+      figures within 2 spaces.
+  - name: Attuned was Songkai
+    text: >-
+      Hold the ashes of Songkai. When you would spend Strain to trigger an
+      ability, you may instead put that many Strain tokens on this card. Once
+      there are 4 tokens on this card, discard it.
+  - name: Pure was Li Ming
+    text: >-
+      Hold the ashes of Li Ming. Discard this card during your turn to drop the
+      ashes. When you do, remove all negative conditions from all figures
+      within 2 spaces.
+  - name: Mighty was Vorizun
+    text: >-
+      Hold the ashes of Vorizun. When you declare an attack, you may place a
+      Strain token on this card to apply +1 damage to that attack. Once there
+      are 4 tokens on this card, discard it.
+  - name: Anguished was Lingwah
+    text: >-
+      Hold the ashes of Lingwah. While you hold her ashes and are wounded, you
+      have +1 Move and +1 Endurance.
+  - name: Cruel was Daoshen
+    text: >-
+      Hold the ashes of Daoshen. While you hold his ashes, your attacks have
+      Pierce 1.
+  - name: Lively was Naomi
+    text: >-
+      Hold the ashes of Naomi. Discard this card during your turn to drop the
+      ashes. When you do, all other heroes in LoS may move up to 2 spaces
+      towards you.
+  - name: Generous was Tsungrai
+    text: >-
+      Hold the ashes of Tsungrai. When you perform a Rest, you may discard them
+      to recover an additional 4 Health.
+  - name: Grasping was Kuurong
+    text: >-
+      Hold the ashes of Kuurong. Discard this card during your turn to drop the
+      ashes. When you do, roll 1 yellow die and do that much damage to all
+      other figures within 2 spaces. Those figures become Stunned.

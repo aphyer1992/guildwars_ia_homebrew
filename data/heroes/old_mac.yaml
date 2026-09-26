@@ -1,0 +1,41 @@
+name: Old Mac
+health: 12
+endurance: 4
+speed: 4
+defense: [black]
+attributes: null  # TODO: not specified
+
+abilities:
+  - name: Here, Joe!
+    text: >-
+      At the start of the mission (after fixed groups but before selecting open
+      groups), Old Mac selects a non-unique Beast deployment with a figure cost
+      <= the threat level. One such figure (even if the group size is larger)
+      deploys as an ally, without granting the Adversary player more threat.
+      Joe activates at the start or end of Old Mac's activation.
+  - name: Comfort Animal
+    text: >-
+      2 Strain, Exhaust: if Joe has been defeated, replace him in a square next
+      to Old Mac.
+
+class_cards:
+  - name: I Will Avenge You!
+    xp: null  # TODO: no XP cost given
+    text: >-
+      If Joe is defeated, exhaust this card during your activation to recover 2
+      Health or become Focused. If Old Mac is wounded, exhaust this card during
+      your activation. Joe interrupts to perform an action.
+  - name: Heal as One
+    xp: null  # TODO: no XP cost given
+    text: >-
+      Whenever Old Mac performs a rest, Joe recovers 2HP.
+  - name: Strike as One
+    xp: 4
+    text: >-
+      After Joe performs an attack, pay 2 Strain and exhaust this card. Old Mac
+      may immediately interrupt to perform an attack against the same target.
+      During this attack, remove 1 defense die from the target's pool.
+  - name: Predatory Bond
+    xp: null
+    status: stub
+    text: null

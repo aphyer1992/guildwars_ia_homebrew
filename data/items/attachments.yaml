@@ -1,0 +1,75 @@
+# Weapon attachments. An entry with no `text` is a placeholder (stub).
+# attach_to: which weapon categories may take it (omitted = any).
+
+prefixes:
+  - name: Shocking
+    text: >-
+      When you declare an attack with the attached weapon, you may replace one
+      die in the attack pool with a blue die.
+  - name: Frost
+    text: >-
+      When you declare an attack with the attached weapon, you may replace one
+      die in the attack pool with a green die.
+  - name: Fiery
+    text: >-
+      When you declare an attack with the attached weapon, you may replace one
+      die in the attack pool with a yellow die.
+  - name: Ebon
+    text: >-
+      When you declare an attack with the attached weapon, you may replace one
+      die in the attack pool with a red die.
+  - name: Sundering
+    attach_to: [melee, ranged]
+    text: Grants Pierce 1.
+  - name: Vampiric
+    text: "Grants Surge: +2 damage, Recover 1 health."
+  - name: Defensive
+    text: "Grants Surge: gain a +1 evade or +1 armor token."
+  - name: Heavy
+    attach_to: [melee]
+    text: >-
+      While attacking with the attached weapon, you may apply +1 damage and -1
+      surge to the results.
+  - name: Swift
+    attach_to: [melee, ranged]
+    text: >-
+      While attacking with the attached weapon, you may apply -1 damage and +1
+      surge to the results.
+  - name: Cruel
+    text: >-
+      While attacking an enemy suffering from a negative condition, apply +1
+      damage to the results.
+  - name: Zealous
+  - name: Furious
+  - name: Hale
+  - name: Insightful
+
+suffixes:
+  - name: Rune of Returning
+    attach_to: [melee]
+    text: >-
+      Action: perform a ranged attack using this weapon. Apply +1 Accuracy to
+      the results.
+  - name: Rune of Defense
+    text: Exhaust while defending to apply +1 armor.
+  - name: Rune of Shelter
+  - name: Rune of Warding
+    text: Exhaust while defending to apply +1 evade.
+  - name: Rune of Swiftness
+  - name: Rune of Weapon Mastery
+    attach_to: [melee, ranged]
+    text: >-
+      Exhaust this while attacking with the attached weapon to apply +1 surge.
+  - name: Rune of Memory
+  - name: Rune of Quickening
+  - name: Rune of Fortitude
+  # "Rune of [attribute]" family:
+  - name: Rune of Strength
+  - name: Rune of Divine Favor
+  - name: Rune of Critical Strikes
+  - name: Rune of Marksmanship
+    attach_to: [ranged]
+    text: +2 accuracy to attacks with this.
+  - name: Rune of Shadow Arts
+    text: >-
+      Exhaust when an attack is declared against you to apply -2 accuracy.

@@ -1,0 +1,20 @@
+name: Charr Ash Walker
+traits: []
+speed: null  # TODO: not specified
+defense: [white]
+attack:
+  type: null  # TODO: melee or ranged?
+  dice: [green, green, yellow]
+
+variants:
+  regular:
+    cost: 5
+    reinforce: null  # TODO: not specified (single figure?)
+    health: 8
+    surges: ["+1 damage, Recover 1", "+1 damage, Recover 1"]
+
+abilities:
+  - name: Shadow Strike
+    text: >-
+      While attacking a figure that has suffered no damage, apply +1 damage to
+      the attack results.

@@ -1,0 +1,35 @@
+# Agenda sets, bought with Influence.
+# kind: discard | deplete | mission (side-mission / forced mission)
+- name: Beasts of Tyria
+  cards:
+    - name: null
+      influence: 1
+      kind: discard
+      status: stub
+      text: null
+    - name: From Below and Above
+      influence: 2
+      kind: deplete
+      text: >-
+        Deplete when a Beast group triggers to let every figure in that group
+        move 3 spaces.
+
+- name: Rites of Fire
+  cards:
+    - name: Althea's Ashes
+      influence: 3
+      kind: mission
+      reward:
+        name: Rites of Fire
+        text: >-
+          Exhaust this card when one of your figures attacks to replace one die
+          in the attack pool with a yellow die.
+
+- name: Stone Summit Wrath
+  cards:
+    - name: null  # TODO: unnamed
+      influence: 2
+      kind: deplete
+      text: >-
+        Deplete at the start of the round. Attach to a melee group. It gains
+        Frenzy.

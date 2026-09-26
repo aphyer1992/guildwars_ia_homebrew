@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+# Word lock files
+~$*
+# generated output (card PDFs, renders)
+output/
