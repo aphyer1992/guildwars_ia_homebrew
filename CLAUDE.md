@@ -17,6 +17,20 @@ balance tooling.
     for any damage/probability maths rather than recalling faces from memory.
 - `tools/check_data.py` — validates all data and lists unfinished entries/TODOs.
   Run it after any data edit: `python tools/check_data.py`.
+- `tools/attack.py` — exact expected-damage calculator for an enemy, weapon or custom
+  dice pool vs black/white defense (`python tools/attack.py charr_ash_walker`). It
+  parses surge strings like `+1 damage`, `Pierce 2`, `Blast 1`, `Recover 1` and
+  conditions.
+  - `--ia "Royal Guard"` runs an official deployment card.
+  - `--compare 4 5` tables every figure at those costs, ours and official, from
+    `reference/ia_cards.json`. For official cards, only surges, always-on modifiers and
+    the unconditional "reroll 1 attack die" wording are modelled. Conditional rerolls
+    are flagged, not applied.
+  - `--reroll N` and `--defense-reroll N`: both sides reroll optimally (exact, not a
+    heuristic). The attacker decides first, then the defender. The choice uses the same
+    objective as surge spending, so it will follow the value model too.
+  - Planned next step: score an attack by situational *value* instead of raw
+  damage.
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
 - `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.
 - `reference/` — official IA material (FFG's copyrighted content). Gitignored, so it's
