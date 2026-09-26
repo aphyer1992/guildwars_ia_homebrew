@@ -3,7 +3,7 @@ traits: []
 speed: null  # TODO: not specified
 defense: [white]
 attack:
-  type: null  # TODO: melee or ranged?
+  type: ranged  # necromancer: hybrid spellcaster
   dice: [green, green, yellow]
 
 variants:

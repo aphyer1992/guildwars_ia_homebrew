@@ -35,7 +35,10 @@ balance tooling.
     values.
     - Surges and rerolls are re-optimised for each listed situation, then averaged.
     - Weapons use the `vs_enemies` perspective; enemies use `vs_heroes`.
-    - `--compare` shows the result as its VALUE column.
+    - Values are given at range 1 for every attack, plus ranges 4 and 6 (medium and
+      long) for ranged attacks, where accuracy must reach the range. `--compare` shows
+      these as V@1/V@4/V@6. `--compare-weapons` gives the same table for all weapons.
+      `--sort value|v4|v6` sorts by them.
     - The model's numbers are the designer's to tune.
     - `--calibrate` shows the value each single surge adds in each perspective. It
       also checks the designer's `targets` in the YAML (for example "Cleave 2 > +2

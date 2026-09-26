@@ -30,7 +30,11 @@ editing the data and deleting the item here.
 
 9. **Attack type** (melee or ranged) is only stated for the Carrion Devourer. Inferred:
     Stalker ranged, Axe Warrior melee, Blade Storm melee, Mind Spark ranged, Flamecaller
-    ranged. **Ash Walker is left blank.**
+    ranged. (Ash Walker confirmed ranged by the designer, 2026-09-26.)
+    *Note (Claude):* if the Mind Spark is ranged, its red + yellow pool has almost no
+    accuracy. Red has none and yellow at most 2. Its value falls from 2.67 at range 1 to
+    0.28 at range 4, and to 0 at range 6 (`python tools/attack.py charr_mind_spark
+    --value`). Either it's melee, or it needs an accuracy source.
 10. **Charr Stalker "Move (Rampage) as One"** was split into a regular *Move as One* (ally
     moves) and an elite *Rampage as One* (ally attacks).
 11. **"Charr Axe Warrior (Fiend)"** was read as: the elite version is named *Charr Axe Fiend*.

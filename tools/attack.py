@@ -446,6 +446,25 @@ def describe_surges(attack):
     return "; ".join(one(c, e) for c, e in attack.surges) or "none"
 
 
+RANGES = (1, 4, 6)  # adjacent, medium, long
+
+
+def value_ranges(attack):
+    """Ranges to value an attack at: range 1 for everything, plus 4 and 6 if ranged."""
+    return RANGES if attack.type == "ranged" else RANGES[:1]
+
+
+def range_values(attack, perspective=None, defense_reroll=0):
+    """{range: value averaged over black and white} for the attack's value ranges."""
+    persp = perspective or attack.perspective
+    return {r: sum(value(attack, [d], persp, r, defense_reroll)[0] for d in ("black", "white")) / 2
+            for r in value_ranges(attack)}
+
+
+def fmt_ranges(vals):
+    return "  ".join(f"{vals[r]:5.2f}" if r in vals else "    -" for r in RANGES)
+
+
 def report(attack, rng, defenses, defense_reroll=0, perspective=None):
     print(f"\n{attack.name}")
     bonus = ", ".join(f"{k} {v:+}" for k, v in attack.bonus.items() if v)
@@ -465,33 +484,51 @@ def report(attack, rng, defenses, defense_reroll=0, perspective=None):
             v, per = value(attack, d, perspective, rng, defense_reroll)
             print(" " * 13 + f"VALUE {v:4.2f} ({perspective}): "
                   + ", ".join(f"{name} {x:.2f}" for name, _, x in per))
+    if perspective and rng is None:
+        vals = range_values(attack, perspective, defense_reroll)
+        print("  VALUE by range (avg of black & white): "
+              + ", ".join(f"range {r}: {v:.2f}" for r, v in vals.items())
+              + ("" if attack.type == "ranged" else "   (melee/unknown type: range 1 only)"))
     for note in attack.notes:
         print(f"  not modelled: {note}")
 
 
-def compare(costs, rng, sort_by):
+RANGE_HEAD = f"{'V@1':>5}  {'V@4':>5}  {'V@6':>5}"
+RANGE_NOTE = ("V@1/V@4/V@6 = value-model score at range 1/4/6, averaged over black and white"
+              " (tools/value_model.yaml). Ranged attacks need accuracy >= range; melee and"
+              " unknown-type attacks are valued at range 1 only.")
+
+
+def sort_key(sort_by, cost_first=False):
+    def v(r, rng):
+        return -r["vals"].get(rng, -99)
+    keys = {"black": lambda r: -r["black"], "white": lambda r: -r["white"],
+            "hp": lambda r: -(r.get("hp") or 0), "value": lambda r: v(r, 1),
+            "v4": lambda r: v(r, 4), "v6": lambda r: v(r, 6)}
+    if sort_by == "cost":
+        return (lambda r: (r["cost"], v(r, 1))) if cost_first else keys["value"]
+    return keys[sort_by]
+
+
+def compare(costs, sort_by):
     attacks = [a for f in sorted((DATA / "enemies").glob("*.yaml")) for a in enemy_attacks(f.stem)]
     attacks += ia_attacks()
     rows = []
     for a in attacks:
         if a.stats.get("cost") not in costs:
             continue
-        vb, vw = (expected(resolve(a, [d], rng)[0]) for d in ("black", "white"))
-        valb, valw = (value(a, [d], a.perspective, rng)[0] for d in ("black", "white"))
+        vb, vw = (expected(resolve(a, [d])[0]) for d in ("black", "white"))
         s = a.stats
         rows.append({"name": a.name, "src": s["source"], "unique": s.get("unique"), "cost": s["cost"],
                      "reinf": s["reinforce"] or "-", "grp": s["group"] or "?",
                      "hp": s["health"], "spd": s["speed"] or "?",
                      "def": "+".join(s["defense"] or []) or "?",
                      "type": (a.type or "?")[:6], "dice": " ".join(a.dice),
-                     "black": vb, "white": vw, "value": (valb + valw) / 2,
+                     "black": vb, "white": vw, "vals": range_values(a),
                      "rr": a.reroll, "notes": bool(a.notes)})
-    key = {"cost": lambda r: (r["cost"], -r["value"]), "black": lambda r: -r["black"],
-           "white": lambda r: -r["white"], "hp": lambda r: -(r["hp"] or 0),
-           "value": lambda r: -r["value"]}[sort_by]
-    rows.sort(key=key)
+    rows.sort(key=sort_key(sort_by, cost_first=True))
     head = (f"{'':1} {'name':38} {'cost':>4} {'rnf':>3} {'grp':>3} {'hp':>3} {'spd':>3} {'def':11} "
-            f"{'type':6} {'dice':22} {'rr':>2} {'dmgB':>5} {'dmgW':>5} {'VALUE':>6}")
+            f"{'type':6} {'dice':22} {'rr':>2} {'dmgB':>5} {'dmgW':>5}  {RANGE_HEAD}")
     print(head)
     print("-" * len(head))
     for r in rows:
@@ -499,16 +536,40 @@ def compare(costs, rng, sort_by):
         rr = (str(r["rr"]) if r["rr"] else "") + ("~" if r["notes"] else "") or "-"
         print(f"{mark} {r['name'][:38]:38} {r['cost']:>4} {r['reinf']:>3} {r['grp']:>3} {r['hp']:>3} "
               f"{r['spd']:>3} {r['def'][:11]:11} {r['type']:6} {r['dice'][:22]:22} {rr:>2} "
-              f"{r['black']:5.2f} {r['white']:5.2f} {r['value']:6.2f}")
+              f"{r['black']:5.2f} {r['white']:5.2f}  {fmt_ranges(r['vals'])}")
     print("\n* = this project's enemies; u = official unique figure (often overcosted).")
-    print("dmgB/dmgW = expected damage per figure per attack vs black/white"
-          + (f", at range {rng}." if rng is not None else ", accuracy ignored."))
-    print("VALUE = value-model score (tools/value_model.yaml, vs_heroes), averaged over black"
-          " and white. It counts overkill, kills, Cleave, Blast, Recover and conditions.")
+    print("dmgB/dmgW = expected damage per figure per attack vs black/white, accuracy ignored.")
+    print(RANGE_NOTE + " Enemies use the vs_heroes perspective.")
     print("rr = attack dice rerolled (optimally); ~ = has reroll text that isn't modelled"
           " (conditional or costed; see --ia NAME).")
     print("Official cards: surges, always-on modifiers and unconditional attack rerolls only;"
           " other card text isn't modelled.")
+
+
+def weapon_attacks():
+    doc = load_yaml(DATA / "items" / "weapons.yaml")
+    return [(cat, Attack.from_strings(w["name"], w["dice"], w.get("surges") or [], hero=True,
+                                      type="melee" if cat == "melee" else "ranged"))
+            for cat in ("melee", "ranged", "magical") for w in doc.get(cat, []) if w.get("dice")]
+
+
+def compare_weapons(sort_by):
+    rows = []
+    for cat, a in weapon_attacks():
+        vb, vw = (expected(resolve(a, [d])[0]) for d in ("black", "white"))
+        rows.append({"name": a.name, "cat": cat, "dice": " ".join(a.dice),
+                     "surges": describe_surges(a), "black": vb, "white": vw,
+                     "vals": range_values(a)})
+    rows.sort(key=sort_key(sort_by))
+    head = f"{'name':18} {'category':8} {'dice':18} {'dmgB':>5} {'dmgW':>5}  {RANGE_HEAD}   surges"
+    print(head)
+    print("-" * (len(head) + 30))
+    for r in rows:
+        print(f"{r['name'][:18]:18} {r['cat']:8} {r['dice'][:18]:18} {r['black']:5.2f} {r['white']:5.2f}"
+              f"  {fmt_ranges(r['vals'])}   {r['surges']}")
+    print("\ndmgB/dmgW = expected damage vs black/white, accuracy ignored.")
+    print(RANGE_NOTE + " Weapons use the vs_enemies perspective (hero attacking).")
+    print("Magical weapons are treated as ranged.")
 
 
 CALIBRATION_SURGES = ["+1 damage", "+2 damage", "Cleave 1", "Cleave 2", "Blast 1", "Blast 2",
@@ -570,7 +631,9 @@ def main():
     ap.add_argument("--defense-reroll", type=int, default=0, help="defense dice the defender may reroll")
     ap.add_argument("--compare", nargs="+", type=int, metavar="COST",
                     help="table of every figure (ours and official) at these costs")
-    ap.add_argument("--sort", choices=["cost", "black", "white", "hp", "value"], default="cost")
+    ap.add_argument("--sort", choices=["cost", "black", "white", "hp", "value", "v4", "v6"], default="cost")
+    ap.add_argument("--compare-weapons", action="store_true",
+                    help="table of every weapon with value at range 1/4/6")
     ap.add_argument("--value", action="store_true",
                     help="also score by the value model (tools/value_model.yaml)")
     ap.add_argument("--perspective", choices=["vs_heroes", "vs_enemies"],
@@ -585,8 +648,10 @@ def main():
 
     if a.calibrate:
         return calibrate([a.perspective] if a.perspective else ["vs_heroes", "vs_enemies"])
+    if a.compare_weapons:
+        return compare_weapons(a.sort)
     if a.compare:
-        return compare(set(a.compare), a.range, a.sort)
+        return compare(set(a.compare), a.sort)
     if a.enemy:
         attacks = enemy_attacks(a.enemy, a.variant)
         if not attacks:
