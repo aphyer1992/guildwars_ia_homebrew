@@ -1,9 +1,8 @@
 name: Norgu
-# TODO: defense not given yet
 health: 12  # default hero health; designer may cut to 10-11 later
 endurance: 4  # default hero endurance
 speed: 4  # default: designer says assume 4
-defense: null
+defense: [white]  # mesmer: spellcaster
 attributes:  # Mesmer: good arcana, mediocre agility, bad strength
   strength: [blue]
   agility: [blue, green]

@@ -85,6 +85,10 @@ balance tooling.
   - 17 isn't a rule. Official heroes range from 14 to 23: Onar Koma 23, Jarrod 21,
     Gideon/Mak/Shyla 20, Loku 14. `check_data.py` lists other totals under "Balance
     flags" as a reminder to confirm they're deliberate, not as errors.
+- **Defense dice:** black = armor; white = light armor, dodging and so on.
+  - Warrior types (warriors, paragons) get black.
+  - Spellcasters (mesmers, elementalists, necromancers) and assassins get white.
+  - Rangers could go either way; so far they get black.
 - **Hero defaults:** Health 12, Endurance 4.
   - Endurance 5 is a very big edge in IA (Gideon, Diala and others). Every hero here has
     4 unless there's strong reason otherwise.
@@ -177,6 +181,14 @@ GW terminology: Rebels/heroes = heroes, Imperial player = **Adversary**, crates 
     are badly overcosted for what they do.
 
   So benchmark against IA content that is mid-strength, not against outliers.
+- **Hero power comes mostly from skills, not stats.** Attribute totals are a minor
+  factor. Gideon and Shyla are strong because of broken class cards, not their sheets:
+  - Gideon's *Masterstroke* gives a second free *Command* each round.
+  - Shyla's *Deadly Grace* (4 XP) gives +1 Endurance, another stat bonus, and 2 free
+    movement points every activation.
+
+  When judging a hero, look hardest at class cards and abilities, especially anything
+  that gives extra actions, free movement, or repeatable free effects.
 - **Some IA mechanics are repurposed for GW flavour:**
   - The Weaken condition mostly stands in for GW **Poison**.
   - Bleed covers both GW **Bleeding** and **Burning**, which are both damage over time.

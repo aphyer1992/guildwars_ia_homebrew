@@ -14,13 +14,11 @@ editing the data and deleting the item here.
 
 ## Missing stats
 
-3. **Norgu's defense die** is still blank (black or white?). Health 12 and endurance 4
-   are set as defaults; health may drop to 10-11 later.
-4. **XP costs** are missing on several class cards: Zenmai *Mo Zing*; Old Mac *I Will
+3. **XP costs** are missing on several class cards: Zenmai *Mo Zing*; Old Mac *I Will
    Avenge You!*, *Heal as One*; all of Argo's and Cynn's class cards; the Adversary class
    cards.
 
 ## Unfinished or inconsistent cards
 
-5. **Stone Summit Wrath**: the 2-influence agenda card has no name. **Beasts of Tyria**:
+4. **Stone Summit Wrath**: the 2-influence agenda card has no name. **Beasts of Tyria**:
    the 1-influence discard card has no name or text.
