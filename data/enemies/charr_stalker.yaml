@@ -26,7 +26,7 @@ variants:
     reinforce: 5
     health: 7
     dice: [blue, blue, yellow]  # with Aim, never misses at range 6
-    surges: ["Blast 2", "+1 damage"]
+    surges: ["Blast 1", "+1 damage", "+2 Accuracy"]  # same as the Stalker; the extra blue die is the upgrade
     abilities:
       - name: Rampage as One
         text: >-
