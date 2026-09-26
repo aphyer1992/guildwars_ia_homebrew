@@ -2,7 +2,7 @@ name: Argo
 health: 12
 endurance: 4
 speed: 4
-defense: [black]
+defense: [black]  # earth-elementalist tank; designer undecided between black and white
 attributes:
   strength: [blue, blue, green]
   agility: [blue]
