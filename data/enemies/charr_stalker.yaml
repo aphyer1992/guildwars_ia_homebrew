@@ -13,7 +13,7 @@ variants:
     cost: 6
     reinforce: 3
     health: 5
-    surges: ["Blast 1", "+1 damage"]  # Aim supplies the accuracy
+    surges: ["Blast 1", "+1 damage", "+2 Accuracy"]  # matches elite Rebel Troopers (same dice and Aim)
     abilities:
       # Original: "Move (Rampage) as One" - parentheses read as the elite version.
       - name: Move as One
