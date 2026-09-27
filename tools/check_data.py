@@ -9,6 +9,7 @@ from pathlib import Path
 
 import yaml
 
+import attack as attack_tool
 from heroes import WOUNDED_OVERRIDES, wounded_stats
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -93,12 +94,22 @@ def check_hero(where, h):
                 err(cw, f"bad xp {card.get('xp')!r}")
 
 
+def readable(where, what, text, surge=False):
+    """Surges and bonuses must be readable by tools/attack.py (its parser is strict)."""
+    if not text:
+        return
+    try:
+        (attack_tool.parse_surge if surge else attack_tool.parse_effect)(text)
+    except ValueError as e:
+        err(where, f"{what} {text!r} can't be read by tools/attack.py: {e}")
+
+
 def check_enemy(where, e):
     if e.get("affiliation") not in AFFILIATIONS:
         err(where, f"affiliation should be one of {sorted(AFFILIATIONS)}, got {e.get('affiliation')!r}")
-    if e.get("status") == "stub":
-        stub(where)
-        return
+    is_stub = e.get("status") == "stub"
+    if is_stub:
+        stub(where)  # still validate whatever is filled in, so problems don't hide
     check_dice(where, e.get("defense"), DEFENSE_DICE)
     attack = e.get("attack") or {}
     check_dice(where, attack.get("dice"), ATTACK_DICE)
@@ -109,8 +120,9 @@ def check_enemy(where, e):
     elif not isinstance(e["group_size"], int) or e["group_size"] < 1:
         err(where, f"bad group_size {e['group_size']!r}")
     variants = e.get("variants") or {}
-    if not variants:
+    if not variants and not is_stub:
         err(where, "no variants")
+    readable(where, "attack bonus", attack.get("bonus"))
     for vname, v in variants.items():
         for field in ("cost", "health"):
             if field not in v:
@@ -118,6 +130,10 @@ def check_enemy(where, e):
         if None in (v.get("surges") or []):
             stub(where, f"{vname}: blank surge")
         check_dice(f"{where} [{vname}]", v.get("dice"), ATTACK_DICE)  # optional per-variant pool
+        readable(f"{where} [{vname}]", "bonus", v.get("bonus"))
+        for s in v.get("surges") or []:
+            if s:
+                readable(f"{where} [{vname}]", "surge", s, surge=True)
 
 
 def check_card_list(where, cards, required="text"):

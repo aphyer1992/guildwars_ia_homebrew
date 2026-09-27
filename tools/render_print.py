@@ -90,7 +90,9 @@ def enemies():
     out = []
     for f in sorted((DATA / "enemies").glob("*.yaml")):
         e = load(f)
-        if e.get("status") != "stub":
+        if e.get("status") == "stub":
+            print(f"skipped {f.name}: status: stub (remove the status line once it's ready)")
+        else:
             out.append((f.stem, e))
     return out
 
@@ -174,9 +176,9 @@ def enemy_card(key, e, vname, v):
         name=v.get("name", e["name"]), elite=vname == "elite", cost=v.get("cost", "?"),
         reinforce=v.get("reinforce"), group=e.get("group_size") or 1, traits=e.get("traits") or [],
         surges=v.get("surges") or [], abilities=(v.get("abilities") or []) + (e.get("abilities") or []),
-        health=v.get("health", "?"), speed=e.get("speed", "?"), defense=e.get("defense"),
+        health=v.get("health", "?"), speed=e.get("speed") or 4, defense=e.get("defense"),
         attack_type=attack.get("type"), attack_dice=v.get("dice") or attack.get("dice"),
-        attack_bonus=attack.get("bonus"), art_style=art, placeholder=placeholder,
+        attack_bonus=v.get("bonus") or attack.get("bonus"), art_style=art, placeholder=placeholder,
         sigil_html=tab, watermark_html=watermark, scale=scale)
 
 

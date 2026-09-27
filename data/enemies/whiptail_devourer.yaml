@@ -1,11 +1,10 @@
 name: Whiptail Devourer
-status: stub
 affiliation: beast
 group_size: 2
 traits: [Devourer]
 defense: [black]
 attack:
-  type: range
+  type: ranged
   dice: [green, blue]
 
 variants:

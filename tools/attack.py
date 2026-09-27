@@ -47,6 +47,7 @@ CONDITIONS = {"bleed", "stun", "weaken", "focus", "hidden"}
 NUMERIC = {"damage", "pierce", "accuracy", "blast", "cleave", "recover", "surge"}
 NOT_EXTRAS = {"damage", "pierce", "accuracy", "surge"}
 ATTACK_DICE_NAMES = {"red", "blue", "green", "yellow"}
+DEFAULT_SPEED = 4  # designer: assume speed 4 when unspecified
 
 
 # ---------------------------------------------------------------- parsing
@@ -57,6 +58,9 @@ def parse_effect(text, strict=True):
     Unknown parts raise when strict; otherwise they're counted under 'other'.
     """
     effect = Counter()
+    # accept IA/Kensei symbol tags as well as words: "+1<damage>", "Recover 2 <damage>"
+    text = re.sub(r"([+-]\d+)\s*<damage>", r"\1 damage", text)
+    text = re.sub(r"\s*<damage>", "", text)
     for part in (p.strip() for p in text.split(",") if p.strip()):
         low = part.lower()
         if m := re.fullmatch(r"([+-]\d+) (damage|accuracy|surge)", low):
@@ -73,9 +77,11 @@ def parse_effect(text, strict=True):
 
 
 def parse_surge(text, strict=True):
-    """'+1 damage' -> (1, effect); '2 surges: +3 damage' -> (2, effect)."""
+    """'+1 damage' -> (1, effect); '2 surges: +3 damage' or '<surge><surge>: ...' -> (2, effect)."""
     if m := re.fullmatch(r"(\d+) surges?: (.*)", text.strip(), re.I):
         return int(m[1]), parse_effect(m[2], strict)
+    if m := re.fullmatch(r"((?:<surge>\s*)+):\s*(.*)", text.strip(), re.I):
+        return m[1].count("<surge>"), parse_effect(m[2], strict)
     return 1, parse_effect(text, strict)
 
 
@@ -126,9 +132,9 @@ def enemy_attacks(file_stem, variant=None):
         out.append(Attack.from_strings(
             f"{v.get('name', e['name'])} [{vname}]", v.get("dice") or e["attack"]["dice"],
             v.get("surges") or [],
-            bonus=e["attack"].get("bonus"), type=e["attack"].get("type"),
+            bonus=v.get("bonus") or e["attack"].get("bonus"), type=e["attack"].get("type"),
             stats={"cost": v.get("cost"), "reinforce": v.get("reinforce"),
-                   "health": v.get("health"), "speed": e.get("speed"),
+                   "health": v.get("health"), "speed": e.get("speed") or DEFAULT_SPEED,
                    "group": v.get("group_size", e.get("group_size")),
                    "defense": e.get("defense"), "source": "ours"}))
     return out

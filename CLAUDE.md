@@ -176,8 +176,13 @@ balance tooling.
     `"2 surges: Blast 2"` or `"2 surges: Stun"`.
   - Parts are comma-separated and all apply: `"+1 damage, Bleed"`.
   - The calculator charges the cost, and cards print N surge symbols.
-  - Keep surge strings in plain words (`+1 damage`, `Pierce 2`, `Blast 1`, `+2 Accuracy`,
-    condition names) so `tools/attack.py` can read them.
+  - Surge strings may use plain words or tags (`+1 damage` / `+1<damage>`,
+    `Recover 2 <damage>`, `<surge><surge>: Stun`). `check_data.py` errors if
+    `tools/attack.py` can't read one.
+- Enemy variants may override `dice` and `bonus` (always-on modifiers such as
+  `"+2 Accuracy"`); otherwise the top-level `attack` values apply.
+- A file with `status: stub` is skipped by the card renderer (it says so) but still
+  validated. Remove the status line once the figure is ready.
 - Unfinished content: `status: stub`, a missing `text`/`dice`, or a `# TODO` comment.
   Keep placeholders rather than deleting them — they're the designer's to-do list.
 - Rules text is the designer's wording. Don't silently reword, "fix" or rebalance it;
