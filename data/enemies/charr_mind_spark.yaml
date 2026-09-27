@@ -20,4 +20,4 @@ abilities:
   - name: Power Drain
     text: >-
       After you damage a target with an attack, if it has not activated yet
-      this round, it takes 1 Strain.
+      this round, it takes 1<strain>.

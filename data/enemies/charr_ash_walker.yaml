@@ -18,5 +18,5 @@ variants:
 abilities:
   - name: Shadow Strike
     text: >-
-      While attacking a figure that has suffered no damage, apply +1 damage to
+      While attacking a figure that has suffered no <damage>, apply +1<damage> to
       the attack results.

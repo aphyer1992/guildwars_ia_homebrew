@@ -36,5 +36,5 @@ variants:
 abilities:
   - name: Aim
     text: >-
-      If you have not exited your space this activation, apply +1 damage and +2
+      If you have not exited your space this activation, apply +1<damage> and +2
       accuracy to your attacks.

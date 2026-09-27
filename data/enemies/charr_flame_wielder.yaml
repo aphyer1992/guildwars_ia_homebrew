@@ -1,4 +1,4 @@
-name: Charr Flamecaller
+name: Charr Flame Wielder
 affiliation: adversary
 group_size: 1
 traits: [Charr]
@@ -18,4 +18,4 @@ variants:
 abilities:
   - name: Inferno
     text: >-
-      Action: roll one red die. All adjacent figures suffer that much damage.
+      Action: roll one red die. All adjacent figures suffer that much <damage>.

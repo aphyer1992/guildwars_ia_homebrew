@@ -12,14 +12,14 @@ abilities:
   - name: Power Block
     text: >-
       When you deal attack damage to an enemy with figure cost <= the threat
-      level with a Magical weapon, you may pay 1 Strain. If you do, until end
+      level with a Magical weapon, you may pay 1<strain>. If you do, until end
       of turn, that figure's text box is blank. This does not affect abilities
-      unless they are written in the text box e.g. most surge abilities will be
+      unless they are written in the text box e.g. most <surge> abilities will be
       unaffected.
   - name: Illusionary Weaponry
     healthy_only: true
     text: >-
-      While attacking, you gain surge: -1 damage, Pierce 3.
+      While attacking, you gain <surge>: -1<damage>, Pierce 3.
 
 class_cards:
   - name: Imagined Burden
@@ -42,7 +42,7 @@ class_cards:
     xp: 2
     text: >-
       When an enemy under the effects of Power Block is killed, exhaust this
-      card to recover 2 Strain or become Focused.
+      card to recover 2<strain> or become Focused.
   - name: Stolen Speed
     xp: 3
     text: >-

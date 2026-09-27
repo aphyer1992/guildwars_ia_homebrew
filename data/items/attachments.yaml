@@ -22,19 +22,19 @@ prefixes:
     attach_to: [melee, ranged]
     text: Grants Pierce 1.
   - name: Vampiric
-    text: "Grants Surge: +2 damage, Recover 1 health."
+    text: "Grants <surge>: +2<damage>, Recover 1<damage> health."
   - name: Defensive
-    text: "Grants Surge: gain a +1 evade or +1 armor token."
+    text: "Grants <surge>: gain a +1<evade> or <power-block>."
   - name: Heavy
     attach_to: [melee]
     text: >-
-      While attacking with the attached weapon, you may apply +1 damage and -1
-      surge to the results.
+      While attacking with the attached weapon, you may apply +1<damage> and -1
+      <surge> to the results.
   - name: Swift
     attach_to: [melee, ranged]
     text: >-
-      While attacking with the attached weapon, you may apply -1 damage and +1
-      surge to the results.
+      While attacking with the attached weapon, you may apply -1<damage> and +1
+      <surge> to the results.
   - name: Cruel
     text: >-
       While attacking an enemy suffering from a negative condition, apply +1
@@ -51,15 +51,15 @@ suffixes:
       Action: perform a ranged attack using this weapon. Apply +1 Accuracy to
       the results.
   - name: Rune of Defense
-    text: Exhaust while defending to apply +1 armor.
+    text: Exhaust while defending to apply +1<block>.
   - name: Rune of Shelter
   - name: Rune of Warding
-    text: Exhaust while defending to apply +1 evade.
+    text: Exhaust while defending to apply +1<evade>.
   - name: Rune of Swiftness
   - name: Rune of Weapon Mastery
     attach_to: [melee, ranged]
     text: >-
-      Exhaust this while attacking with the attached weapon to apply +1 surge.
+      Exhaust this while attacking with the attached weapon to apply +1<surge>.
   - name: Rune of Memory
   - name: Rune of Quickening
   - name: Rune of Fortitude

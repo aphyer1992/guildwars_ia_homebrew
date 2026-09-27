@@ -193,7 +193,7 @@ mini-campaign or a short full campaign. It breaks naturally into two acts:
 ## Enemy roster and IA translations
 
 Already in `data/enemies/`: Carrion, Plague and Whiptail Devourers; Charr Ash Walker,
-Axe Warrior/Fiend, Blade Storm, Flamecaller, Mind Spark and Stalker.
+Axe Warrior/Fiend, Blade Warrior/Storm, Flame Wielder, Mind Spark and Stalker/Hunter.
 
 The existing designs are faithful to the MMO:
 - **Stalker:** Ignite Arrows → Blast, and GW's *Penetrating Attack* also appears as an

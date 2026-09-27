@@ -26,8 +26,7 @@ variants:
 abilities:
   - name: Virulence
     text: >-
-     While attacking, you gain surge: after this attack resolves, if the target suffered damage, it must gain a negative condition it does not always have, if possible.  You can trigger this surge multiple times per attack.
+     While attacking, you gain <surge>: after this attack resolves, if the target suffered <damage>, it must gain a negative condition it does not always have, if possible.  You can trigger this <surge> multiple times per attack.
   - name: Devourer Shell
     text: >-
-      At the end of your activation, if you have no armor tokens, gain 1 armor
-      token.
+      At the end of your activation, if you have no <power-block>, gain 1<power-block>.

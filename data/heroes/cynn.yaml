@@ -11,21 +11,21 @@ attributes:
 abilities:
   - name: Fireball
     text: >-
-      When you declare an attack with a Magical weapon, you may pay 2 Strain.
+      When you declare an attack with a Magical weapon, you may pay 2<strain>.
       If you do, add a yellow die to the attack pool, and the attack gains
-      surge: Blast 1.
+      <surge>: Blast 1<damage>.
 
 class_cards:
   - name: Lava Font
     xp: null  # TODO: no XP cost given
     text: >-
-      At the start of your activation, exhaust this card to perform Blast 1
+      At the start of your activation, exhaust this card to perform Blast 1<damage>
       centered on you.
   - name: Burning Speed
     xp: null
     text: >-
       Exhaust during your activation. Roll an Arcana check. For every success,
-      you may move 1 space. Then take damage equal to the number of spaces
+      you may move 1 space. Then take <damage> equal to the number of spaces
       moved.
   - name: Liquid Flame
     xp: null
@@ -41,5 +41,5 @@ class_cards:
   - name: Master of Magic
     xp: null
     text: >-
-      Whenever you perform an attack or an Arcana check, apply +1 surge to the
-      results for each die that shows one surge and no damage.
+      Whenever you perform an attack or an Arcana check, apply +1<surge> to the
+      results for each die that shows one <surge> and no <damage>.

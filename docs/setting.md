@@ -152,9 +152,8 @@ cards):
 
 ## Naming notes
 
-- **Charr Flamecaller:** GW's name is **Charr Fire Caller** (a Level 6 Elementalist
-  using Conjure Flame, Flare, Lava Font and Meteor Shower). The project's
-  "Flamecaller" may be deliberate. The tougher version is the **Charr Flame Wielder**.
-- **Charr Axe Warrior / Axe Fiend:** both exist in GW (Fort Ranik and the Great Northern
-  Wall), so the project's regular/elite pairing is faithful. The same goes for Blade
-  Warrior / Blade Storm.
+- **Charr Flame Wielder:** named after the MMO's Level 8 Charr fire Elementalist. The
+  MMO's weaker version is the **Charr Fire Caller**. Casters stay as single cards, with
+  no regular/elite split (designer, 2026-09-26).
+- **Charr Axe Warrior / Axe Fiend** and **Blade Warrior / Blade Storm:** regular/elite
+  pairs named as in the MMO (Fort Ranik, the Great Northern Wall).

@@ -11,31 +11,31 @@ attributes:
 abilities:
   - name: Shadow Step
     text: >-
-      While making a melee attack, you gain surge: after this attack resolves,
+      While making a melee attack, you gain <surge>: after this attack resolves,
       you place your figure in any space adjacent to the target and become
       Hidden.
   - name: Aura of Displacement
     healthy_only: true
     text: >-
-      When you declare a melee attack, you may pay 1 Strain. If you do, the
+      When you declare a melee attack, you may pay 1<strain>. If you do, the
       attack gains Reach, and after it resolves you gain 1 movement point.
   - name: Flashing Blades
     text: >-
-      While defending, you may exhaust a melee weapon to add +1 Armor.
+      While defending, you may exhaust a melee weapon to add +1<block>.
 
 class_cards:
   - name: Assassin's Promise
     xp: 1
     text: >-
       At the start of each round, the Adversary player nominates one of their
-      figures. If that figure dies this round, you regain 1 Strain. If you
+      figures. If that figure dies this round, you regain 1<strain>. If you
       defeat it, you also become Focused.
   - name: Mo Zing
     xp: null  # TODO: no XP cost given
     text: >-
-      As long as no ally is within 3 spaces of you, you gain +1 armor.
+      As long as no ally is within 3 spaces of you, you gain +1<block>.
   - name: Locust's Fury
     xp: 4
     text: >-
-      1 Strain, Action: declare an attack with each of two different equipped
+      1<strain>, Action: declare an attack with each of two different equipped
       Melee weapons.

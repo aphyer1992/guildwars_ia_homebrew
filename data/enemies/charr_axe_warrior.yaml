@@ -26,4 +26,4 @@ abilities:
   - name: Executioner's Strike
     text: >-
       When you declare an attack, if the target is suffering from Bleed, the
-      attack gains surge: +2 damage.
+      attack gains <surge>: +2<damage>.

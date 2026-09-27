@@ -12,20 +12,20 @@ abilities:
   - name: Kinetic Armor
     text: >-
       Whenever you damage your target with an attack with a magical weapon,
-      gain a +1 armor token. You may hold up to two additional +1 armor tokens.
+      gain a <power-block>. You may hold up to two additional <power-block>.
   - name: Sliver Armor
     text: >-
-      Once per round, when you take no damage from an enemy's attack, you may
-      pay 2 Strain. If you do, interrupt to perform an attack against that
+      Once per round, when you take no <damage> from an enemy's attack, you may
+      pay 2<strain>. If you do, interrupt to perform an attack against that
       enemy.
   - name: Magnetic Aura
     healthy_only: true
     text: >-
-      When an ally within 3 spaces is attacked, you may spend +1 armor tokens
+      When an ally within 3 spaces is attacked, you may spend <power-block>
       as if you were being attacked.
 
 class_cards:
   - name: Obsidian Flesh
     xp: null  # TODO: no XP cost given
     text: >-
-      When you spend a +1 armor token, also apply +1 evade.
+      When you spend a <power-block>, also apply +1<evade>.

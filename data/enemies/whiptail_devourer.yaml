@@ -22,5 +22,4 @@ variants:
 abilities:
   - name: Devourer Shell
     text: >-
-      At the end of your activation, if you have no armor tokens, gain 1 armor
-      token.
+      At the end of your activation, if you have no <power-block>, gain 1<power-block>.

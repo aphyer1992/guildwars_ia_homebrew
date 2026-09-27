@@ -25,4 +25,4 @@ variants:
 abilities:
   - name: Riposte
     text: >-
-      When attacked by a melee figure, deal 1 damage to the attacker.
+      When attacked by a melee figure, deal 1<damage> to the attacker.

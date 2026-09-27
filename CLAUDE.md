@@ -256,7 +256,7 @@ GW terminology: Rebels/heroes = heroes, Imperial player = **Adversary**, crates 
 - **Some IA mechanics are repurposed for GW flavour:**
   - The Weaken condition mostly stands in for GW **Poison**.
   - Bleed covers both GW **Bleeding** and **Burning**, which are both damage over time.
-    Fire casters like the Charr Flamecaller use it.
+    Fire casters like the Charr Flame Wielder use it.
   - Blast means "it explodes", whether it's a Fireball or a Charr Stalker's Ignite
     Arrows. It isn't reserved for Elementalists.
   - Pierce 3, which IA mostly put on lightsabers, now goes on **Mesmers**, whose attacks

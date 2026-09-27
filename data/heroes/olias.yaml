@@ -11,7 +11,7 @@ attributes:
 abilities:
   - name: Animate Bone Horror
     text: >-
-      When an enemy is defeated during your activation, you may pay 2 Strain to
+      When an enemy is defeated during your activation, you may pay 2<strain> to
       place a Bone Horror in their square. A Bone Horror has 4HP, Move 3,
       Attack R, Defense -. It activates at the start or end of your activation
       (including the one it is created in).
@@ -19,8 +19,8 @@ abilities:
     healthy_only: true
     text: >-
       Once per activation, when you or another hero within 3 spaces would spend
-      Strain, you may instead pay 1 Health (from Olias) in place of 1 of that
-      Strain (from whoever would have spent it).
+      <strain>, you may instead pay 1 Health (from Olias) in place of 1 of that
+      <strain> (from whoever would have spent it).
 
 class_cards:
   - name: Tainted Flesh
@@ -37,7 +37,7 @@ class_cards:
   - name: Foul Feast
     xp: 2
     text: >-
-      1 Strain: Exhaust this card during your activation. Remove all conditions
+      1<strain>: Exhaust this card during your activation. Remove all conditions
       (positive and negative) from all figures within 3 spaces. You gain every
       condition thus removed. Then, restore 2 Health for each negative
       condition you have.
@@ -45,17 +45,17 @@ class_cards:
     xp: 2
     text: >-
       Exhaust this card when a friendly figure in LoS is defeated. All enemies
-      within 2 spaces of that figure take 2 damage and are Stunned.
+      within 2 spaces of that figure take 2<damage> and are Stunned.
   - name: Soul Reaping
     xp: 3
     text: >-
-      Whenever a figure within 3 spaces is defeated, recover 1 Strain.
+      Whenever a figure within 3 spaces is defeated, recover 1<strain>.
   - name: Jagged Bones
     xp: 3
     text: >-
-      Your Bone Horrors' attacks gain Pierce 1 and Bleed. 1 Strain: Exhaust
+      Your Bone Horrors' attacks gain Pierce 1 and Bleed. 1<strain>: Exhaust
       this card when a Bone Horror is defeated to place another Bone Horror in
-      its square. Then place 3 damage on that Bone Horror.
+      its square. Then place 3<damage> on that Bone Horror.
   - name: Necrotic Traversal
     xp: 4
     text: >-
@@ -64,8 +64,8 @@ class_cards:
   - name: Life Siphon
     xp: 4
     text: >-
-      1 Strain, Action: perform an attack with a Magical weapon. If this attack
-      deals damage, restore an equal amount of Health to yourself.
+      1<strain>, Action: perform an attack with a Magical weapon. If this attack
+      deals <damage>, restore an equal amount of Health to yourself.
   - name: Taste of Death
     xp: mission
     text: >-

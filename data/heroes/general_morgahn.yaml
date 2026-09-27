@@ -11,13 +11,13 @@ attributes:  # Paragon/Ranger spear-thrower: good strength, okay agility, bad ar
 abilities:
   - name: Command
     text: >-
-      2 Strain - a friendly figure within 3 spaces may interrupt to perform a
+      2<strain> - a friendly figure within 3 spaces may interrupt to perform a
       move or attack. If the figure is an ally with figure cost <= the threat
-      level, this ability costs 1 less Strain.
+      level, this ability costs 1 less <strain>.
   - name: Leadership
     healthy_only: true
     text: >-
-      Allies attacking while Commanded may use your surges.
+      Allies attacking while Commanded may use your <surge>.
 
 class_cards:
   - name: Mending Refrain
@@ -31,7 +31,7 @@ class_cards:
   - name: Focused Anger
     xp: 4
     text: >-
-      While attacking with a Melee or Ranged weapon, you gain surge: Focus.
+      While attacking with a Melee or Ranged weapon, you gain <surge>: Focus.
   - name: Hammer and Anvil
     xp: 4
     status: stub

@@ -21,5 +21,5 @@
 
         If the heroes would win the mission, you may discard any number of red
         tokens. For each discarded token, choose a hero, roll a red die, and
-        deal them that amount of damage. If this damage causes you to meet a
+        deal them that amount of <damage>. If this <damage> causes you to meet a
         victory condition, you win the mission instead.

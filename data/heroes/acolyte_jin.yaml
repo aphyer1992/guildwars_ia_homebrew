@@ -11,7 +11,7 @@ attributes:
 abilities:
   - name: Apply Poison
     text: >-
-      2 Strain: for the rest of the activation, your attacks with Ranged
+      2<strain>: for the rest of the activation, your attacks with Ranged
       weapons gain Pierce 1 and Weaken.
   - name: Deadly Focus
     healthy_only: true
@@ -24,12 +24,12 @@ class_cards:
     xp: 1
     text: >-
       When you declare an attack with a Ranged weapon while Focused, you may
-      exhaust this card to regain 1 Strain, and you may choose to add any color
+      exhaust this card to regain 1<strain>, and you may choose to add any color
       of die instead of just a green one.
   - name: Mending Touch
     xp: 1
     text: >-
-      Pay 1 Strain and exhaust this card during your turn. You or an adjacent
+      Pay 1<strain> and exhaust this card during your turn. You or an adjacent
       ally may either heal 2 Health or discard a negative condition.
   - name: Read the Wind
     xp: 2
@@ -50,7 +50,7 @@ class_cards:
   - name: Toxicity
     xp: 4
     text: >-
-      While an ally is attacking an enemy with Weaken, apply -1 armor to the
+      While an ally is attacking an enemy with Weaken, apply -1<block> to the
       defense results.
   - name: Barrage
     xp: 4

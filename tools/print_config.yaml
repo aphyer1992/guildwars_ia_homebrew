@@ -8,7 +8,8 @@ token:
 rims: {regular: "#ffffff", elite: "#c0282d", hero: "#2d5fb3"}
 card_borders: {regular: "#8a8a8a", elite: "#b3262a"}
 # Affiliation sigil for the card's corner tab and faint watermark (any image in art/).
-# Placeholders until the designer picks; a missing file falls back to the IA symbol.
+# Designer's picks (2026-09-26); a missing file falls back to the IA symbol.
 affiliation_sigils:
-  adversary: art/sigils/FactionsMissionIcon.png
-  beast: art/sigils/Crude_Shield.jpg
+  adversary: art/sigils/Crude_Shield_transparent.png  # Crude_Shield.jpg with the white background removed
+  beast: art/sigils/ranger.png
+  hero: art/sigils/hardmode_helmet.png

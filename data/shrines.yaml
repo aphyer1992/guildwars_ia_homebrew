@@ -13,8 +13,8 @@ cards:
       figures within 2 spaces.
   - name: Attuned was Songkai
     text: >-
-      Hold the ashes of Songkai. When you would spend Strain to trigger an
-      ability, you may instead put that many Strain tokens on this card. Once
+      Hold the ashes of Songkai. When you would spend <strain> to trigger an
+      ability, you may instead put that many <strain> tokens on this card. Once
       there are 4 tokens on this card, discard it.
   - name: Pure was Li Ming
     text: >-
@@ -24,7 +24,7 @@ cards:
   - name: Mighty was Vorizun
     text: >-
       Hold the ashes of Vorizun. When you declare an attack, you may place a
-      Strain token on this card to apply +1 damage to that attack. Once there
+      <strain> token on this card to apply +1<damage> to that attack. Once there
       are 4 tokens on this card, discard it.
   - name: Anguished was Lingwah
     text: >-
