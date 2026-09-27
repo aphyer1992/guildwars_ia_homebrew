@@ -160,9 +160,13 @@ def enemy_card(key, e, vname, v):
     path, placeholder = art_for(key)
     fig = MANIFEST.get(key, {})
     crop = fig.get("card_crop") or fig.get("icon_crop") or {}
-    art = (f"background-image:url('{rel(path)}');"
-           f"background-position:{crop.get('x', 0.5) * 100:.0f}% {crop.get('y', 0.35) * 100:.0f}%;"
-           if path else "")
+    art = ""
+    if path:
+        art = (f"background-image:url('{rel(path)}');"
+               f"background-position:{crop.get('x', 0.5) * 100:.0f}% {crop.get('y', 0.35) * 100:.0f}%;")
+        if crop.get("fit") == "contain":  # whole image, scaled to the window height, over a plain colour
+            art += (f"background-size:auto {crop.get('scale', 0.9) * 100:.0f}%;"
+                    f"background-color:{crop.get('bg', '#000')};")
     attack = e.get("attack") or {}
     tab, watermark = sigil_parts(e.get("affiliation"))
     scale = CFG["card"]["width_in"] * 96 / 300  # 300-unit design grid -> CSS px at 96/in
@@ -235,9 +239,22 @@ def prompt_sheet():
     lines = ["# Art prompts", "",
              "For each figure, use the reference image as the image-to-image / reference input "
              "(medium strength keeps the silhouette; the prompt supplies weapons, pose and "
-             "palette). Card art is shown about 2.05 x 1.55 in (4:3 landscape): generate at "
-             "least 1200 x 900 px. Save as `art/final/<key>.png`. If the token crop of the card "
-             "art doesn't work, also make a square close-up portrait as `art/final/<key>-icon.png`.",
+             "palette). Save as `art/final/<key>.<png|jpg|jpeg|webp>`.",
+             "",
+             "**Aspect ratio and composition.** The card's art window is wide and short "
+             "(about 1.9:1), and the name bar covers its top fifth. Generate **16:9** (or 2:1 if "
+             "offered), at least 1920 x 1080. Frame the figure **from the knees or waist up**, "
+             "centred, with a little empty space above the head. A full-length figure in 4:3 "
+             "gets cropped to its chest. For art you already have, `card_crop: {fit: contain}` "
+             "in data/art.yaml shows the whole image on a plain background instead.",
+             "",
+             "**Fixing a result.** Adding emphasis (\"MORE BESTIAL\") helps. It works better "
+             "to remove words that pull the other way, and to list unwanted traits under "
+             "Avoid (or in a negative prompt field, if the tool has one). Lower image-to-image "
+             "strength lets the prompt override the reference more.",
+             "",
+             "If the token crop of the card art doesn't work, also make a square close-up "
+             "portrait as `art/final/<key>-icon.<ext>`.",
              "", f"**Shared style:** {style}", ""]
     for key, fig in MANIFEST.items():
         refs = ", ".join(f"`art/reference/{key}/{r}`" for r in fig.get("reference") or [])

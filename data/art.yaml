@@ -10,6 +10,11 @@
 #   accent      group colour, used behind the badge and on the card.
 #   icon_crop   where to centre the token crop: x and y as fractions of the art's
 #               width and height, and zoom (art width / token width).
+#   card_crop   optional, how the art fills the card's wide art window (~1.9:1, top
+#               strip covered by the name bar). Default: cover, centred on icon_crop x/y.
+#               {fit: contain, scale: 0.9, x: 0.5, y: 1.0, bg: "#000"} shows the whole
+#               image (scaled to scale x window height, anchored at x/y) over bg,
+#               which is good for 4:3 art with a plain dark background.
 #   prompt      draft image-generation prompt. Weapon, pose and palette are chosen
 #               to keep lookalike groups distinct (for example the two Charr
 #               warrior groups).
@@ -41,9 +46,11 @@ figures:
     accent: "#4a6fa5"
     icon_crop: {x: 0.5, y: 0.38, zoom: 2.6}
     prompt: >-
-      Charr blade warrior, horned feline beast-man in lighter iron armour with
-      steel-grey and cold-blue cloth, twin long curved swords, head IN PROFILE
-      looking sideways, poised mid-lunge, sleek and fast rather than bulky
+      Charr blade warrior, a hulking, heavily muscled, savage horned feline beast-man,
+      as bestial and heavy-set as any Charr, snarling with bared fangs, head IN
+      PROFILE looking sideways, wielding twin long curved swords, iron armour with
+      steel-grey plates and cold-blue cloth, mid-lunge. Avoid: slender, lithe,
+      graceful, elegant, humanlike
   charr_stalker:
     reference: [Charr_ranger.jpg]
     badge: delapouite/bow-arrow
@@ -76,6 +83,7 @@ figures:
     badge: lorc/fire-ray
     accent: "#e07b1f"
     icon_crop: {x: 0.47, y: 0.16, zoom: 2.6}
+    card_crop: {fit: contain, scale: 0.92, x: 0.5, y: 1.0, bg: "#000"}  # full figure incl. fire ring
     prompt: >-
       Charr fire caller, horned feline beast-man in scorched shaman robes and
       bronze ornaments, a ring of flame erupting around its feet (Inferno), one
