@@ -29,7 +29,7 @@ figures:
     reference: [Charr_warrior.jpg]
     badge: lorc/battle-axe
     accent: "#b5452b"
-    icon_crop: {x: 0.5, y: 0.38, zoom: 2.6}
+    icon_crop: {x: 0.51, y: 0.4, zoom: 2.4}  # tuned for art/final (roaring head + horns)
     prompt: >-
       Charr axe warrior, huge horned feline beast-man in heavy spiked iron plate,
       a notched battle-axe in each fist, FACING THE VIEWER head-on, mouth open

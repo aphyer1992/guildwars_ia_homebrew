@@ -1,3 +1,26 @@
 name: Whiptail Devourer
 status: stub
 affiliation: beast
+
+defense: [black]
+attack:
+  type: range
+  dice: [green, blue]
+
+variants:
+  regular:
+    cost: 4
+    reinforce: 2
+    health: 3
+    surges: ["+1 damage", "+2 accuracy"]
+  elite:
+    cost: 6
+    reinforce: 3
+    health: 5
+    surges: ["+2 damage", "+3 accuracy"]
+
+abilities:
+  - name: Devourer Shell
+    text: >-
+      At the end of your activation, if you have no armor tokens, gain 1 armor
+      token.

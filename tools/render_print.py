@@ -26,6 +26,7 @@ MM = 1 / 25.4  # inches per mm
 BROWSERS = [r"C:\Program Files\Google\Chrome\Application\chrome.exe",
             r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
             "google-chrome", "chromium", "msedge"]
+ART_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp")  # whatever the image tool exports
 DIE_COLOURS = {"red": "#c62828", "blue": "#1e5aa8", "green": "#2e7d32", "yellow": "#f2c230",
                "black": "#1b1b1b", "white": "#ffffff"}
 
@@ -43,9 +44,11 @@ MANIFEST = load(DATA / "art.yaml")["figures"]
 def art_for(key, icon=False):
     """(path, is_placeholder) for a figure's card art or token art, or (None, True)."""
     final = ART / "final"
-    for name in ([f"{key}-icon.png"] if icon else []) + [f"{key}.png", f"{key}.jpg"]:
-        if (final / name).exists():
-            return final / name, False
+    stems = ([f"{key}-icon"] if icon else []) + [key]
+    for stem in stems:
+        for ext in ART_EXTENSIONS:
+            if (final / f"{stem}{ext}").exists():
+                return final / f"{stem}{ext}", False
     refs = sorted((ART / "reference" / key).glob("*")) if (ART / "reference" / key).exists() else []
     return (refs[0], True) if refs else (None, True)
 

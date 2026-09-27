@@ -1,3 +1,33 @@
 name: Plague Devourer
 status: stub
 affiliation: beast
+group_size: 2
+traits: []
+speed: 4
+defense: [black]
+attack:
+  type: ranged
+  dice: [green, yellow]
+  bonus: "+2 Accuracy"
+
+variants:
+  regular:
+    cost: 6
+    reinforce: 3
+    health: 6
+    surges: ["+1 damage"]
+  elite:
+    cost: 10
+    reinforce: 5
+    health: 8
+    dice: [green, yellow, yellow]
+    surges: ["+1 damage", "+1 damage"]
+
+abilities:
+  - name: Virulence
+    text: >-
+     While attacking, you gain surge: after this attack resolves, if the target suffered damage, it must gain a negative condition it does not always have, if possible.  You can trigger this surge multiple times per attack.
+  - name: Devourer Shell
+    text: >-
+      At the end of your activation, if you have no armor tokens, gain 1 armor
+      token.
