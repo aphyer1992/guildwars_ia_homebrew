@@ -1,7 +1,7 @@
 name: Charr Stalker
 affiliation: adversary
 group_size: 2
-traits: []
+traits: [Charr]
 speed: 4
 defense: [black]
 attack:

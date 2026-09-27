@@ -56,6 +56,21 @@ balance tooling.
     - Final art goes in `art/final/<key>.png`, with an optional `<key>-icon.png` token
       override. Until then, reference images are used and marked PLACEHOLDER ART.
     - Sizes are in `tools/print_config.yaml`. The same art serves regular and elite.
+  - `tools/card_layout.py` — IA-style deployment card layout (mirrors Kensei and
+    official IA cards), designed on a 300×467 grid and scaled as vectors so print
+    resolution is unlimited.
+    - **Card text accepts Kensei-style tags,** drawn from IA's symbol font: `<surge>`
+      `<damage>` `<strain>` `<block>` `<evade>` `<dodge>` `<power-block>` `<action>`
+      `<ability>…</ability>` `<b>` `<i>` `<br>` `<dice-red>` and so on.
+    - Plain surge strings get symbols automatically ("+1 damage" → +1 and the damage
+      symbol).
+    - Affiliation sigils for the corner tab and watermark are set in
+      `tools/print_config.yaml`.
+  - `tools/extract_kensei_fonts.py` — copies IA's symbol font and Minion Pro out of the
+    Kensei install into `art/fonts/` (gitignored). Run it once per machine. Agency FB
+    comes with Windows.
+  - Kensei's `.iadc` card files are JSON in the same shape as `reference/ia_cards.json`,
+    with the art embedded as base64.
   - `docs/credits.md` — attribution (game-icons.net requires CC BY credit).
 - `docs/open-questions.md` — design ambiguities awaiting the designer's decision.
 - `docs/rules-primer.md` — condensed IA campaign rules and dice statistics.

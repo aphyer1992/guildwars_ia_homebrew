@@ -35,7 +35,7 @@ figures:
       a notched battle-axe in each fist, FACING THE VIEWER head-on, mouth open
       with fangs bared in a roar, rust-red warpaint and tattered red banners on
       the armour, embers in the air
-  charr_blade_storm:
+  charr_blade_warrior:
     reference: [Charr_warrior.jpg]
     badge: lorc/crossed-swords
     accent: "#4a6fa5"
@@ -71,7 +71,7 @@ figures:
       Charr mesmer, horned feline beast-man in dark robes with violet trim,
       crackling magenta arcane energy between its claws, eyes glowing violet,
       unsettling hypnotic stare
-  charr_flamecaller:
+  charr_flame_wielder:
     reference: [Charr_shaman.jpg]
     badge: lorc/fire-ray
     accent: "#e07b1f"

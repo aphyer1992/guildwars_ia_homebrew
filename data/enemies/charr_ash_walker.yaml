@@ -1,7 +1,7 @@
 name: Charr Ash Walker
 affiliation: adversary
 group_size: 1
-traits: []
+traits: [Charr]
 speed: 4  # default: designer says assume 4
 defense: [white]
 attack:

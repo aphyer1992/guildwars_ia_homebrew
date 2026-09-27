@@ -20,6 +20,8 @@ from pathlib import Path
 import yaml
 from PIL import Image
 
+import card_layout
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA, ART, OUT = ROOT / "data", ROOT / "art", ROOT / "output"
 MM = 1 / 25.4  # inches per mm
@@ -144,58 +146,34 @@ def token_sheet():
 
 # ---------------------------------------------------------------- cards
 
-def dice_html(dice):
-    return "".join(f'<span class="die" style="background:{DIE_COLOURS[d]}"></span>' for d in dice or [])
-
-
-def surge_html(s):
-    text = s
-    icons = "&#9889;"  # lightning: surge
-    if s.lower().startswith("2 surges:"):
-        icons, text = "&#9889;&#9889;", s.split(":", 1)[1].strip()
-    return f'<div class="surge"><span class="si">{icons}</span> {html.escape(text)}</div>'
-
-
-def ability_html(a):
-    return (f'<div class="ability"><b>{html.escape(a.get("name", ""))}:</b> '
-            f'{html.escape(" ".join((a.get("text") or "").split()))}</div>')
+def sigil_parts(affiliation):
+    """(corner-tab html, watermark html) for an affiliation's sigil image."""
+    rel_path = (CFG.get("affiliation_sigils") or {}).get(affiliation or "")
+    path = ROOT / rel_path if rel_path else None
+    if path and path.exists():
+        return (f'<img src="{rel(path)}">', f'<img class="wm" src="{rel(path)}">')
+    glyph = card_layout.SYMBOLS["empire" if affiliation == "adversary" else "mercenary"]
+    return (f'<span class="sym">{glyph}</span>', f'<div class="wm sym">{glyph}</div>')
 
 
 def enemy_card(key, e, vname, v):
-    c = CFG["card"]
-    border = CFG["card_borders"]["elite" if vname == "elite" else "regular"]
     path, placeholder = art_for(key)
-    crop = MANIFEST.get(key, {}).get("icon_crop", {})
-    art = (f"background-image:url('{rel(path)}');background-size:cover;"
-           f"background-position:{crop.get('x', 0.5) * 100:.0f}% {crop.get('y', 0.3) * 100:.0f}%;"
-           if path else "background:#666;")
+    fig = MANIFEST.get(key, {})
+    crop = fig.get("card_crop") or fig.get("icon_crop") or {}
+    art = (f"background-image:url('{rel(path)}');"
+           f"background-position:{crop.get('x', 0.5) * 100:.0f}% {crop.get('y', 0.35) * 100:.0f}%;"
+           if path else "")
     attack = e.get("attack") or {}
-    dice = v.get("dice") or attack.get("dice")
-    abilities = (v.get("abilities") or []) + (e.get("abilities") or [])
-    group = e.get("group_size") or 1
-    cost = f'{v.get("cost", "?")}' + (f'<small>/{v["reinforce"]}</small>' if v.get("reinforce") else "")
-    bonus = attack.get("bonus")
-    return f"""
-      <div class="card" style="width:{c['width_in']}in;height:{c['height_in']}in;border-color:{border}">
-        <div class="head" style="background:{border}">
-          <div class="name">{html.escape(v.get('name', e['name']))}</div>
-          <div class="cost">{cost}</div>
-        </div>
-        <div class="sub">{html.escape((e.get('affiliation') or '').title())}
-          {"".join('<span class="pip"></span>' for _ in range(group))}</div>
-        <div class="cart" style="{art}">{'<div class="ph">PLACEHOLDER ART</div>' if placeholder else ''}
-          {badge_html(key, 0.28)}</div>
-        <div class="stats">
-          <span>&#10084; {v.get('health', '?')}</span><span>&#10140; {e.get('speed', '?')}</span>
-          <span>DEF {dice_html(e.get('defense'))}</span>
-        </div>
-        <div class="attack"><b>{html.escape((attack.get('type') or '?').title())}</b> {dice_html(dice)}
-          {f'<span class="bonus">{html.escape(bonus)}</span>' if bonus else ''}</div>
-        <div class="text">
-          {"".join(surge_html(s) for s in v.get('surges') or [] if s)}
-          {"".join(ability_html(a) for a in abilities)}
-        </div>
-      </div>"""
+    tab, watermark = sigil_parts(e.get("affiliation"))
+    scale = CFG["card"]["width_in"] * 96 / 300  # 300-unit design grid -> CSS px at 96/in
+    return card_layout.deployment_card(
+        name=v.get("name", e["name"]), elite=vname == "elite", cost=v.get("cost", "?"),
+        reinforce=v.get("reinforce"), group=e.get("group_size") or 1, traits=e.get("traits") or [],
+        surges=v.get("surges") or [], abilities=(v.get("abilities") or []) + (e.get("abilities") or []),
+        health=v.get("health", "?"), speed=e.get("speed", "?"), defense=e.get("defense"),
+        attack_type=attack.get("type"), attack_dice=v.get("dice") or attack.get("dice"),
+        attack_bonus=attack.get("bonus"), art_style=art, placeholder=placeholder,
+        sigil_html=tab, watermark_html=watermark, scale=scale)
 
 
 def card_sheet():
@@ -221,31 +199,7 @@ def card_sheet():
       .grid { position:absolute; display:grid; }
       .mark { position:absolute; width:0; border-left:0.4pt solid #000; }
       .mark.h { height:0; width:auto; border-left:none; border-top:0.4pt solid #000; }
-      .card { box-sizing:border-box; border:0.1in solid; background:#f4efe4; position:relative;
-              display:flex; flex-direction:column; overflow:hidden; font-family:Georgia,serif; }
-      .head { display:flex; justify-content:space-between; align-items:center; color:#fff;
-              padding:0 0.03in 0.02in; }
-      .name { font-weight:bold; font-size:8.5pt; line-height:1.05; }
-      .cost { font-weight:bold; font-size:11pt; }
-      .cost small { font-size:7pt; }
-      .sub { font-size:5.5pt; color:#555; padding:0.01in 0.04in; display:flex; gap:0.03in; align-items:center; }
-      .pip { width:0.06in; height:0.06in; background:#555; display:inline-block; }
-      .cart { position:relative; height:1.55in; background-repeat:no-repeat; background-color:#333; }
-      .ph { position:absolute; top:0.03in; left:0.03in; font:bold 4.5pt sans-serif; color:#fff;
-            background:rgba(0,0,0,.55); padding:0.01in 0.03in; }
-      .cart .badge { position:absolute; right:0.04in; bottom:0.04in; border-radius:50%;
-                     border:0.6pt solid #fff; display:flex; align-items:center; justify-content:center; }
-      .cart .badge svg { width:72%; height:72%; }
-      .stats, .attack { display:flex; gap:0.08in; align-items:center; font-size:7pt;
-                        padding:0.025in 0.05in; border-bottom:0.4pt solid #cbbfa6; }
-      .die { display:inline-block; width:0.13in; height:0.13in; border-radius:0.02in;
-             border:0.4pt solid #333; margin-right:0.015in; vertical-align:middle; }
-      .bonus { font-size:6pt; font-style:italic; }
-      .text { font-size:6.4pt; line-height:1.2; padding:0.03in 0.05in; }
-      .surge { margin-bottom:0.01in; }
-      .si { color:#b8860b; }
-      .ability { margin-top:0.025in; }
-    """
+    """ + card_layout.CSS
     return page_doc("Cards", css, body)
 
 

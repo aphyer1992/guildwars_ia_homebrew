@@ -9,3 +9,7 @@
   under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). Authors of the
   icons in use: **Lorc** and **Delapouite**. Each icon's author is its path prefix in
   `data/art.yaml`.
+- **ImperialAssaultSymbols** font (IA game symbols) by "a1bert", and **Minion Pro**,
+  are extracted locally from the Kensei Imperial Assault Tools Suite by
+  `tools/extract_kensei_fonts.py`. They're used for home printing only and aren't
+  committed (`art/fonts/` is gitignored).

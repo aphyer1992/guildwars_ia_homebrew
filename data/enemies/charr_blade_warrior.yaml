@@ -1,7 +1,7 @@
-name: Charr Blade Storm
+name: Charr Blade Warrior
 affiliation: adversary
 group_size: 2
-traits: []
+traits: [Charr]
 speed: 4
 defense: [black]
 attack:
@@ -15,6 +15,7 @@ variants:
     health: 6
     surges: ["Cleave 1", "+1 damage"]
   elite:
+    name: Charr Blade Storm
     cost: 10
     reinforce: 5
     health: 8
