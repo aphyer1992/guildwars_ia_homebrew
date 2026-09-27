@@ -171,7 +171,13 @@ balance tooling.
   elite (cost, reinforce, health, surges, name, attack `dice`, variant-specific
   abilities) goes in `variants.regular` / `variants.elite`. Parenthesised values in the original docs
   meant the elite value.
-- `surges` is a list; each string is one surge ability (costs 1 surge unless stated).
+- `surges` is a list; each string is one surge ability.
+  - An ability costs 1 surge unless prefixed with **`N surges:`**, for example
+    `"2 surges: Blast 2"` or `"2 surges: Stun"`.
+  - Parts are comma-separated and all apply: `"+1 damage, Bleed"`.
+  - The calculator charges the cost, and cards print N surge symbols.
+  - Keep surge strings in plain words (`+1 damage`, `Pierce 2`, `Blast 1`, `+2 Accuracy`,
+    condition names) so `tools/attack.py` can read them.
 - Unfinished content: `status: stub`, a missing `text`/`dice`, or a `# TODO` comment.
   Keep placeholders rather than deleting them — they're the designer's to-do list.
 - Rules text is the designer's wording. Don't silently reword, "fix" or rebalance it;
