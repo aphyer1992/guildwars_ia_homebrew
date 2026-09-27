@@ -248,6 +248,13 @@ def prompt_sheet():
              "gets cropped to its chest. For art you already have, `card_crop: {fit: contain}` "
              "in data/art.yaml shows the whole image on a plain background instead.",
              "",
+             "**Image-to-image copies the starting image's framing,** so a tall full-length "
+             "reference gives a tall full-length result even at 16:9 (the tool just pads the "
+             "sides). Run `python tools/fetch_art.py --wide` and start from "
+             "`art/reference/<key>/wide-start.png` instead: a 16:9 waist-up crop around the "
+             "figure, taken from your existing art if there is some (so the character stays "
+             "the same), otherwise from the wiki reference.",
+             "",
              "**Fixing a result.** Adding emphasis (\"MORE BESTIAL\") helps. It works better "
              "to remove words that pull the other way, and to list unwanted traits under "
              "Avoid (or in a negative prompt field, if the tool has one). Lower image-to-image "
@@ -257,7 +264,8 @@ def prompt_sheet():
              "portrait as `art/final/<key>-icon.<ext>`.",
              "", f"**Shared style:** {style}", ""]
     for key, fig in MANIFEST.items():
-        refs = ", ".join(f"`art/reference/{key}/{r}`" for r in fig.get("reference") or [])
+        refs = ", ".join([f"`art/reference/{key}/wide-start.png` (preferred)"]
+                         + [f"`art/reference/{key}/{r}`" for r in fig.get("reference") or []])
         badge = f" Token badge: {fig['badge']} on {fig['accent']}." if fig.get("badge") else ""
         lines += [f"## {key}", "", f"Reference: {refs}.{badge}", "",
                   f"> {' '.join(fig.get('prompt', '').split())}. {style}", ""]

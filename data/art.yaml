@@ -25,8 +25,9 @@
 
 style: >-
   Painterly dark-fantasy card illustration in the style of Guild Wars concept art,
-  dramatic rim lighting, muted ash-and-ember palette, single figure, plain dark
-  background, no text
+  dramatic rim lighting, muted ash-and-ember palette, single figure, wide 16:9
+  cinematic framing with the figure filling the frame, dark atmospheric background,
+  no text
 
 figures:
   # ---------------------------------------------------------------- Charr
@@ -85,9 +86,13 @@ figures:
     icon_crop: {x: 0.47, y: 0.16, zoom: 2.6}
     card_crop: {fit: contain, scale: 0.92, x: 0.5, y: 1.0, bg: "#000"}  # full figure incl. fire ring
     prompt: >-
-      Charr fire caller, horned feline beast-man in scorched shaman robes and
-      bronze ornaments, a ring of flame erupting around its feet (Inferno), one
-      hand raised calling fire, face lit orange from below
+      WIDE CINEMATIC SHOT, framed from the waist up. A Charr fire caller, horned
+      feline beast-man in scorched shaman robes and bronze ornaments, arms flung
+      out wide to either side, a roaring torrent of flame pouring from each clawed
+      hand and sweeping across the whole width of the image to both edges, face
+      lit orange from below, embers and ash swirling. Horizontal composition; the
+      fire fills the frame. Avoid: full-length figure, feet, small figure, empty
+      space at the sides
   # ---------------------------------------------------------------- Beasts
   carrion_devourer:
     reference: [Red_devourer.jpg]
