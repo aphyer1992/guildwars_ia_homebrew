@@ -1,7 +1,7 @@
 name: Charr Flame Wielder
 affiliation: adversary
 group_size: 1
-traits: [Charr]
+traits: [Charr, Spellcaster]
 speed: 4
 defense: [white]
 attack:
@@ -9,7 +9,7 @@ attack:
   dice: [blue, yellow, yellow]
 
 variants:
-  regular:
+  elite:
     cost: 5
     reinforce: null  # single figure: deploys alone, can't be reinforced
     health: 8

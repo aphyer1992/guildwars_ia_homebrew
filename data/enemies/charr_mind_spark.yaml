@@ -1,7 +1,7 @@
 name: Charr Mind Spark
 affiliation: adversary
 group_size: 1
-traits: [Charr]
+traits: [Charr, Spellcaster]
 speed: 4  # default: designer says assume 4
 defense: [white]
 attack:
@@ -10,7 +10,7 @@ attack:
   bonus: "+4 Accuracy"
 
 variants:
-  regular:
+  elite:
     cost: 5
     reinforce: null  # single figure: deploys alone, can't be reinforced
     health: 8

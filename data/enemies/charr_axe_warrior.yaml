@@ -1,7 +1,7 @@
 name: Charr Axe Warrior
 affiliation: adversary
 group_size: 2
-traits: [Charr]
+traits: [Charr, Warrior]
 speed: 4
 defense: [black]
 attack:

@@ -1,7 +1,7 @@
 name: Grawl
 affiliation: adversary
 group_size: 3
-traits: []
+traits: [Grawl, Warrior]
 speed: 4
 defense: [black]
 attack:
@@ -21,5 +21,5 @@ variants:
 abilities:
   - name: Pack Tactics  # placeholder name; modelled on IA's Squad Training
     text: >-
-      While attacking, if you are adjacent to another friendly Grawl, you may
+      While attacking, if another friendly Grawl is adjacent to the target, you may
       reroll 1 attack die.

@@ -1,0 +1,21 @@
+name: Grawl Ulodyte
+affiliation: adversary
+group_size: 1
+traits: [Grawl, Spellcaster]
+speed: 4  # default: designer says assume 4
+defense: [white]
+attack:
+  type: ranged
+  dice: [blue, green, yellow]
+
+variants:
+  elite:
+    cost: 4
+    reinforce: null  # single figure: deploys alone, can't be reinforced
+    health: 6
+    surges: ["Pierce 1", "+1 Damage"]
+
+abilities:
+  - name: Heal Area
+    text: >-
+      Action: You and each adjacent figure may recover 2<damage>.

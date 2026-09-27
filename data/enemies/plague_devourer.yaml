@@ -2,26 +2,27 @@ name: Plague Devourer
 status: stub
 affiliation: beast
 group_size: 2
-traits: []
+traits: [Devourer]
 speed: 4
 defense: [black]
 attack:
   type: ranged
   dice: [green, yellow]
-  bonus: "+2 Accuracy"
 
 variants:
   regular:
     cost: 6
     reinforce: 3
-    health: 6
+    health: 5
     surges: ["+1 damage"]
+    bonus: "+2 Accuracy"
   elite:
     cost: 10
     reinforce: 5
-    health: 8
+    health: 7
     dice: [green, yellow, yellow]
     surges: ["+1 damage", "+1 damage"]
+    bonus: "+3 Accuracy"
 
 abilities:
   - name: Virulence

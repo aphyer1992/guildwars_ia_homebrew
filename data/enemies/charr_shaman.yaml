@@ -1,0 +1,21 @@
+name: Charr Shaman
+affiliation: adversary
+group_size: 1
+traits: [Charr, Spellcaster]
+speed: 4  # default: designer says assume 4
+defense: [white]
+attack:
+  type: ranged
+  dice: [blue, green, yellow]
+
+variants:
+  elite:
+    cost: 6
+    reinforce: null  # single figure: deploys alone, can't be reinforced
+    health: 9
+    surges: ["Pierce 2", "+2 Damage", "Recover 2 <damage>"]
+
+abilities:
+  - name: Heal Area
+    text: >-
+      Action: You and each adjacent figure may recover 2<damage>.
