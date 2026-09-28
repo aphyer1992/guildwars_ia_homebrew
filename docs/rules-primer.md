@@ -196,6 +196,14 @@ are from the core game; Weaken and Hidden are from expansions.
   Health, defense dice, attack dice, abilities and surges. Elite cards (red) are better
   versions of regular cards (gray). Unique figures (villains) have a bullet before the
   name.
+- **Figure cost** (an IA rules term): what one figure of a group is worth.
+  - It's the group's reinforcement cost, or the whole deployment cost for a figure that
+    deploys alone.
+  - Cards compare it to the **threat level**, often as "figure cost ≤ threat level".
+    Because threat level rises over a campaign, those abilities get relatively cheaper
+    or stronger later, which is intended.
+  - In practice no figure costs much more than 10. The official core-set uniques that
+    cost more were overcosted.
 - **Threat** is gained every round (equal to the threat level) and spent to deploy groups from the
   Imperial player's hand (the full deployment cost) or to **reinforce** single defeated
   figures. Reinforcing needs another figure from that group still on the map and no

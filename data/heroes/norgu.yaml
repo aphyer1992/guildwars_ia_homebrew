@@ -10,12 +10,13 @@ attributes:  # Mesmer: good arcana, mediocre agility, bad strength
 
 abilities:
   - name: Power Block
-    text: >-  # I would kind of LIKE something complicated where this costs (figure cost / threat level) or something, but that feels very clunky.  The 2/1 cost is maybe better, but still feels like he really wants to hyper focus bosses.
-      When you deal attack damage with a Magical weapon, you may pay 2<strain>. If you do, until end
-      of turn, the target figure's text box is blank.  
-      If the target's figure cost is <= the threat cost, this ability costs only 1<strain>. 
-      (This does not affect abilities unless they are written in the text box e.g. most <surge> abilities will be
-      unaffected.)
+    text: >-
+      When you deal attack damage with a Magical weapon, you may pay 1<strain>,
+      +1<strain> if the target's figure cost is greater than the threat level, and
+      +1<strain> more if it is greater than twice the threat level. If you do, the
+      target figure's text box is blank until the end of the round. (This does not
+      affect abilities unless they are written in the text box, e.g. most <surge>
+      abilities will be unaffected.)
   - name: Illusionary Weaponry
     healthy_only: true
     text: >-
@@ -53,7 +54,7 @@ class_cards:
     xp: 3
     text: >-
       When you apply Power Block, you may gain one ability from the targeted
-      figure's textbox until end of turn.
+      figure's textbox until the end of the round.
   - name: Conjure Phantasm
     xp: 4
     status: stub
