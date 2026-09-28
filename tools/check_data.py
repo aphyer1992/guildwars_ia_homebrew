@@ -37,6 +37,7 @@ def stub(group, name="(whole entry)"):
 
 
 flags: list[str] = []  # departures from typical values, to confirm are deliberate (not errors)
+idea_counts: dict[str, int] = {}  # hero file -> number of entries in its ideas: list
 
 
 def flag(where, msg):
@@ -85,6 +86,12 @@ def check_hero(where, h):
     xp = sorted(c.get("xp") for c in h.get("class_cards") or [] if isinstance(c.get("xp"), int))
     if xp != COMPLETE_DECK_XP:
         stub(where, f"class card XP {xp}, want {COMPLETE_DECK_XP}")
+    ideas = h.get("ideas") or []
+    for idea in ideas:  # half-formed ideas: not cards, never printed or counted
+        if not (isinstance(idea, str) or (isinstance(idea, dict) and set(idea) <= {"name", "note"})):
+            err(where, f"ideas entries should be a string or {{name, note}}, got {idea!r}")
+    if ideas:
+        idea_counts[where] = len(ideas)
     for key in ("abilities", "class_cards"):
         for card in h.get(key) or []:
             cw = f"{where} / {card.get('name')}"
@@ -221,6 +228,8 @@ def main():
     print(f"\nTODO comments ({len(todos)}):")
     for t in todos:
         print("  ", t)
+    if idea_counts:
+        print("\nIdeas in progress: " + ", ".join(f"{Path(w).stem} {n}" for w, n in idea_counts.items()))
     print(f"\nBalance flags ({len(flags)}):")
     for f in flags:
         print("  ", f)

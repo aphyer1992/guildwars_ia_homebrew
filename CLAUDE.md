@@ -142,6 +142,11 @@ balance tooling.
   A hero that breaks the rule gets a `wounded:` block overriding `speed`, `endurance`
   and/or `attributes`.
 - `healthy_only: true` marks a hero ability that only works while Healthy (not Wounded).
+- **Half-formed ideas** go in a hero's `ideas:` list, as plain strings or `{name, note}`
+  pairs. They aren't cards: they're never printed, never counted towards the 8-card
+  deck, and never flagged as unfinished. `check_data.py` just shows a count. Move an idea
+  into `class_cards` once it has text and an XP cost. Longer musings can go in
+  `docs/ideas.md`. Designer notes about existing cards stay as YAML comments.
 - Class card `xp`: `1`–`4`, `mission` (mission reward), or `null` (not yet decided).
 - **A complete hero** has:
   - At least one `healthy_only` ability.
