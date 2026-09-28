@@ -13,7 +13,7 @@ abilities:
     text: >-
       When an enemy is defeated during your activation, you may pay 2<strain> to
       place a Bone Horror in their square. A Bone Horror has 4HP, Move 3,
-      Attack R, Defense -. It activates at the start or end of your activation
+      Attack R, +1<damage>, Defense -. It activates at the start or end of your activation
       (including the one it is created in).
   - name: Blood is Power
     healthy_only: true
@@ -23,17 +23,17 @@ abilities:
       <strain> (from whoever would have spent it).
 
 class_cards:
-  - name: Tainted Flesh
-    xp: 1
-    text: >-
-      You may choose to roll a Black instead of a White defense die. After an
-      attack against you is resolved, apply Weaken to the attacker.
   - name: Contagion
     xp: 1
     text: >-
       Exhaust this card during your activation. Choose a figure within LoS. All
       conditions (positive and negative) on that figure are copied onto all
       figures adjacent to it.
+  - name: Necrotic Traversal
+    xp: 1
+    text: >-
+      Deplete this card when a figure in LoS is defeated to place your figure
+      in a space it occupied.
   - name: Foul Feast
     xp: 2
     text: >-
@@ -46,21 +46,20 @@ class_cards:
     text: >-
       Exhaust this card when a friendly figure in LoS is defeated. All enemies
       within 2 spaces of that figure take 2<damage> and are Stunned.
-  - name: Soul Reaping
-    xp: 3
-    text: >-
-      Whenever a figure within 3 spaces is defeated, recover 1<strain>.
   - name: Jagged Bones
     xp: 3
     text: >-
       Your Bone Horrors' attacks gain Pierce 1 and Bleed. 1<strain>: Exhaust
       this card when a Bone Horror is defeated to place another Bone Horror in
       its square. Then place 3<damage> on that Bone Horror.
-  - name: Necrotic Traversal
+  - name: Jagged Bones # wording on this is clunky, but the basic point is that it makes the attacks ranged with BB instead of R but doesn't keep the flat +1 damage from the card.
+    xp: 3
+    text: >-
+      Your Bone Horrors gain <action>: perform a ranged attack using two blue dice, but not gaining the +1<damage>.
+  - name: Soul Reaping
     xp: 4
     text: >-
-      Exhaust this card when a figure in LoS is defeated to place your figure
-      in a space it occupied.
+      Whenever a figure within 3 spaces is defeated, recover 1<strain>.
   - name: Life Siphon
     xp: 4
     text: >-
