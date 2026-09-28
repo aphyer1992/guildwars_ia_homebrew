@@ -1,0 +1,40 @@
+Adversaries are mostly Stone Summit dwarves:
+
+Stone Summit should feel somewhat different from Charr.  Plausibly they can default to Move 3.
+
+I think Dwarves (both ally and enemy) can get a standard ability like this:
+
+Dwarven Armor.  Reduce the Pierce value of incoming damage by 1.
+
+which is both flavorful and helps differentiate.
+
+From the MMO:
+Warriors: Crusher and Axe Wielder.  Maybe just Crushers, we already have axe Charr.
+Casters: Howler (necromancer), Sage (mesmer), Dolyak Rider (monk), Ice Golem (elementalist)
+Rangers: Scout
+Other: Beastmaster - monster rider that can AOE knockdown with Giant Stomp.  
+
+Differentials from e.g. Charr NPCs:
+    the Howler is a mostly-melee necromancer, using e.g. Vampiric Touch.  Might make the overall Stone Summit too melee-heavy?  We could give it a ranged attack and a melee ability?
+    the Sage uses Empathy (punishing attacks made by hexed characters).  Could let it mark a hero and strain them when they attack - leans further into the Mesmers-want-to-act-first thing?
+    the Scout uses Pin Down (cripples enemies to slow their movement) instead of Ignite Arrows.  There isn't really a good fit for this in the board game yet - there's no 'reduce movement' condition.
+    the Dolyak Rider focuses on protection rather than the area-healing from earlier.  Their Shielding Hands and Mark of Protection can make it hard to focus specific targets.  Grant armor/evade tokens?  Restore health when attacked?
+    the Ice Golem is water rather than fire magic, with movement-slowing that again doesn't have a clean board game counterpart.
+
+Also probably counting as adversaries rather than beasts are the local Centaur tribes allied with the Stone Summit.
+
+We might not include them, but if we do the obvious mechanical differentiator is speed - we can give centaurs very high move and/or a Mounted ability (exists on some IA figures like the Dewback Rider, grants move at the start of your action.  usually combined with something else to do with a second action)
+Centaur enemies here are 
+Shiverpeak Warrior (warrior)
+Shiverpeak Longbow (ranger)
+Shiverpeak Protector (monk)
+
+
+
+Beasts:
+
+Ettins (large, tough, thumpy melee warriors.  Come with Stun Immunity that we can probably make condition immunity, and knockdowns that we can make surge:stun)
+Minotaurs (also melee warriors, might be redundant with Ettins.  Come with Endure Pain for temporary extra HP when focused.)
+Dryders (spidermonsters, necromancers that use Suffering to spread AOE degeneration)
+Pinesoul - Trees that throw rocks at you
+Ice Drake - water elementalist again that slows movement.

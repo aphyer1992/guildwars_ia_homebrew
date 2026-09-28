@@ -13,7 +13,7 @@ variants:
     cost: 5
     reinforce: null  # single figure: deploys alone, can't be reinforced
     health: 8
-    surges: ["Bleed"]  # Bleed also represents GW Burning
+    surges: ["Focus", "Bleed", "2 surges: Blast 2"]  # Bleed also represents GW Burning
 
 abilities:
   - name: Inferno

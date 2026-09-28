@@ -25,8 +25,10 @@ class_cards:
   - name: I Will Avenge You!
     xp: null  # TODO: no XP cost given
     text: >-
-      If Joe is defeated, exhaust this card during your activation to recover 2
-      Health or become Focused. If Old Mac is wounded, exhaust this card during
+      If Joe has been defeated, exhaust this card during your activation to recover 2
+      Health or become Focused. 
+      
+      If Old Mac is wounded, exhaust this card during
       your activation. Joe interrupts to perform an action.
   - name: Heal as One
     xp: null  # TODO: no XP cost given
