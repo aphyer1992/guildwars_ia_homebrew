@@ -66,10 +66,16 @@ def surge_rich(surge):
     cost, text = 1, surge.strip()
     if m := re.fullmatch(r"(\d+) surges?: (.*)", text, re.I):
         cost, text = int(m[1]), m[2]
-    if "<" not in text:  # plain-text surge: add symbols the way IA cards print them
+    return sym("surge") * cost + ": " + bonus_rich(text)
+
+
+def bonus_rich(text):
+    """Always-on attack modifier ('+2 Accuracy', '+1 damage'): like a surge ability, no surge icon."""
+    text = text.strip()
+    if "<" not in text:  # plain text: add symbols the way IA cards print them
         text = re.sub(r"([+-]\d+) damage\b", r"\1<damage>", text, flags=re.I)
         text = re.sub(r"\b(Cleave|Blast|Recover) (\d+)\b", r"\1 \2<damage>", text)
-    return sym("surge") * cost + ": " + rich(text)
+    return rich(text)
 
 
 CSS = """
@@ -153,11 +159,16 @@ def deployment_card(*, name, elite, cost, reinforce, group, traits, surges, abil
                     sigil_html, watermark_html, scale):
     size_class = " xlong" if len(name) > 20 else " long" if len(name) > 14 else ""
     bars = "".join("<i></i>" for _ in range(group or 1))
-    surge_html = "".join(f'<div class="surge">{surge_rich(s)}</div>' for s in surges if s)
+    bonuses = [attack_bonus] if isinstance(attack_bonus, str) else list(attack_bonus or [])
+    bonuses = [b for b in bonuses if b]
+    surges = [s for s in surges if s]
+    # Flat bonuses share the strip under the art with surge abilities; no surge icon marks them out.
+    surge_html = "".join(f'<div class="surge">{bonus_rich(b)}</div>' for b in bonuses) + \
+        "".join(f'<div class="surge">{surge_rich(s)}</div>' for s in surges)
+    strip_boxes = len(bonuses) + len(surges)
     ability_html = "".join(
         f'<div class="ability"><b class="ab">{html.escape(a.get("name", ""))}:</b> {rich(a.get("text"))}</div>'
         for a in abilities)
-    bonus = f' <span style="font-size:12px">{rich(attack_bonus)}</span>' if attack_bonus else ""
     attack_icon = sym("melee" if attack_type == "melee" else "ranged") if attack_type else ""
     return f"""
 <div class="cardbox" style="width:{300 * scale:.3f}px;height:{467 * scale:.3f}px">
@@ -171,12 +182,12 @@ def deployment_card(*, name, elite, cost, reinforce, group, traits, surges, abil
   {f'<div class="traits ttl">{" - ".join(html.escape(t) for t in traits)}</div>' if traits else ''}
   <div class="bars">{bars}</div>
   <div class="surges">{surge_html}</div>
-  <div class="textbox" style="top:{184 + 4 + 27 * ((len([s for s in surges if s]) + 1) // 2)}px">
+  <div class="textbox" style="top:{184 + 4 + 27 * ((strip_boxes + 1) // 2)}px">
     {watermark_html}{ability_html}</div>
   <div class="stats">
     <div class="stat"><b>Health</b><div class="val">{health}</div></div>
     <div class="stat"><b>Speed</b><div class="val">{speed}</div></div>
     <div class="stat wide"><b>Defense</b><div class="val">{''.join(die(d) for d in defense or [])}</div></div>
-    <div class="stat wide"><b>Attack</b><div class="val">{attack_icon}{''.join(die(d) for d in attack_dice or [])}{bonus}</div></div>
+    <div class="stat wide"><b>Attack</b><div class="val">{attack_icon}{''.join(die(d) for d in attack_dice or [])}</div></div>
   </div>
 </div></div>"""
