@@ -5,26 +5,26 @@ prefixes:
   - name: Shocking
     text: >-
       When you declare an attack with the attached weapon, you may replace one
-      die in the attack pool with a blue die.
+      die in the attack pool with a blue die.  If performing a melee attack, apply Pierce 1 to the results.
   - name: Frost
     text: >-
       When you declare an attack with the attached weapon, you may replace one
-      die in the attack pool with a green die.
+      die in the attack pool with a green die.  The attack gains <surge>: Stun.
   - name: Fiery
     text: >-
       When you declare an attack with the attached weapon, you may replace one
-      die in the attack pool with a yellow die.
+      die in the attack pool with a yellow die.  The attack gains <surge>: gain <power-surge>.
   - name: Ebon
     text: >-
       When you declare an attack with the attached weapon, you may replace one
-      die in the attack pool with a red die.
+      die in the attack pool with a red die.  If performing a ranged attack, after resolving the attack you may push the target 1 space.
   - name: Sundering
     attach_to: [melee, ranged]
     text: Grants Pierce 1.
   - name: Vampiric
     text: "Grants <surge>: +2<damage>, Recover 1<damage> health."
   - name: Defensive
-    text: "Grants <surge>: gain a +1<evade> or <power-block>."
+    text: "Grants <surge>: gain <power-evade> or <power-block>."
   - name: Heavy
     attach_to: [melee]
     text: >-
@@ -39,17 +39,17 @@ prefixes:
     text: >-
       While attacking an enemy suffering from a negative condition, apply +1
       damage to the results.
+  - name: Barbed
+    text: >-
+      Attached weapon gains <surge>: Bleed.  When you declare an attack with this weapon against a target already suffering from Bleed, apply +1<damage> to the results.
   - name: Zealous
+    text: >- # could give this e.g. -1 endurance as a balancing factor? Hm.
+      When you defeat an enemy with the attached weapon, recover 1 <strain>.
   - name: Furious
   - name: Hale
   - name: Insightful
 
 suffixes:
-  - name: Rune of Returning
-    attach_to: [melee]
-    text: >-
-      Action: perform a ranged attack using this weapon. Apply +1 Accuracy to
-      the results.
   - name: Rune of Defense
     text: Exhaust while defending to apply +1<block>.
   - name: Rune of Shelter

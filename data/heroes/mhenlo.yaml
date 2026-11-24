@@ -1,0 +1,26 @@
+name: Mhenlo
+health: 12
+endurance: 4
+speed: 4
+defense: [white]
+attributes:
+  strength: [blue]
+  agility: [blue]
+  arcana: [blue, green, yellow]
+
+abilities:
+  - name: 
+    text: >-
+  - name: 
+    healthy_only: true
+    text: >-
+
+class_cards:
+#From the MMO:
+#lots of monk stuff is pure healing
+#that doesn't translate well
+#so we may need to push things a bit.
+  - name: Live Vicariously
+    xp: 2
+    text: >-
+      Whenever an ally within 3 spaces performs a rest, recover 1 strain.  Whenever an ally within 3 spaces performs a move, gain 1 movement point.

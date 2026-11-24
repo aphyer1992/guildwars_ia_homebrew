@@ -26,7 +26,7 @@ class_cards:
       When you declare an attack with a Ranged weapon while Focused, you may
       exhaust this card to regain 1<strain>, and you may choose to add any color
       of die instead of just a green one.
-  - name: Mending Touch
+  - name: Mending Touch  # if you've been looking at the wiki you will recognize this as a monk skill.  This is true, but for mechanical reasons (melee range, works with Expertise) it's actually taken very often on Rangers with second-profession Monk and very rarely on primary Monks
     xp: 1
     text: >-
       Pay 1<strain> and exhaust this card during your turn. You or an adjacent
@@ -36,21 +36,24 @@ class_cards:
     text: >-
       When you or an ally within 3 spaces declares a ranged attack, apply +1
       Accuracy to the attack results. When an enemy declares a ranged attack
-      against you or an ally within 3 spaces is defending, apply -1 Accuracy to
+      against you or an ally within 3 spaces, apply -1 Accuracy to
       the attack results.
+  - name: Penetrating Attack
+    xp: 2
+    text: >-
+      Exhaust this card while attacking with a Martial weapon to convert all Pierce on this attack to an equal amount of +damage.
+  - name: Splinter Shot  # undecided on whether to give this char AOE at all, but if we were to this is the obvious skill
+    xp: 2
+    text: >-
+      Exhaust this card while attacking with a Ranged weapon.  For every point of damage blocked by armor, apply an equal amount of Blast to the attack.
   - name: Zojin's Haste
     xp: 3
     text: >-
       After an attack is resolved by you or against you, you may move 1 space.
-  - name: Penetrating Attack
-    xp: 3
-    text: >-
-      While attacking with a martial weapon, apply Pierce 1 to the results for
-      every die showing 3 or more range.
   - name: Toxicity
     xp: 4
     text: >-
-      While an ally is attacking an enemy with Weaken, apply -1<block> to the
+      Whenever you or an ally declares an attack against an enemy subject to Weaken, apply -1<block> to the
       defense results.
   - name: Barrage
     xp: 4

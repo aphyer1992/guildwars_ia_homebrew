@@ -15,7 +15,7 @@ abilities:
       gain a <power-block>. You may hold up to two additional <power-block>.
   - name: Sliver Armor
     text: >-
-      Once per round, when you take no <damage> from an enemy's attack, you may
+      Once per round, when you take no damage from an enemy's attack, you may
       pay 2<strain>. If you do, interrupt to perform an attack against that
       enemy.
   - name: Magnetic Aura
@@ -25,7 +25,31 @@ abilities:
       as if you were being attacked.
 
 class_cards:
+  - name: Magnetic Surge # not very good right now, mostly just to keep Adversary player from ignoring you
+    xp: 1
+    text: >-
+      You may spend <power-block> tokens as if they were <power-damage> tokens.
+  - name: Obsidian Flame # Earth Magic skill that does armor ignoring spike damage
+  - name: Shockwave # Earth Magic AOE centered on caster that deals more damage the closer a target it
+  - name: Stone Daggers # double-attack skill? ehhhh. not sure argo should be able to do hypercarry damage.
   - name: Obsidian Flesh
-    xp: null  # TODO: no XP cost given
+    xp: 2
     text: >-
       When you spend a <power-block>, also apply +1<evade>.
+  - name: Sandstorm
+    xp: 4
+    text: >-
+      1<strain>: Exhaust this card during your turn to deal 1 damage to each enemy figure within 3 spaces.
+  - name: Dragon's Stomp
+    xp: 2
+    text: >-
+      Exhaust this card during your activation to Stun all adjacent enemies.
+  - name: Armor of Earth
+    xp: 2
+    text: >-
+      When an attack is declared against you, if you have not left your space this round, apply +1<block> to the defense results.
+  - name: Stone Sheath # most of the power here is in making ranged attacks miss, unsure if a good thing to do.
+    xp: 3
+    text: >-
+      Exhaust this card when an attack is declared by you or against you to remove one die from the attack pool and replace it with a red one.
+

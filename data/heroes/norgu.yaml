@@ -23,12 +23,13 @@ abilities:
       While attacking, you gain <surge>: -1<damage>, Pierce 3.
 
 class_cards:
-  - name: Imagined Burden
+  - name: Imagined Burden  # this effect could instead go on Argo as Grasping Earth
     xp: 1
     text: >-
       Whenever an enemy figure is moving, it treats clear spaces adjacent to
       you as difficult terrain.
   - name: Phantom Pain
+
     xp: 1
     text: >-
       Exhaust this card during your activation to roll an Arcana check. For
@@ -50,17 +51,17 @@ class_cards:
       Exhaust this card when an enemy within 3 spaces declares a move action to
       roll an Arcana check. For each success, that enemy gains 1 less move
       point and you gain 1 move point.
-  - name: Arcane Thievery
+  - name: Arcane Thievery  # potentially very scary, especially now that Norgu can steal things from high-cost figures.  I can't currently see anything too strong.  He can get a lot of mileage out of stealing e.g. a Flamecaller's Inferno, but this does require that he hit it with an attack, power block it, get into melee with a bunch of enemies, and then use an action to Inferno, all in one turn - if you jump through those hoops I think you deserve it.
     xp: 3
     text: >-
       When you apply Power Block, you may gain one ability from the targeted
       figure's textbox until the end of the round.
-  - name: Conjure Phantasm
+  - name: Conjure Phantasm  # could also name it Conjure Nightmare - cooler and more thematic name but the GW skill is more obscure.
     xp: 4
     status: stub
     text: Whenever an attack is declared targeting a figure under Power Block, remove 1 defense die from its defense pool.
-  - name: Arcane Mimicry
+  - name: Arcane Mimicry  # this skill is fun and thematic but utterly terrifying from a balance perspective.  the best idea I currently have for it is Cynn's Master of Magic, but it does mean that Norgu can potentially be very very weird.  Note when evaluating that many skills require weapon types e.g. if Norgu takes Acolyte Jin's Barrage, he will be able to use his Illusionary Weaponry with it but not his Power Block.
     xp: 4
     text: >-
-      Choose up to 4 XP of unpurchased skill cards from allied heroes. You gain
+      At the beginning of each mission, deplete this card to choose up to 4 XP of unpurchased skill cards from allied heroes. You gain
       those skills.

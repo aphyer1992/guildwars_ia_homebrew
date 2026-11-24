@@ -17,29 +17,29 @@ abilities:
 
 class_cards:
   - name: Lava Font
-    xp: null  # TODO: no XP cost given
+    xp: 1  # TODO: no XP cost given
     text: >-
       At the start of your activation, exhaust this card to perform Blast 1<damage>
       centered on you.
   - name: Burning Speed
-    xp: null
+    xp: 1
     text: >-
       Exhaust during your activation. Roll an Arcana check. For every success,
       you may move 1 space. Then take <damage> equal to the number of spaces
       moved.
+  - name: Meteor
+    xp: 2
+    text: >-
+      Exhaust when resolving a Blast. All figures damaged by the Blast become
+      Stunned.
+  - name: Master of Magic  # this affects two faces on a yellow die, one each on green and blue, nothing on red.  Might be a bit game-y, I haven't decided.
+    xp: 2
+    text: >-
+      Whenever you perform an attack or an Arcana check, apply +1<surge> to the
+      results for each die that shows one <surge> and no <damage>.
   - name: Liquid Flame
-    xp: null
+    xp: 3
     text: >-
       Exhaust when resolving a Blast. Roll an Arcana check. For each success,
       you may either exempt one square 1 away from the center from the Blast
       or include one square 2 away in it.
-  - name: Meteor
-    xp: null
-    text: >-
-      Exhaust when resolving a Blast. All figures damaged by the Blast become
-      Stunned.
-  - name: Master of Magic
-    xp: null
-    text: >-
-      Whenever you perform an attack or an Arcana check, apply +1<surge> to the
-      results for each die that shows one <surge> and no <damage>.

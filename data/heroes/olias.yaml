@@ -13,14 +13,13 @@ abilities:
     text: >-
       When an enemy is defeated during your activation, you may pay 2<strain> to
       place a Bone Horror in their square. A Bone Horror has 4HP, Move 3,
-      Attack R, +1<damage>, Defense -. It activates at the start or end of your activation
+      Attack R, +1<damage>, Defense 1<armor>. It activates at the start or end of your activation
       (including the one it is created in).
   - name: Blood is Power
     healthy_only: true
     text: >-
       Once per activation, when you or another hero within 3 spaces would spend
-      <strain>, you may instead pay 1 Health (from Olias) in place of 1 of that
-      <strain> (from whoever would have spent it).
+      <strain>, you may instead pay 1 Health (from Olias) to reduce that cost by 1.
 
 class_cards:
   - name: Contagion
@@ -52,7 +51,7 @@ class_cards:
       Your Bone Horrors' attacks gain Pierce 1 and Bleed. 1<strain>: Exhaust
       this card when a Bone Horror is defeated to place another Bone Horror in
       its square. Then place 3<damage> on that Bone Horror.
-  - name: Jagged Bones # wording on this is clunky, but the basic point is that it makes the attacks ranged with BB instead of R but doesn't keep the flat +1 damage from the card.
+  - name: Animate Bone Fiend # wording on this is clunky, but the basic point is that it makes the attacks ranged with BB instead of R but doesn't keep the flat +1 damage from the card.
     xp: 3
     text: >-
       Your Bone Horrors gain <action>: perform a ranged attack using two blue dice, but not gaining the +1<damage>.

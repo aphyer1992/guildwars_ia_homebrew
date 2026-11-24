@@ -7,6 +7,18 @@
         Exhaust this card when one of your figures is defeated. Roll a red die
         and deal that much damage to each other figure (friend or foe) within 2
         spaces of it.
+    - name: Enraged Smash
+      xp: 4  # TODO
+      text: >-
+        Whenever one of your figures declares an attack, if it has suffered damage, apply +1 {damage} to the attack.
+    - name: Chain Reaction
+      xp: 1 # ??  could also make more expensive and not exhaust.
+      text: >-
+        When your Afflicted Soul Explosion kills one of your own figures, you may exhaust this card to immediately trigger Afflicted Soul Explosion again from the defeated figure.
+    - name: ??
+      xp: 4?
+      text: >-
+        Whenever one of your figures activates, it recovers 1 {damage}.
 
 - name: Sinister Machinations
   cards:
@@ -21,5 +33,5 @@
 
         If the heroes would win the mission, you may discard any number of red
         tokens. For each discarded token, choose a hero, roll a red die, and
-        deal them that amount of <damage>. If this <damage> causes you to meet a
+        deal them that amount of <damage>. If this damage causes you to meet a
         victory condition, you win the mission instead.

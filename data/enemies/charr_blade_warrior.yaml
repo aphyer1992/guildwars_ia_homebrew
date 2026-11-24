@@ -20,7 +20,7 @@ variants:
     reinforce: 5
     health: 8
     dice: [red, green, yellow]
-    surges: ["Cleave 2", "+1 damage"]
+    surges: ["Cleave 1", "Cleave 1", "+1 damage"]
 
 abilities:
   - name: Riposte

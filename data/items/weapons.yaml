@@ -1,6 +1,8 @@
 # Weapons by category. An entry with no `dice` is a placeholder (stub).
 # restrictions: no_prefix / no_rune = cannot take that attachment type.
 
+
+
 melee:
   # Swords
   - name: Dragon Sword
@@ -39,7 +41,7 @@ melee:
   - name: Bonecrusher
   - name: Shining Maul
   - name: Dwarven Hammer
-  - name: Destroyer Maul
+  - name: Destroyer Maul  # this one can get the somewhat-impractical Blast 1 on a melee attack.  Act 3.
   - name: Spiked Club
   - name: Bronze Crusher
   # Daggers
@@ -122,3 +124,6 @@ families:
   melee: [Tormented]
   ranged: [Ascalon, Bramble, Jade, Skull, Spiked, Feathered]
   magical: [Destroyer, Tormented, Celestial]
+
+# some consistent prefix should apply to the skill-based weapons (similar to the base game's Ryyk Blades/Ancient Lightsaber/Modified Energy Cannon)
+# Tormented Sword/Daggers/Staff?  (Strength could be sword/axe/hammer, agility could be daggers/bow)

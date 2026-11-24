@@ -1,0 +1,34 @@
+name: Melonni
+health: 12
+endurance: 4
+speed: 4
+defense: [black] 
+attributes:
+  strength: [blue, blue, green]
+  agility: [blue, green]
+  arcana: [blue, green] 
+
+# theme notes - this character is a Dervish, a class that usually uses scythes.
+# while we don't want to force that, we do want to indirectly encourage that.
+# mechanically, all scythes and no other melee weapons will have Reach.
+# so Melonni has abilities that encourage Reach, like the powerful-but-inconsistent movement of Onslaught.
+# hopefully this encourages reach weapons, because it gives lots of movement value but doesn't guarantee you'll be exactly where you want to be.
+# similarly Cleave is much stronger on reach weapons
+abilities:
+  - name: Onslaught
+    text: >-
+      When an enemy figure activates, you may pay 1<strain> to move 2 spaces towards that figure.  Limit once per group per round.  
+      You may not spend strain during your turn to strain-move.
+  - name: Twin Moon Sweep
+    healthy_only: true
+    text: >- # feels weak requiring a surge but way too strong if it doesn't
+      Your melee attacks gain <surge>: Cleave 1.  
+
+class_cards:
+  - name: 
+    xp: 3
+    text: >-
+  - name: Armor of Sanctity # 
+  - name: Avatar of ??? # 5 options i guess
+  - name: Chilling Victory # AOE? Bonus when defeating a foe?
+  - name: Vow of Silence # +evade?

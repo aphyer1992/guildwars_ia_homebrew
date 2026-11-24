@@ -1,5 +1,5 @@
 name: Zenmai
-health: 10
+health: 11
 endurance: 4
 speed: 5
 defense: [white]
@@ -9,29 +9,40 @@ attributes:
   arcana: [blue]
 
 abilities:
-  - name: Shadow Step
+  - name: Shadow Step # currently has no strain abilities when wounded - that's probably okay because strain-move is so important on melees.
     text: >-
       While making a melee attack, you gain <surge>: after this attack resolves,
       you place your figure in any space adjacent to the target and become
       Hidden.
-  - name: Aura of Displacement
+  - name: Aura of Displacement # note that abilities with the same trigger eg 'after you resolve this attack' happen in the order you choose.
     healthy_only: true
     text: >-
       When you declare a melee attack, you may pay 1<strain>. If you do, the
       attack gains Reach, and after it resolves you gain 1 movement point.
-  - name: Flashing Blades
-    text: >-
-      While defending, you may exhaust a melee weapon to add +1<block>.
-
+  
 class_cards:
-  - name: Assassin's Promise
+# lots of assassin skills involve or interact with critical hits, which doesn't really exist in IA, unsure how to do things with them.
+# Signet of Deadly Corruption - damage per condition.  She can't enable this herself though unless her weapon has condition surges.  Not sure if we want to lean into the teamcomp builds.
+# Siphon Strength - apply Weaken and gain +dmg tokens?
+# Way of the Empty Palm - XP weapon to represent unarmed strikes?  Ehhhhhh.  I like the weapon-runes system, and XP weapons are kinda inherently hard to balance.
+  - name: Assassin's Promise  # could also call this Augury of Death
     xp: 1
     text: >-
       At the start of each round, the Adversary player nominates one of their
       figures. If that figure dies this round, you regain 1<strain>. If you
       defeat it, you also become Focused.
+  - name: Flashing Blades # limiting to melee because hidden is defense against ranged.  considered having a waeker version of this on her sheet to begin with but felt too good.
+    xp: 1
+    text: >-
+      While defending against a melee attack, exhaust this skill to apply +1 armor to the defense results and deal 1 damage to the attacker.
+
+  
+  - name: Unsuspecting Strike
+    xp: 2
+    text: >-
+      When you declare an attack against an undamaged enemy, apply +1<surge> to the results.
   - name: Mo Zing
-    xp: null  # TODO: no XP cost given
+    xp: 2
     text: >-
       As long as no ally is within 3 spaces of you, you gain +1<block>.
   - name: Locust's Fury
@@ -39,3 +50,30 @@ class_cards:
     text: >-
       1<strain>, Action: declare an attack with each of two different equipped
       Melee weapons.
+  - name: Assassin's Remedy # removes conditions when you attack - the problem is that Weaken already goes away when you attack, Stun stops you from attacking, so it would literally only work with Bleed.
+  - name: Beguiling Haze 
+    xp: # no idea
+    text: >-
+      Exhaust this card during your activation.  Choose any number of non-elite hostile figures within 3 spaces.  You may force each to move 1 space in any direction.
+  - name: Shadow Sanctuary 
+    xp: # 1? 2?  it's better than +1 evade most of the time but that's not great on a when-declared.  could make a more expensive doesn't-exhaust version
+    text: >-
+      Exhaust this card when a melee attack is declared against you.  That attack must show enough accuracy to hit, as if it were ranged.  The attack gains <surge>: ignore this
+
+
+  - name: Death Blossom 
+    xp: 3
+    text: >-
+      After you resolve an attack with a melee weapon, exhaust this card to deal 1 damage to all adjacent enemies.
+  
+  - name: ??? Heart of Shadow? Moebius Strike? Shadow Shroud?  Shadow of Haste?
+    xp: 3??
+    # does no damage but can still trigger effects that occur on attack, like your mobility, without spending an action to make the attack.
+    text: >-
+      Exhaust this card during your turn to perform an attack, applying -10 {damage} to the attack results.
+
+  - name: Swap
+    xp: 1? 4?
+    # Probably a cheap deplete or an expensive exhaust.  Limiting to heroes helps mitigate shenanigans with mission figures.  Can be very good at granting another hero move with how much free mobility zenmai can get.
+    text: >-
+      Deplete this card during your turn.  Choose another hero within Line of Sight and swap your figure with theirs.

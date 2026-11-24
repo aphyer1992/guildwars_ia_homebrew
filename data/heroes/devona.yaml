@@ -1,0 +1,34 @@
+name: Devona
+health: 13
+endurance: 4
+speed: 4
+defense: [black]
+attributes:
+  strength: [blue, green, yellow]
+  agility: [blue, green]
+  arcana: [blue]
+
+abilities:
+  - name: Charge!
+    text: >-
+      2<strain>, <action>: Move up to your Speed, then perform an attack with a melee weapon.
+  - name: Heavy Blow
+    healthy_only: true
+    text: >-
+      While attacking with a melee weapon, you gain {surge}: Stun
+
+class_cards:
+#From the MMO:
+# Desperation Blow - powerful/extra attack then you are knocked down.  Problem - strong when you have ways to clear Stun, very bad otherwise.
+  - name: "I Will Survive!"
+    xp: 1
+    text: >-
+      Exhaust this card during your turn to recover 1 Health, plus 1 Health for each negative condition on you.
+  - name: "None Shall Pass!"
+    xp: 1
+    text: >-
+      Any enemy that enters an adjacent square loses all its remaining movement points.
+  - name: "Earth Shaker"
+    xp: 4
+    text: >-
+      2<strain>, <action>: Choose an equipped melee weapon.  Perform an attack with that weapon against each adjacent enemy.

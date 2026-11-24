@@ -20,7 +20,7 @@ variants:
     reinforce: 5
     health: 8
     dice: [red, yellow, yellow]
-    surges: ["Bleed", "+1 damage"] # the combined surge left it with only one surge it could trigger but frequently rolling two, which is odd
+    surges: ["Bleed", "+1 damage", "+1 damage"] # the combined surge left it with only one surge it could trigger but frequently rolling two, which is odd
 
 abilities:
   - name: Executioner's Strike

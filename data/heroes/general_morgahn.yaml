@@ -17,22 +17,29 @@ abilities:
   - name: Leadership
     healthy_only: true
     text: >-
-      Allies attacking while Commanded may use your <surge>.
+      Allies attacking while Commanded may use your surge abilities.  This cannot grant Cleave to a ranged attack or Blast to a melee attack.
 
 class_cards:
-  - name: Mending Refrain
-    xp: 2
+  - name: Signet of Synergy  # Mending Refrain?
+    xp: 2 # maybe 3?  maybe strain cost on the second option?
     text: >-
-      When you Command, you and the Commanded ally each restore 1HP.
-  - name: Swiftfoot Refrain
-    xp: 2
+      When you Command, choose one:
+      - you and the Commanded ally each restore 1HP.
+      - choose a negative condition, and remove that condition from both you and the Commanded ally.
+  - name: Make Haste!
+    xp: 3 # maybe 
     text: >-
-      When you Command, you and the Commanded ally each gain 1 Movement Point.
+      Exhaust this card during your activation.  You and any number of allies within 3 spaces each gain 1 Movement Point.
   - name: Focused Anger
-    xp: 4
+    xp: 3
     text: >-
-      While attacking with a Melee or Ranged weapon, you gain <surge>: Focus.
-  - name: Hammer and Anvil
-    xp: 4
+      When you or a commanded ally is attacking, the attack gains <surge>: Focus.
+  - name: Never Surrender!  # this is currently maybe pushing it when the imperial player is trying to kill the last unwounded hero.
+    xp: 3
     status: stub
-    text: null
+    text: Exhaust this card during your activation.  You or an ally within 3 spaces may recover 1<strain>, plus 1<health> for each wounded hero.
+  - name: Anthem of Flame # Could adjust the strain cost here to raise or lower its cost: 2strain and 1 XP or no strain and 3XP both seem plausible?
+    xp: 2
+    text: >-
+      1<strain>: Exhaust this card when you or a Commanded ally declares an attack to add a yellow die to the attack pool.  The attack gains <surge>: gain <power-surge>.
+  - name: Enduring Harmony  # most chars don't get 5 endurance but +1 endurance on a skill is acceptable, and Paragon/Warrior are good fits for it.

@@ -1,2 +1,8 @@
 - name: Grim Cesta
   text: -2 Health, +1 Endurance.
+- name: Rune of Expertise
+  text: When you would spend 2 or more Strain at once to trigger an ability, exhaust this card to reduce that by 1.
+- name: Rune of Recovery
+  text: Exhaust this card during your activation to either recover 1 <strain> or discard a negative condition.
+- name: Rune of Vigor
+  text: +2 Health.
